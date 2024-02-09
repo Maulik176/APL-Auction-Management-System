@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role">
+    <sys_security_acl_role action="INSERT_OR_UPDATE">
+        <sys_class_name>sys_security_acl_role</sys_class_name>
+        <sys_created_by>maulik</sys_created_by>
+        <sys_created_on>2024-02-07 06:04:36</sys_created_on>
+        <sys_id>a2d2974c471002100e63e481e36d43f9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_540166_apl_apl_bidlog_table.x_540166_apl.admin</sys_name>
+        <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+        <sys_security_acl display_value="x_540166_apl_apl_bidlog_table">26d2974c471002100e63e481e36d43f6</sys_security_acl>
+        <sys_update_name>sys_security_acl_role_a2d2974c471002100e63e481e36d43f9</sys_update_name>
+        <sys_updated_by>maulik</sys_updated_by>
+        <sys_updated_on>2024-02-07 06:04:36</sys_updated_on>
+        <sys_user_role display_value="x_540166_apl.admin" name="x_540166_apl.admin">f87b4b44471002100e63e481e36d43eb</sys_user_role>
+        <transaction_id/>
+    </sys_security_acl_role>
+</record_update>

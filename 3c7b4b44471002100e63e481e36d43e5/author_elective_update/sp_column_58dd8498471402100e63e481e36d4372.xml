@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_column">
+    <sp_column action="DELETE">
+        <class_name/>
+        <order>1</order>
+        <size>4</size>
+        <size_lg/>
+        <size_sm/>
+        <size_xs/>
+        <sp_row display_value="1">14dd8498471402100e63e481e36d4370</sp_row>
+        <sys_class_name>sp_column</sys_class_name>
+        <sys_created_by>maulik</sys_created_by>
+        <sys_created_on>2024-02-07 10:22:13</sys_created_on>
+        <sys_id>58dd8498471402100e63e481e36d4372</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>1</sys_name>
+        <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+        <sys_update_name>sp_column_58dd8498471402100e63e481e36d4372</sys_update_name>
+        <sys_updated_by>maulik</sys_updated_by>
+        <sys_updated_on>2024-02-07 10:22:13</sys_updated_on>
+    </sp_column>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="APL ">3c7b4b44471002100e63e481e36d43e5</application>
+        <file_path/>
+        <instance_id>757a8d15db46b998199b1729139619ab</instance_id>
+        <instance_name>dev192681</instance_name>
+        <name>sp_column_58dd8498471402100e63e481e36d4372</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_column"><sp_column action="INSERT_OR_UPDATE"><class_name/><order>1</order><size>4</size><size_lg/><size_sm/><size_xs/><sp_row display_value="1">14dd8498471402100e63e481e36d4370</sp_row><sys_class_name>sp_column</sys_class_name><sys_created_by>maulik</sys_created_by><sys_created_on>2024-02-07 10:22:13</sys_created_on><sys_id>58dd8498471402100e63e481e36d4372</sys_id><sys_mod_count>0</sys_mod_count><sys_name>1</sys_name><sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package><sys_policy/><sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope><sys_update_name>sp_column_58dd8498471402100e63e481e36d4372</sys_update_name><sys_updated_by>maulik</sys_updated_by><sys_updated_on>2024-02-07 10:22:13</sys_updated_on></sp_column></record_update>]]></payload>
+        <payload_hash>1123450101</payload_hash>
+        <record_name>1</record_name>
+        <reverted_from/>
+        <source>b87b4b44471002100e63e481e36d43e7</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>maulik</sys_created_by>
+        <sys_created_on>2024-02-07 10:22:13</sys_created_on>
+        <sys_id>14dd44d8471402100e63e481e36d4352</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18d8316e9690000001</sys_recorded_at>
+        <sys_updated_by>maulik</sys_updated_by>
+        <sys_updated_on>2024-02-07 10:22:13</sys_updated_on>
+        <type>Column</type>
+        <update_guid>d8dd849812140210a3a18e034408a773</update_guid>
+        <update_guid_history>d8dd849812140210a3a18e034408a773:1123450101</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="1">336358e4471002100e63e481e36d433b</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>maulik</sys_created_by>
+        <sys_created_on>2024-02-08 05:25:15</sys_created_on>
+        <sys_db_object display_value="" name="sp_column">sp_column</sys_db_object>
+        <sys_id>1aedd3e27f964f5d83693de70b47f649</sys_id>
+        <sys_metadata>58dd8498471402100e63e481e36d4372</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>1</sys_name>
+        <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+        <sys_scope_delete display_value="">34d45e9f175a49329ec1bf71207ab644</sys_scope_delete>
+        <sys_update_name>sp_column_58dd8498471402100e63e481e36d4372</sys_update_name>
+        <sys_update_version display_value="sp_column_58dd8498471402100e63e481e36d4372">14dd44d8471402100e63e481e36d4352</sys_update_version>
+        <sys_updated_by>maulik</sys_updated_by>
+        <sys_updated_on>2024-02-08 05:25:15</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

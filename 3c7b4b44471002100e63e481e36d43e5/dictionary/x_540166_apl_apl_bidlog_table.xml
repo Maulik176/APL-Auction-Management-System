@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="live_feed=false" db_object_id="80a05b88471002100e63e481e36d434f" label="APL bidlog table" max_length="40" name="x_540166_apl_apl_bidlog_table" type="collection">
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
+        <element default="javascript:current.getTableName();" label="Class" max_length="80" name="sys_class_name" type="sys_class_name"/>
+        <element attributes="edge_encryption_enabled=true" choice="3" default="pending" label="Curent Status" max_length="40" name="u_choice_3" type="string">
+            <choice>
+                <element inactive_on_update="false" label="Accepted" sequence="0" value="accepted"/>
+                <element inactive_on_update="false" label="Rejected" sequence="1" value="rejected"/>
+                <element inactive_on_update="false" label="Pending" sequence="2" value="pending"/>
+            </choice>
+        </element>
+        <element attributes="omit_sys_original=true" label="Current Bid" max_length="20" name="u_current_bid" read_only="true" type="currency"/>
+        <element label="Timestamp" max_length="40" name="u_glide_time_1" type="glide_time"/>
+        <element label="Timestamp" mandatory="true" max_length="40" name="u_insert_timestamp" type="insert_timestamp"/>
+        <element label="Time clicked" max_length="40" name="u_insert_timestamp_17" read_only="true" type="insert_timestamp"/>
+        <element attributes="encode_utf8=false" default="a75cd708475002100e63e481e36d435d" label="Team Name" max_length="32" name="u_reference_1" reference="x_540166_apl_team_table" type="reference"/>
+        <element attributes="encode_utf8=false" default="da491344475002100e63e481e36d43b1" dependent="u_reference_team_name" dependent_on_field="u_reference_team_name" label="Team Name" max_length="32" name="u_reference_team_name" reference="x_540166_apl_team_table" type="reference" use_dependent_field="true"/>
+        <index name="index">
+            <element name="sys_class_name"/>
+        </index>
+        <index name="index2">
+            <element name="u_reference_1"/>
+        </index>
+        <index name="index3">
+            <element name="u_reference_team_name"/>
+        </index>
+    </element>
+</database>

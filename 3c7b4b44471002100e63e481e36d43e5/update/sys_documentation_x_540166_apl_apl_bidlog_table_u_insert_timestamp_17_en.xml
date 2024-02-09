@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="u_insert_timestamp_17" label="Time clicked" language="en" table="x_540166_apl_apl_bidlog_table">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>u_insert_timestamp_17</element>
+            <help/>
+            <hint/>
+            <label>Time clicked</label>
+            <language>en</language>
+            <name>x_540166_apl_apl_bidlog_table</name>
+            <plural>Time clicked</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>maulik</sys_created_by>
+            <sys_created_on>2024-02-07 06:28:37</sys_created_on>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Time clicked</sys_name>
+            <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+            <sys_update_name>sys_documentation_x_540166_apl_apl_bidlog_table_u_insert_timestamp_17_en</sys_update_name>
+            <sys_updated_by>maulik</sys_updated_by>
+            <sys_updated_on>2024-02-07 06:28:37</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

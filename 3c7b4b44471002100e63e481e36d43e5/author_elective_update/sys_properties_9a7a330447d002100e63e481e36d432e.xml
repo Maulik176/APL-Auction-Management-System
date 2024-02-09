@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="DELETE">
+        <choices/>
+        <description>If true, portal css would be in rem units</description>
+        <ignore_cache>true</ignore_cache>
+        <is_private>false</is_private>
+        <name>glide.service_portal.resize_text.auction_apl.enable_rem_conversion</name>
+        <read_roles/>
+        <suffix/>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>maulik</sys_created_by>
+        <sys_created_on>2024-02-07 08:57:43</sys_created_on>
+        <sys_id>9a7a330447d002100e63e481e36d432e</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>glide.service_portal.resize_text.auction_apl.enable_rem_conversion</sys_name>
+        <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+        <sys_update_name>sys_properties_9a7a330447d002100e63e481e36d432e</sys_update_name>
+        <sys_updated_by>maulik</sys_updated_by>
+        <sys_updated_on>2024-02-07 09:04:14</sys_updated_on>
+        <type>boolean</type>
+        <value>true</value>
+        <write_roles/>
+    </sys_properties>
+    <sys_translated_text action="DELETE" query="documentkey=9a7a330447d002100e63e481e36d432e"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="APL ">3c7b4b44471002100e63e481e36d43e5</application>
+        <file_path/>
+        <instance_id>757a8d15db46b998199b1729139619ab</instance_id>
+        <instance_name>dev192681</instance_name>
+        <name>sys_properties_9a7a330447d002100e63e481e36d432e</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties"><sys_properties action="INSERT_OR_UPDATE"><choices/><description>If true, portal css would be in rem units</description><ignore_cache>true</ignore_cache><is_private>false</is_private><name>glide.service_portal.resize_text.auction_apl.enable_rem_conversion</name><read_roles/><suffix/><sys_class_name>sys_properties</sys_class_name><sys_created_by>maulik</sys_created_by><sys_created_on>2024-02-07 08:57:43</sys_created_on><sys_id>9a7a330447d002100e63e481e36d432e</sys_id><sys_mod_count>1</sys_mod_count><sys_name>glide.service_portal.resize_text.auction_apl.enable_rem_conversion</sys_name><sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package><sys_policy/><sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope><sys_update_name>sys_properties_9a7a330447d002100e63e481e36d432e</sys_update_name><sys_updated_by>maulik</sys_updated_by><sys_updated_on>2024-02-07 09:04:14</sys_updated_on><type>boolean</type><value>true</value><write_roles/></sys_properties><sys_translated_text action="delete_multiple" query="documentkey=9a7a330447d002100e63e481e36d432e"/></record_update>]]></payload>
+        <payload_hash>-493239996</payload_hash>
+        <record_name>glide.service_portal.resize_text.auction_apl.enable_rem_conversion</record_name>
+        <reverted_from/>
+        <source>b87b4b44471002100e63e481e36d43e7</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>maulik</sys_created_by>
+        <sys_created_on>2024-02-07 09:04:14</sys_created_on>
+        <sys_id>02fb334847d002100e63e481e36d43db</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18d82cf86510000001</sys_recorded_at>
+        <sys_updated_by>maulik</sys_updated_by>
+        <sys_updated_on>2024-02-07 09:04:14</sys_updated_on>
+        <type>System Property</type>
+        <update_guid>0afb33487ed002105b3b47867d7360da</update_guid>
+        <update_guid_history>0afb33487ed002105b3b47867d7360da:-493239996,a67a330481d0021065bf440ce4d4dc31:79770172</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>maulik</sys_created_by>
+        <sys_created_on>2024-02-07 09:07:45</sys_created_on>
+        <sys_db_object display_value="" name="sys_properties">sys_properties</sys_db_object>
+        <sys_id>0398617b832f43d2800e9256cdcd33a4</sys_id>
+        <sys_metadata>9a7a330447d002100e63e481e36d432e</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>glide.service_portal.resize_text.auction_apl.enable_rem_conversion</sys_name>
+        <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+        <sys_scope_delete display_value="">34d45e9f175a49329ec1bf71207ab644</sys_scope_delete>
+        <sys_update_name>sys_properties_9a7a330447d002100e63e481e36d432e</sys_update_name>
+        <sys_update_version display_value="sys_properties_9a7a330447d002100e63e481e36d432e">02fb334847d002100e63e481e36d43db</sys_update_version>
+        <sys_updated_by>maulik</sys_updated_by>
+        <sys_updated_on>2024-02-07 09:07:45</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
