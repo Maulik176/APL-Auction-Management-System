@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller=function() {
+  /* widget controller */
+  var c = this;
+	c.server.update();
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>apl_player_card</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>apl_player_card</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+	var myTable = new GlideRecord('x_540166_apl_apl_player_table');
+	var id;
+	myTable.query();
+
+	if (myTable.hasNext()) {
+    var totalCount = myTable.getRowCount();
+    var randomIndex = Math.floor(Math.random() * totalCount);
+		console.log(randomIndex);
+
+    for (var i = 0; i <= randomIndex; i++) {
+        myTable.next();
+    }
+
+    id = myTable.getValue('sys_id');
+	} else {
+			gs.warning('No records found in the table.');
+	}
+	
+	var gr = new GlideRecord("x_540166_apl_apl_player_table");
+	gr.addQuery('sys_id', id);
+	gr.orderBy('number');
+	gr.query(); 
+	
+	data.list = [];
+	while(gr.next()) {
+		var obj = {};
+		obj.number = gr.getValue('number');
+		obj.name = gr.getValue('u_name');
+		obj.player_image = gr.getValue('player_image');
+		obj.age = gr.getValue('u_age');
+		obj.category = gr.getValue('u_category');
+		obj.value = gr.getValue('u_value');
+		obj.matches = gr.getValue('u_matches_1');
+		obj.innings = gr.getValue('u_innings_3u_runs_2');
+		obj.runs = gr.getValue('u_runs_2');
+		obj.strike_rate = gr.getValue('u_sr_7');
+		obj.fifties = gr.getValue('u_fifties_10');
+		obj.centuries = gr.getValue('u_centuries_9');
+		obj.wickets = gr.getValue('u_wickets_4');
+		obj.three_wicket = gr.getValue('u_3wh_15');
+		obj.five_wicket = gr.getValue('u_integer_11');
+		obj.average = gr.getValue('u_avg_5');
+		obj.highest_score = gr.getValue('u_high_14');
+		obj.bowling_best_fig = gr.getValue('u_bestbowl_12');
+		data.list.push(obj);
+	}
+	
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>dev</sys_created_by>
+        <sys_created_on>2024-02-07 10:38:46</sys_created_on>
+        <sys_id>e691dc9c471402100e63e481e36d43ae</sys_id>
+        <sys_mod_count>26</sys_mod_count>
+        <sys_name>apl_player_card</sys_name>
+        <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+        <sys_update_name>sp_widget_e691dc9c471402100e63e481e36d43ae</sys_update_name>
+        <sys_updated_by>dev</sys_updated_by>
+        <sys_updated_on>2024-02-08 09:26:56</sys_updated_on>
+        <template><![CDATA[<div ng-repeat="player in data.list">
+  <div class="player-card">
+    <img ng-src="{{ ::player.player_image + '.iix' }}" alt="Player Image" class="img-fluid" style="max-height: 300px;">
+    <div class="player-details">
+      <h2>{{ player.name }}</h2>
+      <p>Age: {{ player.age }}</p>
+      <p>Base Price: {{ player.value }}</p>
+      <!-- Add more details based on your requirements -->
+    </div>
+    <div class="player-stats">
+      <p>Matches: {{ player.matches }}</p>
+      <p>Runs: {{ player.runs }}</p>
+      <p>Runs: {{ player.wickets }}</p>
+      <p>Runs: {{ player.average }}</p>
+      <p>Runs: {{ player.category }}</p>
+      <!-- Add more statistics based on your requirements -->
+    </div>
+    <div class="player-buttons">
+      <button ng-click="placeBid(player)">Bid</button>
+      <button ng-click="passOnBid(player)">Pass</button>
+    </div>
+  </div>
+</div>
+]]></template>
+    </sp_widget>
+</record_update>

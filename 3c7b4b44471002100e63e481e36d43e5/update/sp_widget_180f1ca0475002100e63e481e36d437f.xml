@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller=function() {
+  /* widget controller */
+  var c = this;
+}
+]]></client_script>
+        <controller_as>c</controller_as>
+        <css>#apl-image{
+  width:90%;
+
+  height:150px;}
+
+.left-sidebar {
+    width: 200px;
+    background-color: black;
+    padding: 10px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.sidebar-widget {
+    background-color: #333;
+    padding: 20px;
+    color: #e1ad21; /* Golden text color */
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    max-width: 100%;
+    height: auto;
+}
+
+.title-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin: 0;
+}
+
+.dropdown-container label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Customize the appearance of the dropdown arrow */
+select::-ms-expand {
+    display: none;
+}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+}
+
+/* Add more styles as needed */
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>demo-apl</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>demo-apl</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+	var gr = new GlideRecord("x_540166_apl_team_table");
+	gr.query();
+	while(gr.next()){
+		if(gr.getValue('team_name')=='None'){
+			data.image=gr.getValue('image');
+		}
+	}
+	
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>vandan</sys_created_by>
+        <sys_created_on>2024-02-08 06:15:48</sys_created_on>
+        <sys_id>180f1ca0475002100e63e481e36d437f</sys_id>
+        <sys_mod_count>29</sys_mod_count>
+        <sys_name>demo-apl</sys_name>
+        <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+        <sys_update_name>sp_widget_180f1ca0475002100e63e481e36d437f</sys_update_name>
+        <sys_updated_by>vandan</sys_updated_by>
+        <sys_updated_on>2024-02-08 10:54:18</sys_updated_on>
+        <template><![CDATA[
+ <div class="sidebar-widget">
+   <div id="apl-im">
+<img ng-src="{{::c.data.image + '.iix'}}" alt="HI" id="apl-image">
+</div>
+        <div class="title-container">
+            <h4>AUCTIONS 2024</h4>
+        </div>
+        <div class="dropdown-container">
+            <label for="players-bought">Players Bought:</label>
+            <select id="players-bought">
+                <!-- Add options here -->
+            </select>
+
+            <label for="my-team">My Team:</label>
+            <select id="my-team">
+                <!-- Add options here -->
+            </select>
+
+            <label for="remaining-players">Remaining Players:</label>
+            <select id="remaining-players">
+                <!-- Add options here -->
+            </select>
+        </div>
+    </div>
+
+
+]]></template>
+    </sp_widget>
+</record_update>

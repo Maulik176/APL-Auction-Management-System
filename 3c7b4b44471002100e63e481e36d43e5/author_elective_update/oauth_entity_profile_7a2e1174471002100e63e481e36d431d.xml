@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="oauth_entity_profile">
+    <oauth_entity_profile action="DELETE">
+        <default>true</default>
+        <grant_type>client_credentials</grant_type>
+        <jwt_provider/>
+        <name>APL Token default_profile</name>
+        <oauth_entity display_value="APL Token">2eedd934471002100e63e481e36d430a</oauth_entity>
+        <saml2_assertion_producer/>
+        <sys_class_name>oauth_entity_profile</sys_class_name>
+        <sys_created_by>maulik</sys_created_by>
+        <sys_created_on>2024-02-09 05:30:15</sys_created_on>
+        <sys_id>7a2e1174471002100e63e481e36d431d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>APL Token default_profile</sys_name>
+        <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+        <sys_update_name>oauth_entity_profile_7a2e1174471002100e63e481e36d431d</sys_update_name>
+        <sys_updated_by>maulik</sys_updated_by>
+        <sys_updated_on>2024-02-09 05:30:15</sys_updated_on>
+    </oauth_entity_profile>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="APL ">3c7b4b44471002100e63e481e36d43e5</application>
+        <file_path/>
+        <instance_id>757a8d15db46b998199b1729139619ab</instance_id>
+        <instance_name>dev192681</instance_name>
+        <name>oauth_entity_profile_7a2e1174471002100e63e481e36d431d</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="oauth_entity_profile"><oauth_entity_profile action="INSERT_OR_UPDATE"><default>true</default><grant_type>client_credentials</grant_type><jwt_provider/><name>APL Token default_profile</name><oauth_entity display_value="APL Token">2eedd934471002100e63e481e36d430a</oauth_entity><saml2_assertion_producer/><sys_class_name>oauth_entity_profile</sys_class_name><sys_created_by>maulik</sys_created_by><sys_created_on>2024-02-09 05:30:15</sys_created_on><sys_id>7a2e1174471002100e63e481e36d431d</sys_id><sys_mod_count>0</sys_mod_count><sys_name>APL Token default_profile</sys_name><sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package><sys_policy/><sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope><sys_update_name>oauth_entity_profile_7a2e1174471002100e63e481e36d431d</sys_update_name><sys_updated_by>maulik</sys_updated_by><sys_updated_on>2024-02-09 05:30:15</sys_updated_on></oauth_entity_profile></record_update>]]></payload>
+        <payload_hash>220685373</payload_hash>
+        <record_name>APL Token default_profile</record_name>
+        <reverted_from/>
+        <source>b87b4b44471002100e63e481e36d43e7</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>maulik</sys_created_by>
+        <sys_created_on>2024-02-09 05:30:15</sys_created_on>
+        <sys_id>762e1174471002100e63e481e36d4320</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18d8c5852e20000001</sys_recorded_at>
+        <sys_updated_by>maulik</sys_updated_by>
+        <sys_updated_on>2024-02-09 05:30:15</sys_updated_on>
+        <type>OAuth Entity Profile</type>
+        <update_guid>7a2e117458100210b0de8bf983f2dc1f</update_guid>
+        <update_guid_history>7a2e117458100210b0de8bf983f2dc1f:220685373</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="APL Token default_profile">fe3e5174471002100e63e481e36d4355</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>maulik</sys_created_by>
+        <sys_created_on>2024-02-09 05:30:31</sys_created_on>
+        <sys_db_object display_value="" name="oauth_entity_profile">oauth_entity_profile</sys_db_object>
+        <sys_id>5e6c2d3ee2bf4d8886e9b93592ca7710</sys_id>
+        <sys_metadata>7a2e1174471002100e63e481e36d431d</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>APL Token default_profile</sys_name>
+        <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+        <sys_scope_delete display_value="">34d45e9f175a49329ec1bf71207ab644</sys_scope_delete>
+        <sys_update_name>oauth_entity_profile_7a2e1174471002100e63e481e36d431d</sys_update_name>
+        <sys_update_version display_value="oauth_entity_profile_7a2e1174471002100e63e481e36d431d">762e1174471002100e63e481e36d4320</sys_update_version>
+        <sys_updated_by>maulik</sys_updated_by>
+        <sys_updated_on>2024-02-09 05:30:31</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

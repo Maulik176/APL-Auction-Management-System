@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="u_category" table="x_540166_apl_apl_player_table" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>u_category</element>
+            <name>x_540166_apl_apl_player_table</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-07 06:43:21</sys_created_on>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>u_category</sys_name>
+            <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+            <sys_update_name>sys_choice_x_540166_apl_apl_player_table_u_category</sys_update_name>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-07 06:43:21</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>u_category</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Batsman</label>
+            <language>en</language>
+            <name>x_540166_apl_apl_player_table</name>
+            <sequence>0</sequence>
+            <synonyms/>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-07 06:43:21</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-07 06:43:21</sys_updated_on>
+            <value>batsman</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>u_category</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Bowler</label>
+            <language>en</language>
+            <name>x_540166_apl_apl_player_table</name>
+            <sequence>1</sequence>
+            <synonyms/>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-07 06:43:21</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-07 06:43:21</sys_updated_on>
+            <value>bowler</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>u_category</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>All-rounder</label>
+            <language>en</language>
+            <name>x_540166_apl_apl_player_table</name>
+            <sequence>2</sequence>
+            <synonyms/>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-07 06:43:21</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-07 06:43:21</sys_updated_on>
+            <value>all-rounder</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>u_category</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Wicket keeper</label>
+            <language>en</language>
+            <name>x_540166_apl_apl_player_table</name>
+            <sequence>3</sequence>
+            <synonyms/>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-07 06:43:21</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-07 06:43:21</sys_updated_on>
+            <value>wicket keeper</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

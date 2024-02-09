@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="u_status" table="x_540166_apl_apl_player_table" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>u_status</element>
+            <name>x_540166_apl_apl_player_table</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-07 06:43:22</sys_created_on>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>u_status</sys_name>
+            <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+            <sys_update_name>sys_choice_x_540166_apl_apl_player_table_u_status</sys_update_name>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-07 06:43:22</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>u_status</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Sold</label>
+            <language>en</language>
+            <name>x_540166_apl_apl_player_table</name>
+            <sequence>0</sequence>
+            <synonyms/>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-07 06:43:22</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-07 06:43:22</sys_updated_on>
+            <value>sold</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>u_status</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Unsold</label>
+            <language>en</language>
+            <name>x_540166_apl_apl_player_table</name>
+            <sequence>1</sequence>
+            <synonyms/>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-07 06:43:22</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-07 06:43:22</sys_updated_on>
+            <value>unsold</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>
