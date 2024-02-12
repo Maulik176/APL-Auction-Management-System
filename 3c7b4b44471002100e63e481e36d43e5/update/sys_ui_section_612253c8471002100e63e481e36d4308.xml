@@ -4,13 +4,13 @@
             <element>number</element>
             <position>0</position>
             <sys_created_by>harshraj</sys_created_by>
-            <sys_created_on>2024-02-08 09:30:56</sys_created_on>
-            <sys_id>eaabc120471402100e63e481e36d43f4</sys_id>
+            <sys_created_on>2024-02-12 03:58:41</sys_created_on>
+            <sys_id>bef5e875475042100e63e481e36d4386</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="Team Table" display_value="Team Table" name="x_540166_apl_team_table" sys_domain="global" view="Default view">612253c8471002100e63e481e36d4308</sys_ui_section>
             <sys_updated_by>harshraj</sys_updated_by>
-            <sys_updated_on>2024-02-08 09:30:56</sys_updated_on>
+            <sys_updated_on>2024-02-12 03:58:41</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -18,27 +18,27 @@
             <element>team_name</element>
             <position>1</position>
             <sys_created_by>harshraj</sys_created_by>
-            <sys_created_on>2024-02-08 09:30:56</sys_created_on>
-            <sys_id>e2abc120471402100e63e481e36d43f5</sys_id>
+            <sys_created_on>2024-02-12 03:58:41</sys_created_on>
+            <sys_id>b6f5e875475042100e63e481e36d4387</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="Team Table" display_value="Team Table" name="x_540166_apl_team_table" sys_domain="global" view="Default view">612253c8471002100e63e481e36d4308</sys_ui_section>
             <sys_updated_by>harshraj</sys_updated_by>
-            <sys_updated_on>2024-02-08 09:30:56</sys_updated_on>
+            <sys_updated_on>2024-02-12 03:58:41</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
-            <element>team_password</element>
+            <element>password</element>
             <position>2</position>
             <sys_created_by>harshraj</sys_created_by>
-            <sys_created_on>2024-02-08 09:30:56</sys_created_on>
-            <sys_id>e6abc120471402100e63e481e36d43f5</sys_id>
+            <sys_created_on>2024-02-12 03:58:41</sys_created_on>
+            <sys_id>baf5e875475042100e63e481e36d4387</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="Team Table" display_value="Team Table" name="x_540166_apl_team_table" sys_domain="global" view="Default view">612253c8471002100e63e481e36d4308</sys_ui_section>
             <sys_updated_by>harshraj</sys_updated_by>
-            <sys_updated_on>2024-02-08 09:30:56</sys_updated_on>
+            <sys_updated_on>2024-02-12 03:58:41</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -46,13 +46,13 @@
             <element>owner_name</element>
             <position>3</position>
             <sys_created_by>harshraj</sys_created_by>
-            <sys_created_on>2024-02-08 09:30:56</sys_created_on>
-            <sys_id>eaabc120471402100e63e481e36d43f5</sys_id>
+            <sys_created_on>2024-02-12 03:58:41</sys_created_on>
+            <sys_id>bef5e875475042100e63e481e36d4387</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="Team Table" display_value="Team Table" name="x_540166_apl_team_table" sys_domain="global" view="Default view">612253c8471002100e63e481e36d4308</sys_ui_section>
             <sys_updated_by>harshraj</sys_updated_by>
-            <sys_updated_on>2024-02-08 09:30:56</sys_updated_on>
+            <sys_updated_on>2024-02-12 03:58:41</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -60,13 +60,13 @@
             <element>coach_name</element>
             <position>4</position>
             <sys_created_by>harshraj</sys_created_by>
-            <sys_created_on>2024-02-08 09:30:56</sys_created_on>
-            <sys_id>eeabc120471402100e63e481e36d43f5</sys_id>
+            <sys_created_on>2024-02-12 03:58:41</sys_created_on>
+            <sys_id>b2f5e875475042100e63e481e36d4388</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="Team Table" display_value="Team Table" name="x_540166_apl_team_table" sys_domain="global" view="Default view">612253c8471002100e63e481e36d4308</sys_ui_section>
             <sys_updated_by>harshraj</sys_updated_by>
-            <sys_updated_on>2024-02-08 09:30:56</sys_updated_on>
+            <sys_updated_on>2024-02-12 03:58:41</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -74,13 +74,13 @@
             <element>image</element>
             <position>5</position>
             <sys_created_by>harshraj</sys_created_by>
-            <sys_created_on>2024-02-08 09:30:56</sys_created_on>
-            <sys_id>e2abc120471402100e63e481e36d43f6</sys_id>
+            <sys_created_on>2024-02-12 03:58:41</sys_created_on>
+            <sys_id>b6f5e875475042100e63e481e36d4388</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="Team Table" display_value="Team Table" name="x_540166_apl_team_table" sys_domain="global" view="Default view">612253c8471002100e63e481e36d4308</sys_ui_section>
             <sys_updated_by>harshraj</sys_updated_by>
-            <sys_updated_on>2024-02-08 09:30:56</sys_updated_on>
+            <sys_updated_on>2024-02-12 03:58:41</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -88,13 +88,13 @@
             <element>team_purse</element>
             <position>6</position>
             <sys_created_by>harshraj</sys_created_by>
-            <sys_created_on>2024-02-08 09:30:56</sys_created_on>
-            <sys_id>e6abc120471402100e63e481e36d43f6</sys_id>
+            <sys_created_on>2024-02-12 03:58:41</sys_created_on>
+            <sys_id>baf5e875475042100e63e481e36d4388</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="Team Table" display_value="Team Table" name="x_540166_apl_team_table" sys_domain="global" view="Default view">612253c8471002100e63e481e36d4308</sys_ui_section>
             <sys_updated_by>harshraj</sys_updated_by>
-            <sys_updated_on>2024-02-08 09:30:56</sys_updated_on>
+            <sys_updated_on>2024-02-12 03:58:41</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -102,13 +102,13 @@
             <element>team_players</element>
             <position>7</position>
             <sys_created_by>harshraj</sys_created_by>
-            <sys_created_on>2024-02-08 09:30:56</sys_created_on>
-            <sys_id>eaabc120471402100e63e481e36d43f6</sys_id>
+            <sys_created_on>2024-02-12 03:58:41</sys_created_on>
+            <sys_id>bef5e875475042100e63e481e36d4388</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="Team Table" display_value="Team Table" name="x_540166_apl_team_table" sys_domain="global" view="Default view">612253c8471002100e63e481e36d4308</sys_ui_section>
             <sys_updated_by>harshraj</sys_updated_by>
-            <sys_updated_on>2024-02-08 09:30:56</sys_updated_on>
+            <sys_updated_on>2024-02-12 03:58:41</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>

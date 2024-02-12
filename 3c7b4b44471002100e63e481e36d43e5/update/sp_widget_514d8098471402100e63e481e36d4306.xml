@@ -4,13 +4,22 @@
         <client_script><![CDATA[api.controller=function($scope, spModal) {
   /* widget controller */
   var c = this;
-	
-	c.Login=function(){
-		
+	var x=c.data.list;
+	c.login=function(){
+		console.log("hi");
+		/*for(var i=0; i<x.size; i++)
+			{
+				console.log(i)
+				if(x[i].t_name == c.ltname)
+					{
+						console.log("hi");
+					}
+			}
+		*/
 	}
 	
 	
-	c.Signup=function(){
+	c.signup=function(){
 		spModal.open({
 			title: 'New Registration',
       widget: "apl_reg_page",
@@ -86,20 +95,41 @@
         <option_schema/>
         <public>false</public>
         <roles/>
-        <script><![CDATA[(function() {  /* populate the 'data' object */  /* e.g., data.table = $sp.getValue('table'); */})();]]></script>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+	data.list=[];
+	if(input)
+	{
+		var gr=new GlideRecord('x_540166_apl_team_table');
+		gr.query();
+		console.log("hi");
+		while(gr.next())
+		{
+			var obj={};
+			obj.t_name=gr.getValue('team_name');
+			//obj.t_pass=gr.getValue('password');
+			data.list.push(obj);
+		}
+	}
+	for(var i=0; i<data.list.length; i++)
+			{
+				console.log("i");
+			}
+})();]]></script>
         <servicenow>false</servicenow>
         <sys_class_name>sp_widget</sys_class_name>
         <sys_created_by>harshraj</sys_created_by>
         <sys_created_on>2024-02-07 10:19:50</sys_created_on>
         <sys_id>514d8098471402100e63e481e36d4306</sys_id>
-        <sys_mod_count>12</sys_mod_count>
+        <sys_mod_count>59</sys_mod_count>
         <sys_name>apl_test_login</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
         <sys_update_name>sp_widget_514d8098471402100e63e481e36d4306</sys_update_name>
         <sys_updated_by>harshraj</sys_updated_by>
-        <sys_updated_on>2024-02-08 09:39:51</sys_updated_on>
+        <sys_updated_on>2024-02-12 03:56:05</sys_updated_on>
         <template><![CDATA[<div class="login-container">
     <h2>Login</h2>
     <form id="login-form">
@@ -112,8 +142,8 @@
         <input type="password" id="password" name="password" ng-model="c.ltpass" required>
       </div>
       <div class="btn-container">
-        <button type="submit" ng-click="c.Login()">Login</button>
-        <button type="button" ng-click="c.Signup()">Sign Up</button>
+        <button type="button" ng-click="c.login()">Login</button>
+        <button type="button" ng-click="c.signup()">Sign Up</button>
       </div>
     </form>
   </div>]]></template>

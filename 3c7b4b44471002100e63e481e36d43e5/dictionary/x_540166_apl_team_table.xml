@@ -4,6 +4,7 @@
         <element attributes="pdf_cell_type=image" label="Image" max_length="40" name="image" type="user_image"/>
         <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Team ID" max_length="40" name="number" type="string"/>
         <element attributes="edge_encryption_enabled=true" label="Team Owner's Name" mandatory="true" max_length="255" name="owner_name" type="string_full_utf8"/>
+        <element attributes="edge_encryption_enabled=true" label="Password" mandatory="true" max_length="255" name="password" type="string_full_utf8"/>
         <element default="javascript:current.getTableName();" label="Class" max_length="80" name="sys_class_name" type="sys_class_name"/>
         <element attributes="edge_encryption_enabled=true" display="true" label="Team Name" mandatory="true" max_length="255" name="team_name" type="string_full_utf8"/>
         <element attributes="edge_encryption_enabled=true,no_data_replicate=true" label="Team Password" max_length="255" name="team_password" type="password2"/>

@@ -7,7 +7,128 @@
 	c.server.update();
 };]]></client_script>
         <controller_as>c</controller_as>
-        <css/>
+        <css>/* Player Card Container */
+.player-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Increased vertical spacing between containers */
+  padding: 15px; /* Increased padding for the card */
+  border: 2px solid #ddd; /* Add a subtle border */
+  border-radius: 10px; /* Add rounded corners */
+}
+
+/* First Row (30%) */
+.player-card .first-row {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 30%;
+  gap: 15px; /* Increased spacing between containers in the first row */
+}
+
+/* Container 1 - Player Profile Pic */
+.first-row .container1 {
+  flex: 30%;
+  position: relative; /* Added position relative for positioning the overlay text */
+  overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+}
+
+/* Fixed size for images based on container1 size */
+.container1 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Adjust the object-fit property as needed */
+  border-radius: 10px; /* Add rounded corners to the image */
+  
+}
+
+/* Overlay text for image */
+.container1 .overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 16px; /* Adjust the font size of the overlay text */
+}
+
+/* Container 2 - Player Name and Age */
+.first-row .container2 {
+  flex: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px; /* Adjust the font size for player name and age */
+   overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+}
+
+/* Container 3 - Base Price */
+.first-row .container3 {
+  flex: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px; /* Adjust the font size for base price */
+   overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+}
+
+/* Second Row (70%) */
+.player-card .second-row {
+  display: flex;
+  height: 70%;
+  gap: 15px; /* Increased spacing between containers in the second row */
+}
+
+/* Container 4 - Other Statistics */
+.second-row .container4 {
+  flex: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px; /* Adjust the font size for statistics */
+   overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+}
+
+/* Container 5 - Buttons (Bid, Pass, Give Up) */
+.second-row .container5 {
+  flex: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+   overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+  align-items: center;
+}
+
+/* Styling for Buttons */
+.container5 button {
+  margin: 10px; /* Increased margin for buttons */
+  padding: 15px; /* Increased padding for buttons */
+  font-size: 16px; /* Adjust the font size for buttons */
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px; /* Add rounded corners to buttons */
+}
+
+.container5 button:hover {
+  background-color: #2980b9;
+}
+</css>
         <data_table>sp_instance</data_table>
         <demo_data/>
         <description/>
@@ -77,34 +198,41 @@
         <sys_created_by>dev</sys_created_by>
         <sys_created_on>2024-02-07 10:38:46</sys_created_on>
         <sys_id>e691dc9c471402100e63e481e36d43ae</sys_id>
-        <sys_mod_count>26</sys_mod_count>
+        <sys_mod_count>42</sys_mod_count>
         <sys_name>apl_player_card</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
         <sys_update_name>sp_widget_e691dc9c471402100e63e481e36d43ae</sys_update_name>
-        <sys_updated_by>dev</sys_updated_by>
-        <sys_updated_on>2024-02-08 09:26:56</sys_updated_on>
+        <sys_updated_by>maulik</sys_updated_by>
+        <sys_updated_on>2024-02-09 10:29:35</sys_updated_on>
         <template><![CDATA[<div ng-repeat="player in data.list">
   <div class="player-card">
-    <img ng-src="{{ ::player.player_image + '.iix' }}" alt="Player Image" class="img-fluid" style="max-height: 300px;">
-    <div class="player-details">
-      <h2>{{ player.name }}</h2>
-      <p>Age: {{ player.age }}</p>
-      <p>Base Price: {{ player.value }}</p>
-      <!-- Add more details based on your requirements -->
+    <div class="first-row">
+      <div class="container1">
+        <img ng-src="{{ ::player.player_image + '.iix' }}" alt="Player Image" class="img-fluid">
+      </div>
+      <div class="container2">
+        <h2>{{ player.name }}</h2>
+        <p>Age: {{ player.age }}</p>
+      </div>
+      <div class="container3">
+        <p>Base Price: {{ player.value }}</p>
+      </div>
     </div>
-    <div class="player-stats">
-      <p>Matches: {{ player.matches }}</p>
-      <p>Runs: {{ player.runs }}</p>
-      <p>Runs: {{ player.wickets }}</p>
-      <p>Runs: {{ player.average }}</p>
-      <p>Runs: {{ player.category }}</p>
-      <!-- Add more statistics based on your requirements -->
-    </div>
-    <div class="player-buttons">
-      <button ng-click="placeBid(player)">Bid</button>
-      <button ng-click="passOnBid(player)">Pass</button>
+    <div class="second-row">
+      <div class="container4">
+        <p>Matches: {{ player.matches }}</p>
+        <p>Runs: {{ player.runs }}</p>
+        <p>Wickets: {{ player.wickets }}</p>
+        <p>Average: {{ player.average }}</p>
+        <p>Category: {{ player.category }}</p>
+        <!-- Add more statistics based on your requirements -->
+      </div>
+      <div class="container5">
+        <button ng-click="placeBid(player)">Bid</button>
+        <button ng-click="passOnBid(player)">Pass</button>
+      </div>
     </div>
   </div>
 </div>
