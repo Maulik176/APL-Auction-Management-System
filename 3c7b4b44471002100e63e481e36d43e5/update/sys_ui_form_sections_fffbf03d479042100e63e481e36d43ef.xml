@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_form_sections form_id="fffbf03d479042100e63e481e36d43ef" sys_domain="global" table="x_540166_apl_player_stats" version="3">
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>0</position>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-12 05:34:53</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>4c0cf03d479042100e63e481e36d43f2</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="x_540166_apl_player_stats" name="x_540166_apl_player_stats" sys_domain="global" view="Default view">fffbf03d479042100e63e481e36d43ef</sys_ui_form>
+            <sys_ui_section caption="NULL" display_value="" name="x_540166_apl_player_stats" sys_domain="global" view="Default view">e797f4f5479042100e63e481e36d432f</sys_ui_section>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-12 05:34:53</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>1</position>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-12 05:34:53</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>880cf03d479042100e63e481e36d43f3</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="x_540166_apl_player_stats" name="x_540166_apl_player_stats" sys_domain="global" view="Default view">fffbf03d479042100e63e481e36d43ef</sys_ui_form>
+            <sys_ui_section caption="Stats" display_value="Stats" name="x_540166_apl_player_stats" sys_domain="global" view="Default view">b3fbf03d479042100e63e481e36d43a4</sys_ui_section>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-12 05:34:53</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form action="INSERT_OR_UPDATE">
+            <name>x_540166_apl_player_stats</name>
+            <roles/>
+            <sys_class_name>sys_ui_form</sys_class_name>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-12 05:34:52</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>fffbf03d479042100e63e481e36d43ef</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_540166_apl_player_stats</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+            <sys_update_name>sys_ui_form_sections_fffbf03d479042100e63e481e36d43ef</sys_update_name>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-12 05:34:52</sys_updated_on>
+            <sys_user/>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_form>
+    </sys_ui_form_sections>
+</record_update>

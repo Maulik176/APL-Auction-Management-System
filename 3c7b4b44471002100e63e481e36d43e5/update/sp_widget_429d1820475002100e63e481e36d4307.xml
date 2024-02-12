@@ -57,28 +57,27 @@
         <public>false</public>
         <roles/>
         <script><![CDATA[(function () {
-    /* populate the 'data' object */
-    /* e.g., data.table = $sp.getValue('table'); */
+	/* populate the 'data' object */
+	/* e.g., data.table = $sp.getValue('table'); */
 
-    var teams = [];
-
-    var gr = new GlideRecord('x_540166_apl_team_table');
-    gr.addQuery('sys_id', 'a75cd708475002100e63e481e36d435d');
+	data.teams = [];
+	var id = 'a75cd708475002100e63e481e36d435d';
+	var gr = new GlideRecord('x_540166_apl_team_table');
+	gr.addQuery('sys_id', id);
 	gr.query();
-	
 
-    while (gr.next()) {
-        var team = {
-            teamImage: gr.getValue('image'),
-            teamName: gr.getValue('team_name'),
-            teamPurse: gr.getValue('team_purse'),
-            numPlayers: gr.getValue('team_players')
-        };
 
-        teams.push(team);
-    }
+	while (gr.next()) {
+		var team = {
+			teamImage: gr.getValue('image'),
+			teamName: gr.getValue('team_name'),
+			teamPurse: gr.getValue('team_purse'),
+			numPlayers: gr.getValue('team_players')
+		};
 
-    data.teams = teams; // Assuming you want to use 'teams' as the array of teams in the 'data' object
+		data.teams.push(team);
+	}
+
 })();
 ]]></script>
         <servicenow>false</servicenow>
@@ -86,19 +85,19 @@
         <sys_created_by>maulik</sys_created_by>
         <sys_created_on>2024-02-08 06:09:38</sys_created_on>
         <sys_id>429d1820475002100e63e481e36d4307</sys_id>
-        <sys_mod_count>37</sys_mod_count>
+        <sys_mod_count>40</sys_mod_count>
         <sys_name>APL Team Card</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
         <sys_update_name>sp_widget_429d1820475002100e63e481e36d4307</sys_update_name>
         <sys_updated_by>maulik</sys_updated_by>
-        <sys_updated_on>2024-02-08 08:09:50</sys_updated_on>
+        <sys_updated_on>2024-02-12 09:41:38</sys_updated_on>
         <template><![CDATA[<div class="container-fluid">
     <div class="row team-card" ng-repeat="team in c.data.teams">
         <div class="col-md-4">
             <img ng-src="{{::team.teamImage + '.iix'}}" alt="Team Logo" class="img-fluid" style="max-height: 100px;">
-        </div>
+        </div>   
         <div class="col-md-4">
             <h2 class="team-name">{{team.teamName}}</h2>
         </div>

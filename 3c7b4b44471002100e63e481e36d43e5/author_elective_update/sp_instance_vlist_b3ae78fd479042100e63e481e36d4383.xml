@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance_vlist">
+    <sp_instance_vlist action="DELETE">
+        <active>true</active>
+        <class_name/>
+        <color>default</color>
+        <css/>
+        <display_field>u_current_bid</display_field>
+        <field_list/>
+        <filter/>
+        <glyph>th-list</glyph>
+        <id/>
+        <maximum_entries>10</maximum_entries>
+        <order>1</order>
+        <order_by/>
+        <order_direction>asc</order_direction>
+        <roles/>
+        <short_description/>
+        <size>md</size>
+        <sp_column display_value="2">ec0790e8471002100e63e481e36d434b</sp_column>
+        <sp_page/>
+        <sp_widget display_value="Copy of Simple List">6ccdb4bd479042100e63e481e36d4381</sp_widget>
+        <sys_class_name>sp_instance_vlist</sys_class_name>
+        <sys_created_by>maulik</sys_created_by>
+        <sys_created_on>2024-02-12 05:46:37</sys_created_on>
+        <sys_id>b3ae78fd479042100e63e481e36d4383</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+        <sys_update_name>sp_instance_vlist_b3ae78fd479042100e63e481e36d4383</sys_update_name>
+        <sys_updated_by>maulik</sys_updated_by>
+        <sys_updated_on>2024-02-12 05:51:56</sys_updated_on>
+        <table>x_540166_apl_apl_bidlog_table</table>
+        <title/>
+        <url/>
+        <widget_parameters><![CDATA[{
+	"always_show": {
+		"value": "",
+		"displayValue": ""
+	},
+	"panel_body_height": {
+		"value": "",
+		"displayValue": ""
+	},
+	"image_field": {
+		"value": "current_profile_pic",
+		"displayValue": "current_profile_pic"
+	},
+	"secondary_fields": {
+		"value": "u_reference_1",
+		"displayValue": "u_reference_1"
+	},
+	"rounded_images": {
+		"value": "true",
+		"displayValue": "true"
+	},
+	"list_page": {
+		"value": "",
+		"displayValue": ""
+	},
+	"hide_footer": {
+		"value": "",
+		"displayValue": ""
+	},
+	"view": {
+		"value": "",
+		"displayValue": ""
+	},
+	"disable_record_watcher": {
+		"value": "",
+		"displayValue": ""
+	},
+	"filter_acls": {
+		"value": "false",
+		"displayValue": "false"
+	},
+	"table":{
+		"value": "x_540166_apl_apl_bidlog_table"
+	}
+}]]></widget_parameters>
+    </sp_instance_vlist>
+    <sys_translated_text action="DELETE" query="documentkey=b3ae78fd479042100e63e481e36d4383"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="APL ">3c7b4b44471002100e63e481e36d43e5</application>
+        <file_path/>
+        <instance_id>757a8d15db46b998199b1729139619ab</instance_id>
+        <instance_name>dev192681</instance_name>
+        <name>sp_instance_vlist_b3ae78fd479042100e63e481e36d4383</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_instance_vlist"&gt;&lt;sp_instance_vlist action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;class_name/&gt;&lt;color&gt;default&lt;/color&gt;&lt;css/&gt;&lt;display_field&gt;u_current_bid&lt;/display_field&gt;&lt;field_list/&gt;&lt;filter/&gt;&lt;glyph&gt;th-list&lt;/glyph&gt;&lt;id/&gt;&lt;maximum_entries&gt;10&lt;/maximum_entries&gt;&lt;order&gt;1&lt;/order&gt;&lt;order_by/&gt;&lt;order_direction&gt;asc&lt;/order_direction&gt;&lt;roles/&gt;&lt;short_description/&gt;&lt;size&gt;md&lt;/size&gt;&lt;sp_column display_value="2"&gt;ec0790e8471002100e63e481e36d434b&lt;/sp_column&gt;&lt;sp_page/&gt;&lt;sp_widget display_value="Copy of Simple List"&gt;6ccdb4bd479042100e63e481e36d4381&lt;/sp_widget&gt;&lt;sys_class_name&gt;sp_instance_vlist&lt;/sys_class_name&gt;&lt;sys_created_by&gt;maulik&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2024-02-12 05:46:37&lt;/sys_created_on&gt;&lt;sys_id&gt;b3ae78fd479042100e63e481e36d4383&lt;/sys_id&gt;&lt;sys_mod_count&gt;2&lt;/sys_mod_count&gt;&lt;sys_name/&gt;&lt;sys_package display_value="APL " source="x_540166_apl"&gt;3c7b4b44471002100e63e481e36d43e5&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="APL "&gt;3c7b4b44471002100e63e481e36d43e5&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_instance_vlist_b3ae78fd479042100e63e481e36d4383&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;maulik&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2024-02-12 05:51:56&lt;/sys_updated_on&gt;&lt;table&gt;x_540166_apl_apl_bidlog_table&lt;/table&gt;&lt;title/&gt;&lt;url/&gt;&lt;widget_parameters&gt;&lt;![CDATA[{
+	"always_show": {
+		"value": "",
+		"displayValue": ""
+	},
+	"panel_body_height": {
+		"value": "",
+		"displayValue": ""
+	},
+	"image_field": {
+		"value": "current_profile_pic",
+		"displayValue": "current_profile_pic"
+	},
+	"secondary_fields": {
+		"value": "u_reference_1",
+		"displayValue": "u_reference_1"
+	},
+	"rounded_images": {
+		"value": "true",
+		"displayValue": "true"
+	},
+	"list_page": {
+		"value": "",
+		"displayValue": ""
+	},
+	"hide_footer": {
+		"value": "",
+		"displayValue": ""
+	},
+	"view": {
+		"value": "",
+		"displayValue": ""
+	},
+	"disable_record_watcher": {
+		"value": "",
+		"displayValue": ""
+	},
+	"filter_acls": {
+		"value": "false",
+		"displayValue": "false"
+	},
+	"table":{
+		"value": "x_540166_apl_apl_bidlog_table"
+	}
+}]]&gt;&lt;/widget_parameters&gt;&lt;/sp_instance_vlist&gt;&lt;sys_translated_text action="delete_multiple" query="documentkey=b3ae78fd479042100e63e481e36d4383"/&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>1649808078</payload_hash>
+        <record_name/>
+        <reverted_from/>
+        <source>2773b578475002100e63e481e36d434f</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>maulik</sys_created_by>
+        <sys_created_on>2024-02-12 05:51:56</sys_created_on>
+        <sys_id>35effc3147d042100e63e481e36d4325</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18d9bdf42ce0000001</sys_recorded_at>
+        <sys_updated_by>maulik</sys_updated_by>
+        <sys_updated_on>2024-02-12 05:51:56</sys_updated_on>
+        <type>Instance of Simple List</type>
+        <update_guid>f5eff03178d04210a9210f5708b146ad</update_guid>
+        <update_guid_history>f5eff03178d04210a9210f5708b146ad:1649808078,582fb031b1d042105fe3c35b364f0821:2089562837,fbae78fdd7904210fc8bf066f56c4d84:221768767</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="">8b30057147d042100e63e481e36d43c2</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>maulik</sys_created_by>
+        <sys_created_on>2024-02-12 05:53:23</sys_created_on>
+        <sys_db_object display_value="" name="sp_instance_vlist">sp_instance_vlist</sys_db_object>
+        <sys_id>96d94bdc2ab54ccba17d4663c268e261</sys_id>
+        <sys_metadata>b3ae78fd479042100e63e481e36d4383</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+        <sys_scope_delete display_value="">34d45e9f175a49329ec1bf71207ab644</sys_scope_delete>
+        <sys_update_name>sp_instance_vlist_b3ae78fd479042100e63e481e36d4383</sys_update_name>
+        <sys_update_version display_value="sp_instance_vlist_b3ae78fd479042100e63e481e36d4383">35effc3147d042100e63e481e36d4325</sys_update_version>
+        <sys_updated_by>maulik</sys_updated_by>
+        <sys_updated_on>2024-02-12 05:53:23</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

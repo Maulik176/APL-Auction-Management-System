@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance">
+    <sp_instance_vlist action="DELETE">
+        <active>true</active>
+        <class_name/>
+        <color>default</color>
+        <css/>
+        <display_field>u_current_bid</display_field>
+        <field_list/>
+        <filter/>
+        <glyph/>
+        <id/>
+        <maximum_entries>5</maximum_entries>
+        <order>1</order>
+        <order_by/>
+        <order_direction>asc</order_direction>
+        <roles/>
+        <short_description/>
+        <size>md</size>
+        <sp_column display_value="2">ec0790e8471002100e63e481e36d434b</sp_column>
+        <sp_page/>
+        <sp_widget/>
+        <sys_class_name>sp_instance_vlist</sys_class_name>
+        <sys_created_by>maulik</sys_created_by>
+        <sys_created_on>2024-02-12 06:02:22</sys_created_on>
+        <sys_id>fa4285f147d042100e63e481e36d43a1</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+        <sys_update_name>sp_instance_vlist_fa4285f147d042100e63e481e36d43a1</sys_update_name>
+        <sys_updated_by>maulik</sys_updated_by>
+        <sys_updated_on>2024-02-12 06:08:22</sys_updated_on>
+        <table>x_540166_apl_apl_bidlog_table</table>
+        <title/>
+        <url/>
+        <widget_parameters><![CDATA[{
+	"always_show": {
+		"value": "",
+		"displayValue": ""
+	},
+	"panel_body_height": {
+		"value": "",
+		"displayValue": ""
+	},
+	"image_field": {
+		"value": "",
+		"displayValue": ""
+	},
+	"secondary_fields": {
+		"value": "u_reference_1",
+		"displayValue": "u_reference_1"
+	},
+	"rounded_images": {
+		"value": "",
+		"displayValue": ""
+	},
+	"list_page": {
+		"value": "",
+		"displayValue": ""
+	},
+	"hide_footer": {
+		"value": "",
+		"displayValue": ""
+	},
+	"view": {
+		"value": "",
+		"displayValue": ""
+	},
+	"disable_record_watcher": {
+		"value": "",
+		"displayValue": ""
+	},
+	"filter_acls": {
+		"value": "false",
+		"displayValue": "false"
+	}
+}]]></widget_parameters>
+    </sp_instance_vlist>
+    <sys_translated_text action="DELETE" query="documentkey=fa4285f147d042100e63e481e36d43a1"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="APL ">3c7b4b44471002100e63e481e36d43e5</application>
+        <file_path/>
+        <instance_id>757a8d15db46b998199b1729139619ab</instance_id>
+        <instance_name>dev192681</instance_name>
+        <name>sp_instance_vlist_fa4285f147d042100e63e481e36d43a1</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_instance"&gt;&lt;sp_instance_vlist action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;class_name/&gt;&lt;color&gt;default&lt;/color&gt;&lt;css/&gt;&lt;display_field&gt;u_current_bid&lt;/display_field&gt;&lt;field_list/&gt;&lt;filter/&gt;&lt;glyph/&gt;&lt;id/&gt;&lt;maximum_entries&gt;5&lt;/maximum_entries&gt;&lt;order&gt;1&lt;/order&gt;&lt;order_by/&gt;&lt;order_direction&gt;asc&lt;/order_direction&gt;&lt;roles/&gt;&lt;short_description/&gt;&lt;size&gt;md&lt;/size&gt;&lt;sp_column display_value="2"&gt;ec0790e8471002100e63e481e36d434b&lt;/sp_column&gt;&lt;sp_page/&gt;&lt;sp_widget/&gt;&lt;sys_class_name&gt;sp_instance_vlist&lt;/sys_class_name&gt;&lt;sys_created_by&gt;maulik&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2024-02-12 06:02:22&lt;/sys_created_on&gt;&lt;sys_id&gt;fa4285f147d042100e63e481e36d43a1&lt;/sys_id&gt;&lt;sys_mod_count&gt;2&lt;/sys_mod_count&gt;&lt;sys_name/&gt;&lt;sys_package display_value="APL " source="x_540166_apl"&gt;3c7b4b44471002100e63e481e36d43e5&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="APL "&gt;3c7b4b44471002100e63e481e36d43e5&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_instance_vlist_fa4285f147d042100e63e481e36d43a1&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;maulik&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2024-02-12 06:08:22&lt;/sys_updated_on&gt;&lt;table&gt;x_540166_apl_apl_bidlog_table&lt;/table&gt;&lt;title/&gt;&lt;url/&gt;&lt;widget_parameters&gt;&lt;![CDATA[{
+	"always_show": {
+		"value": "",
+		"displayValue": ""
+	},
+	"panel_body_height": {
+		"value": "",
+		"displayValue": ""
+	},
+	"image_field": {
+		"value": "",
+		"displayValue": ""
+	},
+	"secondary_fields": {
+		"value": "u_reference_1",
+		"displayValue": "u_reference_1"
+	},
+	"rounded_images": {
+		"value": "",
+		"displayValue": ""
+	},
+	"list_page": {
+		"value": "",
+		"displayValue": ""
+	},
+	"hide_footer": {
+		"value": "",
+		"displayValue": ""
+	},
+	"view": {
+		"value": "",
+		"displayValue": ""
+	},
+	"disable_record_watcher": {
+		"value": "",
+		"displayValue": ""
+	},
+	"filter_acls": {
+		"value": "false",
+		"displayValue": "false"
+	}
+}]]&gt;&lt;/widget_parameters&gt;&lt;/sp_instance_vlist&gt;&lt;sys_translated_text action="delete_multiple" query="documentkey=fa4285f147d042100e63e481e36d43a1"/&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-865384583</payload_hash>
+        <record_name/>
+        <reverted_from/>
+        <source>2773b578475002100e63e481e36d434f</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>maulik</sys_created_by>
+        <sys_created_on>2024-02-12 06:15:15</sys_created_on>
+        <sys_id>533581b547d042100e63e481e36d4305</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18d9bf49b340000001</sys_recorded_at>
+        <sys_updated_by>maulik</sys_updated_by>
+        <sys_updated_on>2024-02-12 06:15:15</sys_updated_on>
+        <type>Instance of Simple List</type>
+        <update_guid>6ea3cd3507d04210cc24341c6df6d113</update_guid>
+        <update_guid_history>6ea3cd3507d04210cc24341c6df6d113:-1640684995,6ea3cd3507d04210cc24341c6df6d113:-1640684995,3c72c9f18cd042106bc0ffc444255fd8:582776156,b24285f1a3d04210d4c4e340251365a3:-858455214</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="">cd96053947d042100e63e481e36d4328</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>maulik</sys_created_by>
+        <sys_created_on>2024-02-12 06:21:06</sys_created_on>
+        <sys_db_object display_value="" name="sp_instance_vlist">sp_instance_vlist</sys_db_object>
+        <sys_id>67d74d7c799d4f4ab8e5f23623ce4ec4</sys_id>
+        <sys_metadata>fa4285f147d042100e63e481e36d43a1</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+        <sys_scope_delete display_value="">34d45e9f175a49329ec1bf71207ab644</sys_scope_delete>
+        <sys_update_name>sp_instance_vlist_fa4285f147d042100e63e481e36d43a1</sys_update_name>
+        <sys_update_version display_value="sp_instance_vlist_fa4285f147d042100e63e481e36d43a1">533581b547d042100e63e481e36d4305</sys_update_version>
+        <sys_updated_by>maulik</sys_updated_by>
+        <sys_updated_on>2024-02-12 06:21:06</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

@@ -4,42 +4,77 @@
         <client_script><![CDATA[api.controller=function() {
   /* widget controller */
   var c = this;
+  c.togglePlayers1 = function(){
+    var playerList = document.getElementById('playerList1');
+    var playersBox = document.querySelector('.players-box');
+
+    // Toggle the 'open' class on the players-box
+    if (playersBox.classList.contains('open')) {
+      playersBox.classList.remove('open');
+      // Clear the player list when the box is closed
+      playerList.innerHTML = '';
+    } else {
+      playersBox.classList.add('open');
+      // Replace this with your actual player names
+      var dummyNames = ['Player 1', 'Player 2', 'Player 3'];
+      playerList.innerHTML = dummyNames.map(function (name) {
+        return '<li>' + name + '</li>';
+      }).join('');
+    }
+  }
+  c.togglePlayers2 = function(){
+    var playerList = document.getElementById('playerList2');
+    var playersBox = document.querySelector('.players-team');
+
+    // Toggle the 'open' class on the players-box
+    if (playersBox.classList.contains('open')) {
+      playersBox.classList.remove('open');
+      // Clear the player list when the box is closed
+      playerList.innerHTML = '';
+    } else {
+      playersBox.classList.add('open');
+      // Replace this with your actual player names
+      var dummyNames = ['Player 1', 'Player 2', 'Player 3'];
+      playerList.innerHTML = dummyNames.map(function (name) {
+        return '<li>' + name + '</li>';
+      }).join('');
+    }
+  }
+
+	
+	  c.togglePlayers3 = function(){
+    var playerList = document.getElementById('playerList3');
+    var playersBox = document.querySelector('.players-rem');
+
+    // Toggle the 'open' class on the players-box
+    if (playersBox.classList.contains('open')) {
+      playersBox.classList.remove('open');
+      // Clear the player list when the box is closed
+      playerList.innerHTML = '';
+    } else {
+      playersBox.classList.add('open');
+      // Replace this with your actual player names
+      var dummyNames = ['Player 1', 'Player 2', 'Player 3'];
+      playerList.innerHTML = dummyNames.map(function (name) {
+        return '<li>' + name + '</li>';
+      }).join('');
+    }
+  }
+
+
+  
 }
 ]]></client_script>
         <controller_as>c</controller_as>
         <css>#apl-image{
-  width:90%;
+  width:100%;
 
   height:150px;}
-
-.left-sidebar {
-    width: 200px;
-    background-color: black;
-    padding: 10px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-}
-
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
-
 .sidebar-widget {
     background-color: #333;
     padding: 20px;
     color: #e1ad21; /* Golden text color */
 }
-
-.logo-container {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.logo {
-    max-width: 100%;
-    height: auto;
-}
-
 .title-container {
     text-align: center;
     margin-bottom: 20px;
@@ -49,33 +84,22 @@ h2 {
     margin: 0;
 }
 
-.dropdown-container label {
-    display: block;
-    margin-bottom: 5px;
-}
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
 
-select {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border:1px solid #e1ad21;
+    height: 50px;
+  }
 
-/* Customize the appearance of the dropdown arrow */
-select::-ms-expand {
-    display: none;
-}
 
-select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    cursor: pointer;
-}
 
-/* Add more styles as needed */
+
 </css>
         <data_table>sp_instance</data_table>
         <demo_data/>
@@ -108,39 +132,89 @@ select {
         <sys_created_by>vandan</sys_created_by>
         <sys_created_on>2024-02-08 06:15:48</sys_created_on>
         <sys_id>180f1ca0475002100e63e481e36d437f</sys_id>
-        <sys_mod_count>29</sys_mod_count>
+        <sys_mod_count>91</sys_mod_count>
         <sys_name>demo-apl</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
         <sys_update_name>sp_widget_180f1ca0475002100e63e481e36d437f</sys_update_name>
         <sys_updated_by>vandan</sys_updated_by>
-        <sys_updated_on>2024-02-08 10:54:18</sys_updated_on>
-        <template><![CDATA[
+        <sys_updated_on>2024-02-12 09:37:07</sys_updated_on>
+        <template><![CDATA[<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Accordion - Collapse content</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#accordion" ).accordion({
+      collapsible: true
+    });
+  } );
+  </script>
+</head>
  <div class="sidebar-widget">
    <div id="apl-im">
 <img ng-src="{{::c.data.image + '.iix'}}" alt="HI" id="apl-image">
 </div>
-        <div class="title-container">
-            <h4>AUCTIONS 2024</h4>
-        </div>
-        <div class="dropdown-container">
-            <label for="players-bought">Players Bought:</label>
-            <select id="players-bought">
-                <!-- Add options here -->
-            </select>
+<div class="title-container">
+  <h2>AUCTIONS 2024</h2>
+</div>
+ <div class="container">
+  <div class="players-box" ng-click="c.togglePlayers1()">
+    <h4>Players Bought</h4>
+    <ul id="playerList1">
+      <!-- Your player names will be dynamically added here -->
+    </ul>
+  </div>
+</div>
+<div class="container">
+  <div class="players-team" ng-click="c.togglePlayers2()">
+    <h4>My Team</h4>
+    <ul id="playerList2">
+      <!-- Your player names will be dynamically added here -->
+    </ul>
+  </div>
+</div>
+<div class="container">
+  <div class="players-rem" ng-click="c.togglePlayers3()">
+    <h4>Remaining Players</h4>
+    <ul id="playerList3">
+      <!-- Your player names will be dynamically added here -->
+    </ul>
+  </div>
+</div>
+  <div id="accordion">
+  <h3>Section 1</h3>
+  <div>
+    <p>Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</p>
+  </div>
+  <h3>Section 2</h3>
+  <div>
+    <p>Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In suscipit faucibus urna. </p>
+  </div>
+  <h3>Section 3</h3>
+  <div>
+    <p>Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis. Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui. </p>
+    <ul>
+      <li>List item one</li>
+      <li>List item two</li>
+      <li>List item three</li>
+    </ul>
+  </div>
+  <h3>Section 4</h3>
+  <div>
+    <p>Cras dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia mauris vel est. </p><p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </p>
+  </div>
+</div>
 
-            <label for="my-team">My Team:</label>
-            <select id="my-team">
-                <!-- Add options here -->
-            </select>
 
-            <label for="remaining-players">Remaining Players:</label>
-            <select id="remaining-players">
-                <!-- Add options here -->
-            </select>
-        </div>
-    </div>
+
+
+</div>
+   
 
 
 ]]></template>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_dictionary action="DELETE" element="u_runs_2" table="x_540166_apl_apl_player_table">
+        <active>true</active>
+        <array>false</array>
+        <attributes/>
+        <audit>false</audit>
+        <calculation/>
+        <choice>0</choice>
+        <choice_field/>
+        <choice_table/>
+        <column_label>Runs</column_label>
+        <comments/>
+        <create_roles/>
+        <default_value>0</default_value>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>u_runs_2</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <internal_type display_value="Integer">integer</internal_type>
+        <mandatory>true</mandatory>
+        <max_length>40</max_length>
+        <name>x_540166_apl_apl_player_table</name>
+        <next_element/>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_dictionary</sys_class_name>
+        <sys_created_by>vandan</sys_created_by>
+        <sys_created_on>2024-02-07 08:56:01</sys_created_on>
+        <sys_id>651a3b8447d002100e63e481e36d4393</sys_id>
+        <sys_name>Runs</sys_name>
+        <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+        <sys_update_name>sys_dictionary_x_540166_apl_apl_player_table_u_runs_2</sys_update_name>
+        <sys_updated_by>vandan</sys_updated_by>
+        <sys_updated_on>2024-02-07 08:56:02</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_dictionary>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="APL ">3c7b4b44471002100e63e481e36d43e5</application>
+        <file_path/>
+        <instance_id>757a8d15db46b998199b1729139619ab</instance_id>
+        <instance_name>dev192681</instance_name>
+        <name>sys_dictionary_x_540166_apl_apl_player_table_u_runs_2</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_dictionary action="INSERT_OR_UPDATE" element="u_runs_2" table="x_540166_apl_apl_player_table"><active>true</active><array>false</array><attributes/><audit>false</audit><calculation/><choice>0</choice><choice_field/><choice_table/><column_label>Runs</column_label><comments/><create_roles/><default_value>0</default_value><defaultsort/><delete_roles/><dependent/><dependent_on_field/><display>false</display><dynamic_creation>false</dynamic_creation><dynamic_creation_script/><dynamic_default_value/><dynamic_ref_qual/><element>u_runs_2</element><element_reference>false</element_reference><foreign_database/><formula/><function_definition/><function_field>false</function_field><internal_type display_value="Integer">integer</internal_type><mandatory>true</mandatory><max_length>40</max_length><name>x_540166_apl_apl_player_table</name><next_element/><primary>false</primary><read_only>false</read_only><read_roles/><reference/><reference_cascade_rule/><reference_floats>false</reference_floats><reference_key/><reference_qual/><reference_qual_condition/><reference_type/><spell_check>false</spell_check><staged>false</staged><sys_class_name>sys_dictionary</sys_class_name><sys_created_by>vandan</sys_created_by><sys_created_on>2024-02-07 08:56:01</sys_created_on><sys_id>651a3b8447d002100e63e481e36d4393</sys_id><sys_name>Runs</sys_name><sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package><sys_policy/><sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope><sys_update_name>sys_dictionary_x_540166_apl_apl_player_table_u_runs_2</sys_update_name><sys_updated_by>vandan</sys_updated_by><sys_updated_on>2024-02-07 08:56:02</sys_updated_on><table_reference>false</table_reference><text_index>false</text_index><unique>false</unique><use_dependent_field>false</use_dependent_field><use_dynamic_default>false</use_dynamic_default><use_reference_qualifier>simple</use_reference_qualifier><virtual>false</virtual><virtual_type>script</virtual_type><widget/><write_roles/><xml_view>false</xml_view></sys_dictionary></record_update>]]></payload>
+        <payload_hash>253310063</payload_hash>
+        <record_name>APL player table.Runs</record_name>
+        <reverted_from/>
+        <source>b87b4b44471002100e63e481e36d43e7</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>vandan</sys_created_by>
+        <sys_created_on>2024-02-07 08:56:02</sys_created_on>
+        <sys_id>711a3b8447d002100e63e481e36d43e1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18d82c8027c0000001</sys_recorded_at>
+        <sys_updated_by>vandan</sys_updated_by>
+        <sys_updated_on>2024-02-07 08:56:02</sys_updated_on>
+        <type>Dictionary</type>
+        <update_guid>791a3b8477d002108fa07a459ec250e0</update_guid>
+        <update_guid_history>791a3b8477d002108fa07a459ec250e0:253310063,a11a3b842ed00210472bb2f9402f00af:826923113</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>dev</sys_created_by>
+        <sys_created_on>2024-02-12 05:41:54</sys_created_on>
+        <sys_db_object display_value="" name="sys_dictionary">sys_dictionary</sys_db_object>
+        <sys_id>4ea11fd9863349ab9cde6679d458f5b1</sys_id>
+        <sys_metadata>651a3b8447d002100e63e481e36d4393</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Runs</sys_name>
+        <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+        <sys_parent display_value="APL player table">4c12dfc8471002100e63e481e36d4342</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+        <sys_scope_delete display_value="">34d45e9f175a49329ec1bf71207ab644</sys_scope_delete>
+        <sys_update_name>sys_dictionary_x_540166_apl_apl_player_table_u_runs_2</sys_update_name>
+        <sys_update_version display_value="sys_dictionary_x_540166_apl_apl_player_table_u_runs_2">711a3b8447d002100e63e481e36d43e1</sys_update_version>
+        <sys_updated_by>dev</sys_updated_by>
+        <sys_updated_on>2024-02-12 05:41:54</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
