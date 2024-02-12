@@ -17,6 +17,7 @@
   padding: 15px; /* Increased padding for the card */
   border: 2px solid #ddd; /* Add a subtle border */
   border-radius: 10px; /* Add rounded corners */
+  
 }
 
 /* First Row (30%) */
@@ -79,6 +80,7 @@
    overflow: hidden; /* Hide overflow for rounded corners */
   border: 2px solid #ddd; /* Add a border to container1 */
   border-radius: 10px; /* Add rounded corners */
+  color: #007965;
 }
 
 /* Second Row (70%) */
@@ -111,6 +113,7 @@
   border: 2px solid #ddd; /* Add a border to container1 */
   border-radius: 10px; /* Add rounded corners */
   align-items: center;
+  
 }
 
 /* Styling for Buttons */
@@ -123,6 +126,7 @@
   border: none;
   cursor: pointer;
   border-radius: 8px; /* Add rounded corners to buttons */
+  background-color: #00AF91;
 }
 
 .container5 button:hover {
@@ -145,6 +149,8 @@
         <script><![CDATA[(function() {
   /* populate the 'data' object */
   /* e.g., data.table = $sp.getValue('table'); */
+	
+	// Generate random sys_id
 	var myTable = new GlideRecord('x_540166_apl_apl_player_table');
 	var id;
 	myTable.query();
@@ -163,22 +169,29 @@
 			gs.warning('No records found in the table.');
 	}
 	
+	
+	// fetch record for that player
 	var gr = new GlideRecord("x_540166_apl_apl_player_table");
 	gr.addQuery('sys_id', id);
 	gr.orderBy('number');
 	gr.query(); 
 	
 	data.list = [];
+	var obj = {};
+	
 	while(gr.next()) {
-		var obj = {};
+		//data.obj = {};
 		obj.number = gr.getValue('number');
 		obj.name = gr.getValue('u_name');
 		obj.player_image = gr.getValue('player_image');
 		obj.age = gr.getValue('u_age');
 		obj.category = gr.getValue('u_category');
 		obj.value = gr.getValue('u_value');
+		//data.list.push(obj);
+		
+		/*
 		obj.matches = gr.getValue('u_matches_1');
-		obj.innings = gr.getValue('u_innings_3u_runs_2');
+		obj.innings = gr.getValue('u_innings_3');
 		obj.runs = gr.getValue('u_runs_2');
 		obj.strike_rate = gr.getValue('u_sr_7');
 		obj.fifties = gr.getValue('u_fifties_10');
@@ -189,8 +202,31 @@
 		obj.average = gr.getValue('u_avg_5');
 		obj.highest_score = gr.getValue('u_high_14');
 		obj.bowling_best_fig = gr.getValue('u_bestbowl_12');
+		data.list.push(data.obj);
+		*/
+	} 
+	
+	
+	// fetch stats for that player
+	var stat = new GlideRecord("x_540166_apl_player_stats");
+	stat.addQuery('u_reference_15', id);
+	stat.query();
+	while(stat.next()) {
+		obj.matches = stat.getValue('u_matches_1');
+		obj.innings = stat.getValue('u_innings_3');
+		obj.runs = stat.getValue('u_runs_2');
+		obj.strike_rate = stat.getValue('u_sr_7');
+		obj.fifties = stat.getValue('u_fifties_10');
+		obj.centuries = stat.getValue('u_centuries_9');
+		obj.wickets = stat.getValue('u_wickets_4');
+		obj.three_wicket = stat.getValue('u_3wh_15');
+		obj.five_wicket = stat.getValue('u_integer_11');
+		obj.average = stat.getValue('u_avg_5');
+		obj.highest_score = stat.getValue('u_high_14');
+		obj.bowling_best_fig = stat.getValue('u_bestbowl_12');
 		data.list.push(obj);
 	}
+	
 	
 })();]]></script>
         <servicenow>false</servicenow>
@@ -198,14 +234,14 @@
         <sys_created_by>dev</sys_created_by>
         <sys_created_on>2024-02-07 10:38:46</sys_created_on>
         <sys_id>e691dc9c471402100e63e481e36d43ae</sys_id>
-        <sys_mod_count>42</sys_mod_count>
+        <sys_mod_count>56</sys_mod_count>
         <sys_name>apl_player_card</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
         <sys_update_name>sp_widget_e691dc9c471402100e63e481e36d43ae</sys_update_name>
-        <sys_updated_by>maulik</sys_updated_by>
-        <sys_updated_on>2024-02-09 10:29:35</sys_updated_on>
+        <sys_updated_by>dev</sys_updated_by>
+        <sys_updated_on>2024-02-12 08:39:41</sys_updated_on>
         <template><![CDATA[<div ng-repeat="player in data.list">
   <div class="player-card">
     <div class="first-row">

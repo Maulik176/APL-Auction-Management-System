@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section caption="Stats" section_id="b3fbf03d479042100e63e481e36d43a4" sys_domain="global" table="x_540166_apl_player_stats" version="3" view="">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_matches_1</element>
+            <position>0</position>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-12 05:34:55</sys_created_on>
+            <sys_id>6c0c743d479042100e63e481e36d4387</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Stats" display_value="Stats" name="x_540166_apl_player_stats" sys_domain="global" view="Default view">b3fbf03d479042100e63e481e36d43a4</sys_ui_section>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-12 05:34:55</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_runs_2</element>
+            <position>1</position>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-12 05:34:55</sys_created_on>
+            <sys_id>600c743d479042100e63e481e36d4388</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Stats" display_value="Stats" name="x_540166_apl_player_stats" sys_domain="global" view="Default view">b3fbf03d479042100e63e481e36d43a4</sys_ui_section>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-12 05:34:55</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_avg_5</element>
+            <position>2</position>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-12 05:34:55</sys_created_on>
+            <sys_id>640c743d479042100e63e481e36d4388</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Stats" display_value="Stats" name="x_540166_apl_player_stats" sys_domain="global" view="Default view">b3fbf03d479042100e63e481e36d43a4</sys_ui_section>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-12 05:34:55</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_sr_7</element>
+            <position>3</position>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-12 05:34:55</sys_created_on>
+            <sys_id>680c743d479042100e63e481e36d4388</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Stats" display_value="Stats" name="x_540166_apl_player_stats" sys_domain="global" view="Default view">b3fbf03d479042100e63e481e36d43a4</sys_ui_section>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-12 05:34:55</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_centuries_9</element>
+            <position>4</position>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-12 05:34:55</sys_created_on>
+            <sys_id>6c0c743d479042100e63e481e36d4388</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Stats" display_value="Stats" name="x_540166_apl_player_stats" sys_domain="global" view="Default view">b3fbf03d479042100e63e481e36d43a4</sys_ui_section>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-12 05:34:55</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_fifties_10</element>
+            <position>5</position>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-12 05:34:55</sys_created_on>
+            <sys_id>600c743d479042100e63e481e36d4389</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Stats" display_value="Stats" name="x_540166_apl_player_stats" sys_domain="global" view="Default view">b3fbf03d479042100e63e481e36d43a4</sys_ui_section>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-12 05:34:55</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_high_14</element>
+            <position>6</position>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-12 05:34:55</sys_created_on>
+            <sys_id>640c743d479042100e63e481e36d4389</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Stats" display_value="Stats" name="x_540166_apl_player_stats" sys_domain="global" view="Default view">b3fbf03d479042100e63e481e36d43a4</sys_ui_section>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-12 05:34:55</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.split</element>
+            <position>7</position>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-12 05:34:55</sys_created_on>
+            <sys_id>680c743d479042100e63e481e36d4389</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Stats" display_value="Stats" name="x_540166_apl_player_stats" sys_domain="global" view="Default view">b3fbf03d479042100e63e481e36d43a4</sys_ui_section>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-12 05:34:55</sys_updated_on>
+            <sys_user/>
+            <type>.split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_innings_3</element>
+            <position>8</position>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-12 05:34:55</sys_created_on>
+            <sys_id>6c0c743d479042100e63e481e36d4389</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Stats" display_value="Stats" name="x_540166_apl_player_stats" sys_domain="global" view="Default view">b3fbf03d479042100e63e481e36d43a4</sys_ui_section>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-12 05:34:55</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_wickets_4</element>
+            <position>9</position>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-12 05:34:55</sys_created_on>
+            <sys_id>ec0c743d479042100e63e481e36d43a2</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Stats" display_value="Stats" name="x_540166_apl_player_stats" sys_domain="global" view="Default view">b3fbf03d479042100e63e481e36d43a4</sys_ui_section>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-12 05:34:55</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_bowlavg_6</element>
+            <position>10</position>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-12 05:34:55</sys_created_on>
+            <sys_id>e00c743d479042100e63e481e36d43a3</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Stats" display_value="Stats" name="x_540166_apl_player_stats" sys_domain="global" view="Default view">b3fbf03d479042100e63e481e36d43a4</sys_ui_section>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-12 05:34:55</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_bowlsr_8</element>
+            <position>11</position>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-12 05:34:55</sys_created_on>
+            <sys_id>e40c743d479042100e63e481e36d43a3</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Stats" display_value="Stats" name="x_540166_apl_player_stats" sys_domain="global" view="Default view">b3fbf03d479042100e63e481e36d43a4</sys_ui_section>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-12 05:34:55</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_3wh_15</element>
+            <position>12</position>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-12 05:34:55</sys_created_on>
+            <sys_id>e80c743d479042100e63e481e36d43a3</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Stats" display_value="Stats" name="x_540166_apl_player_stats" sys_domain="global" view="Default view">b3fbf03d479042100e63e481e36d43a4</sys_ui_section>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-12 05:34:55</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_integer_11</element>
+            <position>13</position>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-12 05:34:55</sys_created_on>
+            <sys_id>ec0c743d479042100e63e481e36d43a3</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Stats" display_value="Stats" name="x_540166_apl_player_stats" sys_domain="global" view="Default view">b3fbf03d479042100e63e481e36d43a4</sys_ui_section>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-12 05:34:55</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_bestbowl_12</element>
+            <position>14</position>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-12 05:34:55</sys_created_on>
+            <sys_id>e00c743d479042100e63e481e36d43a4</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Stats" display_value="Stats" name="x_540166_apl_player_stats" sys_domain="global" view="Default view">b3fbf03d479042100e63e481e36d43a4</sys_ui_section>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-12 05:34:55</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption>Stats</caption>
+            <header>false</header>
+            <name>x_540166_apl_player_stats</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-12 05:34:52</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>b3fbf03d479042100e63e481e36d43a4</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_540166_apl_player_stats</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+            <sys_update_name>sys_ui_section_b3fbf03d479042100e63e481e36d43a4</sys_update_name>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-12 05:34:52</sys_updated_on>
+            <sys_user/>
+            <title>false</title>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

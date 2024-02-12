@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="8486b0b5479042100e63e481e36d4389" label="APL Player Stats" max_length="40" name="x_540166_apl_player_stats" type="collection">
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
+        <element default="0" label="3 Wicket Hauls" max_length="40" name="u_3wh_15" type="integer"/>
+        <element default="0.00" label="Average" max_length="40" name="u_avg_5" type="float"/>
+        <element attributes="edge_encryption_enabled=true" default="0/00" label="Best Bowling Figures" max_length="40" name="u_bestbowl_12" type="string"/>
+        <element default="0.00" label="Bowling Average" max_length="40" name="u_bowlavg_6" type="float"/>
+        <element default="0.00" label="Bowling Strike rate" max_length="40" name="u_bowlsr_8" type="float"/>
+        <element default="0" label="Centuries" max_length="40" name="u_centuries_9" type="integer"/>
+        <element default="0" label="Fifties" max_length="40" name="u_fifties_10" type="integer"/>
+        <element default="0" label="Highest Score" max_length="40" name="u_high_14" type="integer"/>
+        <element default="0" label="Innings Played" max_length="40" name="u_innings_3" type="integer"/>
+        <element default="0" label="5 Wicket Hauls" max_length="40" name="u_integer_11" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" default="0" label="Matches Played" max_length="40" name="u_matches_1" type="string"/>
+        <element attributes="encode_utf8=false" default="565b34ac479002100e63e481e36d43dd" label="Player" max_length="32" name="u_reference_15" reference="x_540166_apl_apl_player_table" type="reference"/>
+        <element default="0" label="Runs" max_length="40" name="u_runs_2" type="integer"/>
+        <element default="0.00" label="Strike rate" max_length="40" name="u_sr_7" type="float"/>
+        <element default="0" label="Wickets" max_length="40" name="u_wickets_4" type="integer"/>
+        <index name="index">
+            <element name="u_reference_15"/>
+        </index>
+    </element>
+</database>
