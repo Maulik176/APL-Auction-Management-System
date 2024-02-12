@@ -118,7 +118,7 @@
 
 /* Styling for Buttons */
 .container5 button {
-  margin: 10px; /* Increased margin for buttons */
+  margin: 9px; /* Increased margin for buttons */
   padding: 15px; /* Increased padding for buttons */
   font-size: 16px; /* Adjust the font size for buttons */
   background-color: #3498db;
@@ -129,8 +129,11 @@
   background-color: #00AF91;
 }
 
+
+
 .container5 button:hover {
   background-color: #2980b9;
+  
 }
 </css>
         <data_table>sp_instance</data_table>
@@ -234,14 +237,14 @@
         <sys_created_by>dev</sys_created_by>
         <sys_created_on>2024-02-07 10:38:46</sys_created_on>
         <sys_id>e691dc9c471402100e63e481e36d43ae</sys_id>
-        <sys_mod_count>56</sys_mod_count>
+        <sys_mod_count>75</sys_mod_count>
         <sys_name>apl_player_card</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
         <sys_update_name>sp_widget_e691dc9c471402100e63e481e36d43ae</sys_update_name>
-        <sys_updated_by>dev</sys_updated_by>
-        <sys_updated_on>2024-02-12 08:39:41</sys_updated_on>
+        <sys_updated_by>maulik</sys_updated_by>
+        <sys_updated_on>2024-02-12 11:14:33</sys_updated_on>
         <template><![CDATA[<div ng-repeat="player in data.list">
   <div class="player-card">
     <div class="first-row">
@@ -266,8 +269,15 @@
         <!-- Add more statistics based on your requirements -->
       </div>
       <div class="container5">
-        <button ng-click="placeBid(player)">Bid</button>
+        <div class="twobut">
+          <button ng-click="placeBid(player)">
+Bid
+          </button>
         <button ng-click="passOnBid(player)">Pass</button>
+        </div>
+        <button ng-click="giveup(player)">
+          Give up
+        </button>
       </div>
     </div>
   </div>

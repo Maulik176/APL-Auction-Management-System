@@ -8,10 +8,10 @@
         <choice>3</choice>
         <choice_field/>
         <choice_table/>
-        <column_label>Curent Status</column_label>
+        <column_label>Player Status</column_label>
         <comments/>
         <create_roles/>
-        <default_value>pending</default_value>
+        <default_value>unsold</default_value>
         <defaultsort/>
         <delete_roles/>
         <dependent/>
@@ -47,13 +47,13 @@
         <sys_class_name>sys_dictionary</sys_class_name>
         <sys_created_by>maulik</sys_created_by>
         <sys_created_on>2024-02-07 07:29:03</sys_created_on>
-        <sys_name>Curent Status</sys_name>
+        <sys_name>Player Status</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
         <sys_update_name>sys_dictionary_x_540166_apl_apl_bidlog_table_u_choice_3</sys_update_name>
         <sys_updated_by>maulik</sys_updated_by>
-        <sys_updated_on>2024-02-07 07:29:03</sys_updated_on>
+        <sys_updated_on>2024-02-12 10:15:04</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>
