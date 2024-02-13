@@ -12,10 +12,11 @@
                 <element inactive="true" inactive_on_update="true" label="Pending" sequence="2" value="pending"/>
             </choice>
         </element>
-        <element attributes="omit_sys_original=true" label="Current Bid" max_length="20" name="u_current_bid" read_only="true" type="currency"/>
+        <element attributes="omit_sys_original=true" label="Current Bid" max_length="20" name="u_current_bid" type="currency"/>
         <element label="Timestamp" max_length="40" name="u_glide_time_1" type="glide_time"/>
         <element label="Timestamp" mandatory="true" max_length="40" name="u_insert_timestamp" type="insert_timestamp"/>
         <element label="Time clicked" max_length="40" name="u_insert_timestamp_17" read_only="true" type="insert_timestamp"/>
+        <element default="0" label="Current Bid" max_length="40" name="u_new_current_bid" type="integer"/>
         <element attributes="encode_utf8=false" default="a75cd708475002100e63e481e36d435d" label="Team Name" max_length="32" name="u_reference_1" reference="x_540166_apl_team_table" type="reference"/>
         <element attributes="encode_utf8=false" default="565b34ac479002100e63e481e36d43dd" dependent="sys_id" dependent_on_field="sys_id" label="Profile Picture" max_length="32" name="u_reference_2" read_only="true" reference="x_540166_apl_apl_player_table" type="reference" use_dependent_field="true"/>
         <element attributes="encode_utf8=false" default="da491344475002100e63e481e36d43b1" dependent="u_reference_team_name" dependent_on_field="u_reference_team_name" label="Team Name" max_length="32" name="u_reference_team_name" reference="x_540166_apl_team_table" type="reference" use_dependent_field="true"/>
