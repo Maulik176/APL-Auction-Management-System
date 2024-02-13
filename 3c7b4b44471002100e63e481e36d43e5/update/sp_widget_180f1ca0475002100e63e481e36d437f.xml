@@ -34,7 +34,7 @@
     } else {
       playersBox.classList.add('open');
       // Replace this with your actual player names
-      var dummyNames = ['Player 1', 'Player 2', 'Player 3'];
+      var dummyNames = ['Player 1', 'Player 2', 'Player 3','Player 3','Player 3','Player 3','Player 3','Player 3',];
       playerList.innerHTML = dummyNames.map(function (name) {
         return '<li>' + name + '</li>';
       }).join('');
@@ -93,51 +93,73 @@ for (i = 0; i < acc.length; i++) {
   margin-bottom: 20px;
 }
 
-.accordion {
+
+.acccordion {
   cursor: pointer;
   padding: 18px;
   width: 100%;
   border: none;
-  text-align: left;
-  outline: none;
-  font-size: 18px; /* Adjusted font size for better readability */
-  transition: background-color 0.4s, color 0.4s; /* Added transition for a smoother effect */
   text-align: center;
+  outline: none;
+  font-size: 18px; 
+  transition: background-color 0.4s, color 0.4s; 
+  text-align: center;
+
+  margin-bottom: 10px; /* Add some spacing between accordion sections */
+}
 }
 
 .active, .accordion:hover {
   color: #fff;
-  background-color: #007965; /* Adjusted color for consistency */
-}
+background-color: #007965; }
 
 .panel {
   padding: 0 18px;
   background-color: white;
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.3s ease-out; /* Adjusted transition duration */
-}
+  transition: max-height 0.9s ease-out; }
 
-/* Styling for the lists inside the accordion panels */
+
 ul {
-  list-style: none; /* Remove default list styles */
-  padding: 0; /* Remove default padding */
+  list-style: none; 
+  padding: 0; 
+  list-style-type: none; /* Remove default list styles */
+  padding: 0; /* Remove default padding for the list */
+  display: none; /* Hide the list by default */
 }
 
 ul li {
-  margin-bottom: 10px; /* Adjust margin between list items */
-  font-size: 16px; /* Adjust font size for better readability */
+  margin-bottom: 10px; 
+  font-size: 16px; 
+  padding: 10px; /* Add padding for better readability */
 }
 
-/* Add box shadow to the lists for a subtle depth effect */
+
 .panel ul {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-/* Media queries for responsiveness */
+
 @media screen and (max-width: 768px) {
   .accordion {
     font-size: 16px;
   }
+}
+
+
+
+.players-box,
+.players-team,
+.players-rem {
+  cursor: pointer;
+  text-align:center;/* Change cursor to pointer for better user experience */
+  padding: 15px;
+  /* Add a border between accordion sections */
+}
+
+/* Show the list when the accordion section is active */
+.active ul {
+  display: block;
 }
 </css>
         <data_table>sp_instance</data_table>
@@ -188,14 +210,14 @@ var gr1=new GlideRecord("x_540166_apl_apl_player_table");
         <sys_created_by>vandan</sys_created_by>
         <sys_created_on>2024-02-08 06:15:48</sys_created_on>
         <sys_id>180f1ca0475002100e63e481e36d437f</sys_id>
-        <sys_mod_count>123</sys_mod_count>
+        <sys_mod_count>150</sys_mod_count>
         <sys_name>demo-apl</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
         <sys_update_name>sp_widget_180f1ca0475002100e63e481e36d437f</sys_update_name>
-        <sys_updated_by>maulik</sys_updated_by>
-        <sys_updated_on>2024-02-13 05:42:02</sys_updated_on>
+        <sys_updated_by>vandan</sys_updated_by>
+        <sys_updated_on>2024-02-13 09:30:27</sys_updated_on>
         <template><![CDATA[
  <div class="sidebar-widget">
    <div id="apl-im">
@@ -204,12 +226,13 @@ var gr1=new GlideRecord("x_540166_apl_apl_player_table");
 <div class="title-container">
   <h1>AUCTIONS 2024</h1>
 </div>
+  
  <div class="accordion">
   <div class="players-box" ng-click="c.togglePlayers1()">
     <h4>Players Bought</h4>
     <ul id="playerList1">
-      <!-- Your player names will be dynamically added here -->
-    </ul>
+      Your player names will be dynamically added here -->
+  </ul>
   </div>
 </div>
 <div class="accordion">
@@ -217,28 +240,25 @@ var gr1=new GlideRecord("x_540166_apl_apl_player_table");
     <h4>My Team</h4>
     <ul id="playerList2">
       <!-- Your player names will be dynamically added here -->
-    </ul>
+  </ul>
   </div>
 </div>
 <div class="accordion">
   <div class="players-rem" ng-click="c.togglePlayers3()">
     <h4>Remaining Players</h4>
-    <ul id="playerList3">
+    <ul id="playerList3"> -->
       <!-- Your player names will be dynamically added here -->
-    </ul>
+   </ul>
   </div>
 </div>
+    
+  </div>
 
 
 
 
-</html>
 
 
-
-
-</div>
-   
 
 
 ]]></template>
