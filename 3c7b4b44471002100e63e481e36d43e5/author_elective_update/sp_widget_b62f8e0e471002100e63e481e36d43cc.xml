@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="DELETE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller=function() {
+  /* widget controller */
+  var c = this;
+	c.server.update();
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/* Player Card Container */
+.player-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Increased vertical spacing between containers */
+  padding: 15px; /* Increased padding for the card */
+  border: 2px solid #ddd; /* Add a subtle border */
+  border-radius: 10px; /* Add rounded corners */
+  
+}
+
+/* First Row (30%) */
+.player-card .first-row {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 30%;
+  gap: 15px; /* Increased spacing between containers in the first row */
+}
+
+/* Container 1 - Player Profile Pic */
+.first-row .container1 {
+  flex: 30%;
+  position: relative; /* Added position relative for positioning the overlay text */
+  overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+}
+
+/* Fixed size for images based on container1 size */
+.container1 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Adjust the object-fit property as needed */
+  border-radius: 10px; /* Add rounded corners to the image */
+  
+}
+
+/* Overlay text for image */
+.container1 .overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 16px; /* Adjust the font size of the overlay text */
+}
+
+/* Container 2 - Player Name and Age */
+.first-row .container2 {
+  flex: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px; /* Adjust the font size for player name and age */
+   overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+}
+
+/* Container 3 - Base Price */
+.first-row .container3 {
+  flex: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px; /* Adjust the font size for base price */
+   overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+  color: #007965;
+}
+
+/* Second Row (70%) */
+.player-card .second-row {
+  display: flex;
+  height: 70%;
+  gap: 15px; /* Increased spacing between containers in the second row */
+}
+
+/* Container 4 - Other Statistics */
+.second-row .container4 {
+  flex: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px; /* Adjust the font size for statistics */
+   overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+}
+
+/* Container 5 - Buttons (Bid, Pass, Give Up) */
+.second-row .container5 {
+  flex: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+   overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+  align-items: center;
+  
+}
+
+/* Styling for Buttons */
+.container5 button {
+  margin: 9px; /* Increased margin for buttons */
+  padding: 15px; /* Increased padding for buttons */
+  font-size: 16px; /* Adjust the font size for buttons */
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px; /* Add rounded corners to buttons */
+  background-color: #00AF91;
+}
+
+
+
+.container5 button:hover {
+  background-color: #2980b9;
+  
+}
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>h_apl_player_card</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>h_apl_player_card</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+	
+	var id;
+	var player_ids=[];
+	var myTable = new GlideRecord('x_540166_apl_apl_player_table');
+	myTable.orderBy('number');
+	myTable.query();
+
+	while(myTable.next()) {
+		player_ids.push(myTable.getValue('sys_id'));
+	}
+	id = player_ids[player_ids.length];
+	
+	// fetch record for that player
+	var gr = new GlideRecord("x_540166_apl_apl_player_table");
+	gr.addQuery('sys_id', id);
+	gr.orderBy('number');
+	gr.query(); 
+	
+	data.list = [];
+	var obj = {};
+	
+	while(gr.next()) {
+		//data.obj = {};
+		obj.number = gr.getValue('number');
+		obj.name = gr.getValue('u_name');
+		obj.player_image = gr.getValue('player_image');
+		obj.age = gr.getValue('u_age');
+		obj.category = gr.getValue('u_category');
+		obj.value = gr.getValue('u_value');
+	} 
+	
+	
+	// fetch stats for that player
+	var stat = new GlideRecord("x_540166_apl_player_stats");
+	stat.addQuery('u_reference_15', id);
+	stat.query();
+	while(stat.next()) {
+		obj.matches = stat.getValue('u_matches_1');
+		obj.innings = stat.getValue('u_innings_3');
+		obj.runs = stat.getValue('u_runs_2');
+		obj.strike_rate = stat.getValue('u_sr_7');
+		obj.fifties = stat.getValue('u_fifties_10');
+		obj.centuries = stat.getValue('u_centuries_9');
+		obj.wickets = stat.getValue('u_wickets_4');
+		obj.three_wicket = stat.getValue('u_3wh_15');
+		obj.five_wicket = stat.getValue('u_integer_11');
+		obj.average = stat.getValue('u_avg_5');
+		obj.highest_score = stat.getValue('u_high_14');
+		obj.bowling_best_fig = stat.getValue('u_bestbowl_12');
+		data.list.push(obj);
+	}
+	
+	
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>harshraj</sys_created_by>
+        <sys_created_on>2024-02-13 06:16:44</sys_created_on>
+        <sys_id>b62f8e0e471002100e63e481e36d43cc</sys_id>
+        <sys_mod_count>31</sys_mod_count>
+        <sys_name>h_apl_player_card</sys_name>
+        <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+        <sys_update_name>sp_widget_b62f8e0e471002100e63e481e36d43cc</sys_update_name>
+        <sys_updated_by>harshraj</sys_updated_by>
+        <sys_updated_on>2024-02-13 09:23:26</sys_updated_on>
+        <template><![CDATA[<div ng-repeat="player in data.list">
+  <div class="player-card">
+    <div class="first-row">
+      <div class="container1">
+        <img ng-src="{{ ::player.player_image + '.iix' }}" alt="Player Image" class="img-fluid">
+      </div>
+      <div class="container2">
+        <h2>{{ player.name }}</h2>
+        <p>Age: {{ player.age }}</p>
+      </div>
+      <div class="container3">
+        <p>Price: {{ player.value }}</p>
+      </div>
+    </div>
+    <div class="second-row">
+      <div class="container4">
+        <p>Matches: {{ player.matches }}</p>
+        <p>Runs: {{ player.runs }}</p>
+        <p>Wickets: {{ player.wickets }}</p>
+        <p>Average: {{ player.average }}</p>
+        <p>Category: {{ player.category }}</p>
+        <!-- Add more statistics based on your requirements -->
+      </div>
+      <div class="container5">
+        <div class="twobut">
+          <button ng-click="placeBid(player)">
+Bid
+          </button>
+        <button ng-click="passOnBid(player)">Pass</button>
+        </div>
+        <button ng-click="giveup(player)">
+          Give up
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+]]></template>
+    </sp_widget>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="APL ">3c7b4b44471002100e63e481e36d43e5</application>
+        <file_path/>
+        <instance_id>757a8d15db46b998199b1729139619ab</instance_id>
+        <instance_name>dev192681</instance_name>
+        <name>sp_widget_b62f8e0e471002100e63e481e36d43cc</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_widget"&gt;&lt;sp_widget action="INSERT_OR_UPDATE"&gt;&lt;category&gt;custom&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[api.controller=function() {
+  /* widget controller */
+  var c = this;
+	c.server.update();
+};]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css&gt;/* Player Card Container */
+.player-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Increased vertical spacing between containers */
+  padding: 15px; /* Increased padding for the card */
+  border: 2px solid #ddd; /* Add a subtle border */
+  border-radius: 10px; /* Add rounded corners */
+  
+}
+
+/* First Row (30%) */
+.player-card .first-row {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 30%;
+  gap: 15px; /* Increased spacing between containers in the first row */
+}
+
+/* Container 1 - Player Profile Pic */
+.first-row .container1 {
+  flex: 30%;
+  position: relative; /* Added position relative for positioning the overlay text */
+  overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+}
+
+/* Fixed size for images based on container1 size */
+.container1 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Adjust the object-fit property as needed */
+  border-radius: 10px; /* Add rounded corners to the image */
+  
+}
+
+/* Overlay text for image */
+.container1 .overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 16px; /* Adjust the font size of the overlay text */
+}
+
+/* Container 2 - Player Name and Age */
+.first-row .container2 {
+  flex: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px; /* Adjust the font size for player name and age */
+   overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+}
+
+/* Container 3 - Base Price */
+.first-row .container3 {
+  flex: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px; /* Adjust the font size for base price */
+   overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+  color: #007965;
+}
+
+/* Second Row (70%) */
+.player-card .second-row {
+  display: flex;
+  height: 70%;
+  gap: 15px; /* Increased spacing between containers in the second row */
+}
+
+/* Container 4 - Other Statistics */
+.second-row .container4 {
+  flex: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px; /* Adjust the font size for statistics */
+   overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+}
+
+/* Container 5 - Buttons (Bid, Pass, Give Up) */
+.second-row .container5 {
+  flex: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+   overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+  align-items: center;
+  
+}
+
+/* Styling for Buttons */
+.container5 button {
+  margin: 9px; /* Increased margin for buttons */
+  padding: 15px; /* Increased padding for buttons */
+  font-size: 16px; /* Adjust the font size for buttons */
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px; /* Add rounded corners to buttons */
+  background-color: #00AF91;
+}
+
+
+
+.container5 button:hover {
+  background-color: #2980b9;
+  
+}
+&lt;/css&gt;&lt;data_table&gt;sp_instance&lt;/data_table&gt;&lt;demo_data/&gt;&lt;description/&gt;&lt;docs/&gt;&lt;field_list/&gt;&lt;has_preview&gt;true&lt;/has_preview&gt;&lt;id&gt;h_apl_player_card&lt;/id&gt;&lt;internal&gt;false&lt;/internal&gt;&lt;link&gt;&lt;![CDATA[function link(scope, element, attrs, controller) {  }]]&gt;&lt;/link&gt;&lt;name&gt;h_apl_player_card&lt;/name&gt;&lt;option_schema/&gt;&lt;public&gt;false&lt;/public&gt;&lt;roles/&gt;&lt;script&gt;&lt;![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+	
+	var id;
+	var player_ids=[];
+	var myTable = new GlideRecord('x_540166_apl_apl_player_table');
+	myTable.orderBy('number');
+	myTable.query();
+
+	while(myTable.next()) {
+		player_ids.push(myTable.getValue('sys_id'));
+	}
+	id = player_ids[player_ids.length];
+	
+	// fetch record for that player
+	var gr = new GlideRecord("x_540166_apl_apl_player_table");
+	gr.addQuery('sys_id', id);
+	gr.orderBy('number');
+	gr.query(); 
+	
+	data.list = [];
+	var obj = {};
+	
+	while(gr.next()) {
+		//data.obj = {};
+		obj.number = gr.getValue('number');
+		obj.name = gr.getValue('u_name');
+		obj.player_image = gr.getValue('player_image');
+		obj.age = gr.getValue('u_age');
+		obj.category = gr.getValue('u_category');
+		obj.value = gr.getValue('u_value');
+	} 
+	
+	
+	// fetch stats for that player
+	var stat = new GlideRecord("x_540166_apl_player_stats");
+	stat.addQuery('u_reference_15', id);
+	stat.query();
+	while(stat.next()) {
+		obj.matches = stat.getValue('u_matches_1');
+		obj.innings = stat.getValue('u_innings_3');
+		obj.runs = stat.getValue('u_runs_2');
+		obj.strike_rate = stat.getValue('u_sr_7');
+		obj.fifties = stat.getValue('u_fifties_10');
+		obj.centuries = stat.getValue('u_centuries_9');
+		obj.wickets = stat.getValue('u_wickets_4');
+		obj.three_wicket = stat.getValue('u_3wh_15');
+		obj.five_wicket = stat.getValue('u_integer_11');
+		obj.average = stat.getValue('u_avg_5');
+		obj.highest_score = stat.getValue('u_high_14');
+		obj.bowling_best_fig = stat.getValue('u_bestbowl_12');
+		data.list.push(obj);
+	}
+	
+	
+})();]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;harshraj&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2024-02-13 06:16:44&lt;/sys_created_on&gt;&lt;sys_id&gt;b62f8e0e471002100e63e481e36d43cc&lt;/sys_id&gt;&lt;sys_mod_count&gt;31&lt;/sys_mod_count&gt;&lt;sys_name&gt;h_apl_player_card&lt;/sys_name&gt;&lt;sys_package display_value="APL " source="x_540166_apl"&gt;3c7b4b44471002100e63e481e36d43e5&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="APL "&gt;3c7b4b44471002100e63e481e36d43e5&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_b62f8e0e471002100e63e481e36d43cc&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;harshraj&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2024-02-13 09:23:26&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;div ng-repeat="player in data.list"&gt;
+  &lt;div class="player-card"&gt;
+    &lt;div class="first-row"&gt;
+      &lt;div class="container1"&gt;
+        &lt;img ng-src="{{ ::player.player_image + '.iix' }}" alt="Player Image" class="img-fluid"&gt;
+      &lt;/div&gt;
+      &lt;div class="container2"&gt;
+        &lt;h2&gt;{{ player.name }}&lt;/h2&gt;
+        &lt;p&gt;Age: {{ player.age }}&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="container3"&gt;
+        &lt;p&gt;Price: {{ player.value }}&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="second-row"&gt;
+      &lt;div class="container4"&gt;
+        &lt;p&gt;Matches: {{ player.matches }}&lt;/p&gt;
+        &lt;p&gt;Runs: {{ player.runs }}&lt;/p&gt;
+        &lt;p&gt;Wickets: {{ player.wickets }}&lt;/p&gt;
+        &lt;p&gt;Average: {{ player.average }}&lt;/p&gt;
+        &lt;p&gt;Category: {{ player.category }}&lt;/p&gt;
+        &lt;!-- Add more statistics based on your requirements --&gt;
+      &lt;/div&gt;
+      &lt;div class="container5"&gt;
+        &lt;div class="twobut"&gt;
+          &lt;button ng-click="placeBid(player)"&gt;
+Bid
+          &lt;/button&gt;
+        &lt;button ng-click="passOnBid(player)"&gt;Pass&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;button ng-click="giveup(player)"&gt;
+          Give up
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+]]&gt;&lt;/template&gt;&lt;/sp_widget&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>1893434824</payload_hash>
+        <record_name>h_apl_player_card</record_name>
+        <reverted_from/>
+        <source>7e2f8e0e471002100e63e481e36d43cd</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>harshraj</sys_created_by>
+        <sys_created_on>2024-02-13 09:23:26</sys_created_on>
+        <sys_id>a9e93ac647d002100e63e481e36d430f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18da1c740f80000001</sys_recorded_at>
+        <sys_updated_by>harshraj</sys_updated_by>
+        <sys_updated_on>2024-02-13 09:23:26</sys_updated_on>
+        <type>Widget</type>
+        <update_guid>61e93ac6bdd00210e9afc0d3a75c090f</update_guid>
+        <update_guid_history>61e93ac6bdd00210e9afc0d3a75c090f:1893434824,7ad93ac675d00210b98af7cf54ed7f7a:1429627585,88d97a8677d00210ce6ad68c31658d94:-1258857758,ddc9f6c6cdd00210447dbd4bd137bb71:347624195,3249be8619d00210b7365c69ac5beaf4:1954106148,88493a86e0d002103b6958c734e1c8c2:-176854368,3c39f68638d002102c83fc95e467c228:1429627585,9229768685d00210474dfb85b469f280:-1258857758,6319f6864fd002104daa7309c9449c3b:1954106148,b4d8768693d002102b9c2f4ebc07993c:347624195,89c8b686b0d00210054ac1aabf5d6b32:1954106148,a6a8b2860ed002100cbd6ad90361e345:1893434824,5c78ba4636d00210abc51b61af3fbe43:-253617906,cb48be46f2d00210e6f5d00d3bae3838:-453252040,a087ba061ad00210cec3bcfccb8fbe17:708722235,9e073a062ad002101a924b7f31e8ebfb:1868764850,94d6360610d00210936680749854c266:-295911314,68b63606d3d002100955377dbe9bbd60:-49234690,85a6f20636d002101397e40bb2af018c:1997284480,c786720607d002107b76e710753193da:974024895,7d66fec28dd00210e8626fe0450a340b:-49234690,565676c21bd002101cbce12feedf04d3:-1072494275,6d463ac25ad00210d421f4eecdb1e71f:-2095753860,85063ac2e4d002108d34393cde2cd398:-458784021,fbe53ac2c1d002104e0693a573c17309:-1482043606,14d576c225d002103e42df9fd6d19432:296026791,d4c576c2d5d00210bb594c6c6a21472c:-1108018805,f405728242d00210e721853d9ceeb7b3:296026791,f9d4f6426bd0021049c1959daaf4b23a:123309230,c6b4764218d00210da9a550da38575f7:-365654898,b684fa4207d00210a1ab2bb8e4b2d522:1884147726,b22f8e0ed81002106bc7f73bf32733cf:-94554065</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="h_apl_player_card">c6900b8e47d002100e63e481e36d43ba</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>harshraj</sys_created_by>
+        <sys_created_on>2024-02-13 09:52:42</sys_created_on>
+        <sys_db_object display_value="" name="sp_widget">sp_widget</sys_db_object>
+        <sys_id>12934bea20de48d4a860e013552fae51</sys_id>
+        <sys_metadata>b62f8e0e471002100e63e481e36d43cc</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>h_apl_player_card</sys_name>
+        <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+        <sys_scope_delete display_value="">34d45e9f175a49329ec1bf71207ab644</sys_scope_delete>
+        <sys_update_name>sp_widget_b62f8e0e471002100e63e481e36d43cc</sys_update_name>
+        <sys_update_version display_value="sp_widget_b62f8e0e471002100e63e481e36d43cc">a9e93ac647d002100e63e481e36d430f</sys_update_version>
+        <sys_updated_by>harshraj</sys_updated_by>
+        <sys_updated_on>2024-02-13 09:52:42</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
