@@ -5,14 +5,6 @@
   /* widget controller */
   var c = this;
 	c.server.update();
-	
-	c.placeBid = function(player) {
-		var n = 500;
-		c.data.newValue = parseInt(c.data.list[0].value) + parseInt("500");
-		c.server.update();
-		window.location.reload();
-	}
-	
 };]]></client_script>
         <controller_as>c</controller_as>
         <css>/* Player Card Container */
@@ -150,44 +142,37 @@
         <docs/>
         <field_list/>
         <has_preview>true</has_preview>
-        <id>apl_player_card</id>
+        <id>h_apl_player_card</id>
         <internal>false</internal>
         <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
-        <name>apl_player_card</name>
+        <name>h_apl_player_card</name>
         <option_schema/>
         <public>false</public>
         <roles/>
         <script><![CDATA[(function() {
-	/* populate the 'data' object */
-	/* e.g., data.table = $sp.getValue('table'); */
-
-	/*
-	// Generate random sys_id
-	var myTable = new GlideRecord('x_540166_apl_apl_player_table');
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+	
 	var id;
+	var player_ids=[];
+	var myTable = new GlideRecord('x_540166_apl_apl_player_table');
+	myTable.orderBy('number');
 	myTable.query();
-	if (myTable.hasNext()) {
-		var totalCount = myTable.getRowCount();
-		var randomIndex = Math.floor(Math.random() * totalCount);
-		console.log(randomIndex);
-		for (var i = 0; i <= randomIndex; i++) {
-			myTable.next();
-		}
-		id = myTable.getValue('sys_id');
-	} else {
-		gs.warning('No records found in the table.');
-	}
-	*/
 
+	while(myTable.next()) {
+		player_ids.push(myTable.getValue('sys_id'));
+	}
+	id = player_ids[player_ids.length];
+	
 	// fetch record for that player
 	var gr = new GlideRecord("x_540166_apl_apl_player_table");
-	gr.addQuery('sys_id', 'c20e04a0471002100e63e481e36d43b4');
+	gr.addQuery('sys_id', id);
 	gr.orderBy('number');
 	gr.query(); 
-
+	
 	data.list = [];
 	var obj = {};
-
+	
 	while(gr.next()) {
 		//data.obj = {};
 		obj.number = gr.getValue('number');
@@ -197,11 +182,11 @@
 		obj.category = gr.getValue('u_category');
 		obj.value = gr.getValue('u_value');
 	} 
-
-
+	
+	
 	// fetch stats for that player
 	var stat = new GlideRecord("x_540166_apl_player_stats");
-	stat.addQuery('u_reference_15', 'c20e04a0471002100e63e481e36d43b4');
+	stat.addQuery('u_reference_15', id);
 	stat.query();
 	while(stat.next()) {
 		obj.matches = stat.getValue('u_matches_1');
@@ -218,35 +203,22 @@
 		obj.bowling_best_fig = stat.getValue('u_bestbowl_12');
 		data.list.push(obj);
 	}
-
-	if (input) {
-		console.log(input.newValue);
-		var player = new GlideRecord('x_540166_apl_apl_player_table');
-		player.addQuery('sys_id', 'c20e04a0471002100e63e481e36d43b4');
-		//player.setLimit(1);
-		player.query();
-		var a = gr.getValue('u_name');
-		console.log(a);
-		if (player.next()) {
-			player.setValue('u_value', input.newValue);
-			player.update();
-		}
-	}
-
+	
+	
 })();]]></script>
         <servicenow>false</servicenow>
         <sys_class_name>sp_widget</sys_class_name>
-        <sys_created_by>dev</sys_created_by>
-        <sys_created_on>2024-02-07 10:38:46</sys_created_on>
-        <sys_id>e691dc9c471402100e63e481e36d43ae</sys_id>
-        <sys_mod_count>96</sys_mod_count>
-        <sys_name>apl_player_card</sys_name>
+        <sys_created_by>harshraj</sys_created_by>
+        <sys_created_on>2024-02-13 06:16:44</sys_created_on>
+        <sys_id>b62f8e0e471002100e63e481e36d43cc</sys_id>
+        <sys_mod_count>31</sys_mod_count>
+        <sys_name>h_apl_player_card</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
-        <sys_update_name>sp_widget_e691dc9c471402100e63e481e36d43ae</sys_update_name>
-        <sys_updated_by>dev</sys_updated_by>
-        <sys_updated_on>2024-02-13 09:33:54</sys_updated_on>
+        <sys_update_name>sp_widget_b62f8e0e471002100e63e481e36d43cc</sys_update_name>
+        <sys_updated_by>harshraj</sys_updated_by>
+        <sys_updated_on>2024-02-13 09:23:26</sys_updated_on>
         <template><![CDATA[<div ng-repeat="player in data.list">
   <div class="player-card">
     <div class="first-row">
@@ -272,10 +244,10 @@
       </div>
       <div class="container5">
         <div class="twobut">
-          <button ng-click="c.placeBid(player)">
-            Bid
+          <button ng-click="placeBid(player)">
+Bid
           </button>
-          <button ng-click="passOnBid(player)">Pass</button>
+        <button ng-click="passOnBid(player)">Pass</button>
         </div>
         <button ng-click="giveup(player)">
           Give up
