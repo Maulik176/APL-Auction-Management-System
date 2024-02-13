@@ -79,46 +79,35 @@ for (i = 0; i < acc.length; i++) {
 }
 ]]></client_script>
         <controller_as>c</controller_as>
-        <css>#apl-image{
-  width:100%;
+        <css>#apl-image {
+  width: 100%;
+  height: 150px;
+}
 
-  height:150px;}
 .sidebar-widget {
-    background-color: #333;
-    padding: 20px;
-    color: #e1ad21; /* Golden text color */
+  padding: 20px;
 }
+
 .title-container {
-    text-align: center;
-    margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 20px;
 }
-
-h2 {
-    margin: 0;
-}
-
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-  }
-
 
 .accordion {
-
   cursor: pointer;
   padding: 18px;
   width: 100%;
   border: none;
   text-align: left;
   outline: none;
-  font-size: 15px;
-  transition: 0.4s;
-  text-align:center;
+  font-size: 18px; /* Adjusted font size for better readability */
+  transition: background-color 0.4s, color 0.4s; /* Added transition for a smoother effect */
+  text-align: center;
 }
 
 .active, .accordion:hover {
-  color: #333;
-  background-color: #e1ad21;
+  color: #fff;
+  background-color: #007965; /* Adjusted color for consistency */
 }
 
 .panel {
@@ -126,12 +115,30 @@ body {
   background-color: white;
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.2s ease-out;
+  transition: max-height 0.3s ease-out; /* Adjusted transition duration */
 }
 
+/* Styling for the lists inside the accordion panels */
+ul {
+  list-style: none; /* Remove default list styles */
+  padding: 0; /* Remove default padding */
+}
 
+ul li {
+  margin-bottom: 10px; /* Adjust margin between list items */
+  font-size: 16px; /* Adjust font size for better readability */
+}
 
-
+/* Add box shadow to the lists for a subtle depth effect */
+.panel ul {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+/* Media queries for responsiveness */
+@media screen and (max-width: 768px) {
+  .accordion {
+    font-size: 16px;
+  }
+}
 </css>
         <data_table>sp_instance</data_table>
         <demo_data/>
@@ -181,14 +188,14 @@ var gr1=new GlideRecord("x_540166_apl_apl_player_table");
         <sys_created_by>vandan</sys_created_by>
         <sys_created_on>2024-02-08 06:15:48</sys_created_on>
         <sys_id>180f1ca0475002100e63e481e36d437f</sys_id>
-        <sys_mod_count>114</sys_mod_count>
+        <sys_mod_count>123</sys_mod_count>
         <sys_name>demo-apl</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
         <sys_update_name>sp_widget_180f1ca0475002100e63e481e36d437f</sys_update_name>
-        <sys_updated_by>vandan</sys_updated_by>
-        <sys_updated_on>2024-02-12 10:46:26</sys_updated_on>
+        <sys_updated_by>maulik</sys_updated_by>
+        <sys_updated_on>2024-02-13 05:42:02</sys_updated_on>
         <template><![CDATA[
  <div class="sidebar-widget">
    <div id="apl-im">
