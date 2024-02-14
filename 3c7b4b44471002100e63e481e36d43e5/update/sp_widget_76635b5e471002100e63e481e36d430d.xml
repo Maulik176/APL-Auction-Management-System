@@ -4,11 +4,18 @@
         <client_script><![CDATA[api.controller=function($scope, spUtil) {
   /* widget controller */
   var c = this;
+	c.btn_show=true;
 	////  new logic /////
 	localStorage.setItem("teams_list", JSON.stringify(c.data.teams_array));
 	var temp_array=JSON.parse(localStorage.getItem("teams_list"));
-	console.log(temp_array[0]);
-	debugger;
+	//console.log(temp_array[0]);
+	var team_len=temp_array.length;
+	var it=0;
+	it=setTimeout(increment, it*3000);
+	function increment(){
+		it=(it+1)%team_len;
+	}
+	
 	
 	/////////////////////////////
 	c.placeBid = function(player) {
@@ -261,14 +268,14 @@
         <sys_created_by>harshraj</sys_created_by>
         <sys_created_on>2024-02-14 05:53:25</sys_created_on>
         <sys_id>76635b5e471002100e63e481e36d430d</sys_id>
-        <sys_mod_count>25</sys_mod_count>
+        <sys_mod_count>31</sys_mod_count>
         <sys_name>h_apl_player_card</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
         <sys_update_name>sp_widget_76635b5e471002100e63e481e36d430d</sys_update_name>
         <sys_updated_by>harshraj</sys_updated_by>
-        <sys_updated_on>2024-02-14 07:01:10</sys_updated_on>
+        <sys_updated_on>2024-02-14 08:10:34</sys_updated_on>
         <template><![CDATA[<div ng-repeat="player in data.list">
   <div class="player-card">
     <div class="first-row">
@@ -291,7 +298,7 @@
         <p>Average: {{ player.average }}</p>
         <p>Category: {{ player.category }}</p>
       </div>
-      <div class="container5">
+      <div class="container5" ng-show="c.btn_show">
         <div class="twobut">
           <button ng-click="c.placeBid(player)">
             Bid
