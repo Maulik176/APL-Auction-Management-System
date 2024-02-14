@@ -4,10 +4,22 @@
         <client_script><![CDATA[api.controller=function($scope, spUtil) {
 	/* widget controller */
 	var c = this;
+	  
+	////  new logic /////
+	var give_up_array=JSON.parse(localStorage.getItem('give_up_list'));
+	var team_id=localStorage.getItem('user_id');
+	var it=localStorage.getItem('it');
+	
+	c.btn_show=false
+	if(give_up_array[it]==team_id) 
+	{
+		c.btn_show=true;
+	}
+	
 	
 	// recordWatch()
 	spUtil.recordWatch($scope, "x_540166_apl_apl_player_table", "numberISNOTEMPTY", function(name) {
-		console.log("updated");
+		localStorage.setItem('it',(it+1)%give_up_array.length);
 		window.location.reload();
 	});
 
@@ -16,7 +28,10 @@
 		c.data.newValue = parseInt(c.data.list[0].value) + parseInt("500");
 		c.data.team_id = localStorage.getItem('user_id');
 		c.server.update();
-		//window.location.reload();
+	}
+	
+	c.giveup = function(player) {
+		
 	}
 
 
@@ -240,21 +255,20 @@
 		bidlog.setValue('u_current_bid', input.newValue);
 		bidlog.insert();
 	}
-	
 })();]]></script>
         <servicenow>false</servicenow>
         <sys_class_name>sp_widget</sys_class_name>
         <sys_created_by>dev</sys_created_by>
         <sys_created_on>2024-02-07 10:38:46</sys_created_on>
         <sys_id>e691dc9c471402100e63e481e36d43ae</sys_id>
-        <sys_mod_count>126</sys_mod_count>
+        <sys_mod_count>153</sys_mod_count>
         <sys_name>apl_player_card</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
         <sys_update_name>sp_widget_e691dc9c471402100e63e481e36d43ae</sys_update_name>
-        <sys_updated_by>dev</sys_updated_by>
-        <sys_updated_on>2024-02-14 07:53:10</sys_updated_on>
+        <sys_updated_by>harshraj</sys_updated_by>
+        <sys_updated_on>2024-02-14 10:51:41</sys_updated_on>
         <template><![CDATA[<div ng-repeat="player in data.list">
   <div class="player-card">
     <div class="first-row">
@@ -277,14 +291,14 @@
         <p>Average: {{ player.average }}</p>
         <p>Category: {{ player.category }}</p>
       </div>
-      <div class="container5">
+      <div class="container5" ng-show="c.btn_show">
         <div class="twobut">
           <button ng-click="c.placeBid(player)">
             Bid
           </button>
           <!--<button ng-click="passOnBid(player)">Pass</button>-->
         </div>
-        <button ng-click="giveup(player)">
+        <button ng-click="c.giveup(player)">
           Give up
         </button>
       </div>

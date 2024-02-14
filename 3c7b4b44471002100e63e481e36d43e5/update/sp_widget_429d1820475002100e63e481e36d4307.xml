@@ -41,7 +41,7 @@
 }
 
 .team-name {
-    font-size: 28px;
+    font-size: 25px;
     margin-bottom: 10px;
 }
 </css>
@@ -89,24 +89,24 @@
         <sys_created_by>maulik</sys_created_by>
         <sys_created_on>2024-02-08 06:09:38</sys_created_on>
         <sys_id>429d1820475002100e63e481e36d4307</sys_id>
-        <sys_mod_count>50</sys_mod_count>
+        <sys_mod_count>57</sys_mod_count>
         <sys_name>APL Team Card</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
         <sys_update_name>sp_widget_429d1820475002100e63e481e36d4307</sys_update_name>
-        <sys_updated_by>dev</sys_updated_by>
-        <sys_updated_on>2024-02-13 05:26:58</sys_updated_on>
+        <sys_updated_by>maulik</sys_updated_by>
+        <sys_updated_on>2024-02-14 08:30:22</sys_updated_on>
         <template><![CDATA[<div class="container-fluid">
     <div class="row team-card" ng-repeat="team in c.data.teams">
         <div class="col-md-4">
             <img ng-src="{{::team.teamImage + '.iix'}}" alt="Team Logo" class="img-fluid" style="max-height: 100px;">
         </div>   
         <div class="col-md-4">
-            <h2 class="team-name">{{team.teamName}}</h2>
+            <h2 class="team-name">Team Purse ${{team.teamPurse}}</h2>
         </div>
         <div class="col-md-4 team-info">
-            <p>Team Purse: {{team.teamPurse}}</p>
+            <!--<p>Team Purse: {{team.teamPurse}}</p>-->
             <p>Number of Players: {{team.numPlayers}}/25</p>
         </div>
     </div>
