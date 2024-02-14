@@ -93,42 +93,36 @@ for (i = 0; i < acc.length; i++) {
   text-align: center;
   margin-bottom: 20px;
 }
+
 .accordion {
-  border: 1px solid #ddd; /* Add some border for styling */
-  margin-bottom: 10px; /* Add some spacing between accordion panels */
-  overflow: hidden; /* Hide overflow content */
-}
-.active, .accordion:hover {
-  color: #fff;
-background-color: #007965; }
-.acccordion {
+  border: 5px solid #ddd;
+  margin-bottom: 10px;
+  overflow: hidden;
   cursor: pointer;
   padding: 18px;
   width: 100%;
   border: none;
   text-align: center;
   outline: none;
-  font-size: 18px; 
-  transition: background-color 0.4s, color 0.4s; 
-  text-align: center;
-
-  margin-bottom: 10px; /* Add some spacing between accordion sections */
-}
+  font-size: 18px;
+  transition: background-color 0.4s, color 0.4s;
+  margin-bottom: 10px;
+  color: #000;
 }
 
-.active, .accordion:hover {
+.active,
+.accordion:hover {
   color: #fff;
-background-color: #007965; }
-
+  background-color: #007965; 
+}
 
 .players-box,
 .players-team,
 .players-rem {
-  background-color: #f5f5f5; /* Background color for accordion headers */
+  background-color: #f5f5f5;
   padding: 10px;
   cursor: pointer;
-  text-align:center;
- 
+  text-align: center;
 }
 
 .players-box h4,
@@ -143,34 +137,30 @@ background-color: #007965; }
   list-style: none;
   padding: 0;
   margin: 0;
-  max-height: 300px; /* Set a max height for the player lists */
-  overflow-y: auto; /* Enable vertical scroll if the list exceeds max height */
-  transition: max-height 0.3s ease-out; /* Add smooth transition effect */
+  max-height: 300px;
+  overflow-y: auto;
+  transition: max-height 0.3s ease-out;
 }
 
-/* Hide other panels when one is expanded */
 .players-box.expanded ul,
 .players-team.expanded ul,
 .players-rem.expanded ul {
   max-height: 0;
 }
 
-/* Style for list items (adjust as needed) */
 .players-box ul li,
 .players-team ul li,
 .players-rem ul li {
   padding: 5px;
 }
 
-/* Change background color on hover */
 .players-box:hover,
 .players-team:hover,
-.players-rem:hover {
+.players-rem:hover,
+.accordion.expanded {
   background-color: #007965;
-  color:#fff;
+  color: #fff;
 }
-
-
 </css>
         <data_table>sp_instance</data_table>
         <demo_data/>
@@ -229,14 +219,14 @@ var gr1=new GlideRecord("x_540166_apl_apl_player_table");
         <sys_created_by>vandan</sys_created_by>
         <sys_created_on>2024-02-13 17:04:06</sys_created_on>
         <sys_id>ed53a01e475802100e63e481e36d43a2</sys_id>
-        <sys_mod_count>18</sys_mod_count>
+        <sys_mod_count>28</sys_mod_count>
         <sys_name>APL_accordion</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
         <sys_update_name>sp_widget_ed53a01e475802100e63e481e36d43a2</sys_update_name>
-        <sys_updated_by>vandan</sys_updated_by>
-        <sys_updated_on>2024-02-13 17:23:39</sys_updated_on>
+        <sys_updated_by>maulik</sys_updated_by>
+        <sys_updated_on>2024-02-14 05:48:20</sys_updated_on>
         <template><![CDATA[
  <div class="sidebar-widget">
    <div id="apl-im">
