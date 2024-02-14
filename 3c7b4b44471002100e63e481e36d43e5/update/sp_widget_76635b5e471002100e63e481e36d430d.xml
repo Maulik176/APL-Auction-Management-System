@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
         <category>custom</category>
-        <client_script><![CDATA[api.controller=function() {
+        <client_script><![CDATA[api.controller=function($scope, spUtil) {
   /* widget controller */
   var c = this;
-	c.server.update();
+	////  new logic /////
+	localStorage.setItem("teams_list", JSON.stringify(c.data.teams_array));
+	var temp_array=JSON.parse(localStorage.getItem("teams_list"));
+	console.log(temp_array[0]);
+	debugger;
+	
+	/////////////////////////////
+	c.placeBid = function(player) {
+		var n = 500;
+		c.data.newValue = parseInt(c.data.list[0].value) + parseInt("500");
+		c.data.team_id = localStorage.getItem('user_id');
+		c.server.update(); 
+		window.location.reload();
+	}
+	
 };]]></client_script>
         <controller_as>c</controller_as>
         <css>/* Player Card Container */
@@ -150,9 +164,10 @@
         <public>false</public>
         <roles/>
         <script><![CDATA[(function() {
-  /* populate the 'data' object */
-  /* e.g., data.table = $sp.getValue('table'); */
-	
+	/* populate the 'data' object */
+	/* e.g., data.table = $sp.getValue('table'); */
+
+	// same player on all users logic
 	var id;
 	var player_ids=[];
 	var myTable = new GlideRecord('x_540166_apl_apl_player_table');
@@ -162,17 +177,17 @@
 	while(myTable.next()) {
 		player_ids.push(myTable.getValue('sys_id'));
 	}
-	id = player_ids[player_ids.length];
-	
+	id = player_ids[player_ids.length-1];
+
 	// fetch record for that player
 	var gr = new GlideRecord("x_540166_apl_apl_player_table");
 	gr.addQuery('sys_id', id);
 	gr.orderBy('number');
 	gr.query(); 
-	
+
 	data.list = [];
 	var obj = {};
-	
+
 	while(gr.next()) {
 		//data.obj = {};
 		obj.number = gr.getValue('number');
@@ -182,8 +197,8 @@
 		obj.category = gr.getValue('u_category');
 		obj.value = gr.getValue('u_value');
 	} 
-	
-	
+
+
 	// fetch stats for that player
 	var stat = new GlideRecord("x_540166_apl_player_stats");
 	stat.addQuery('u_reference_15', id);
@@ -203,22 +218,57 @@
 		obj.bowling_best_fig = stat.getValue('u_bestbowl_12');
 		data.list.push(obj);
 	}
+
+	if(input) {
+		var player = new GlideRecord('x_540166_apl_apl_player_table');
+		player.addQuery('sys_id', id);
+		//player.setLimit(1);
+		player.query();
+		var a = gr.getValue('u_name');
+		if (player.next()) {
+			player.setValue('u_value', input.newValue);
+			player.update();
+		}
+		
+		
+		var bidlog = new GlideRecord('x_540166_apl_apl_bidlog_table');
+		bidlog.initialize();
+		bidlog.setValue('current_profile_pic', obj.player_image);
+		bidlog.setValue('u_reference_1', input.team_id);
+		bidlog.setValue('u_current_bid', input.newValue);
+		bidlog.insert();
+	} 
 	
+	// bidding buttons logic
+	
+	data.teams_array=[];
+	var teamData = new GlideRecord("x_540166_apl_team_table");
+	teamData.orderBy('number');
+	teamData.query(); 
+	while(teamData.next())
+	{
+		data.teams_array.push(teamData.getValue('sys_id'));
+	}
+	
+	for(var i=0; i<data.teams_array.length; i++)
+		{
+			console.log(data.teams_array[i]);
+		}
 	
 })();]]></script>
         <servicenow>false</servicenow>
         <sys_class_name>sp_widget</sys_class_name>
         <sys_created_by>harshraj</sys_created_by>
-        <sys_created_on>2024-02-13 06:16:44</sys_created_on>
-        <sys_id>b62f8e0e471002100e63e481e36d43cc</sys_id>
-        <sys_mod_count>31</sys_mod_count>
+        <sys_created_on>2024-02-14 05:53:25</sys_created_on>
+        <sys_id>76635b5e471002100e63e481e36d430d</sys_id>
+        <sys_mod_count>25</sys_mod_count>
         <sys_name>h_apl_player_card</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
-        <sys_update_name>sp_widget_b62f8e0e471002100e63e481e36d43cc</sys_update_name>
+        <sys_update_name>sp_widget_76635b5e471002100e63e481e36d430d</sys_update_name>
         <sys_updated_by>harshraj</sys_updated_by>
-        <sys_updated_on>2024-02-13 09:23:26</sys_updated_on>
+        <sys_updated_on>2024-02-14 07:01:10</sys_updated_on>
         <template><![CDATA[<div ng-repeat="player in data.list">
   <div class="player-card">
     <div class="first-row">
@@ -240,14 +290,13 @@
         <p>Wickets: {{ player.wickets }}</p>
         <p>Average: {{ player.average }}</p>
         <p>Category: {{ player.category }}</p>
-        <!-- Add more statistics based on your requirements -->
       </div>
       <div class="container5">
         <div class="twobut">
-          <button ng-click="placeBid(player)">
-Bid
+          <button ng-click="c.placeBid(player)">
+            Bid
           </button>
-        <button ng-click="passOnBid(player)">Pass</button>
+          <!--<button ng-click="passOnBid(player)">Pass</button>-->
         </div>
         <button ng-click="giveup(player)">
           Give up

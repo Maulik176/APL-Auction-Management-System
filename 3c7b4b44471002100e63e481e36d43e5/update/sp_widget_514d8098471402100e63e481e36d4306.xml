@@ -12,10 +12,8 @@
 			localStorage.setItem('user_id', r.user_id);
 			if(r.loginstatus == true)
 				{
-					window.location.href = 'https://dev192681.service-now.com/apl?id=apl_landing_page&user_id='+r.user_id;
+					window.location.href = 'https://dev192681.service-now.com/apl?id=apl_landing_page&team_id='+r.user_id;
 				}
-			//var check=localStorage.getItem('user_id');
-			//console.log(check);
 		});
 
 	}
@@ -40,7 +38,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+       height: 100vh;
     }
 .login-container {
       background-color: #fff;
@@ -48,6 +46,8 @@
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       width: 300px;
+  margin: auto;
+      
     }
 .login-container h2 {
       margin-top: 0;
@@ -58,6 +58,7 @@
     .form-group {
       margin-bottom: 20px;
     }
+
     .form-group label {
       display: block;
       font-weight: bold;
@@ -65,7 +66,8 @@
       color: #007965;
     }
     .form-group input {
-      width: 100%;
+      //width: 100%;
+      width: calc(100% - 16px); /* Adjusted width for better appearance */
       padding: 8px;
       border: 1px solid #ccc;
       border-radius: 4px;
@@ -135,14 +137,14 @@
         <sys_created_by>harshraj</sys_created_by>
         <sys_created_on>2024-02-07 10:19:50</sys_created_on>
         <sys_id>514d8098471402100e63e481e36d4306</sys_id>
-        <sys_mod_count>156</sys_mod_count>
+        <sys_mod_count>163</sys_mod_count>
         <sys_name>apl_login</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
         <sys_update_name>sp_widget_514d8098471402100e63e481e36d4306</sys_update_name>
         <sys_updated_by>harshraj</sys_updated_by>
-        <sys_updated_on>2024-02-13 05:42:07</sys_updated_on>
+        <sys_updated_on>2024-02-14 06:18:10</sys_updated_on>
         <template><![CDATA[<div class="login-container">
     <h2>Login</h2>
     <form id="login-form">

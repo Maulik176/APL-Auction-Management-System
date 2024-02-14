@@ -5,12 +5,12 @@
 api.controller = function ($scope, $http) {
   var c = this;
 	c.server.update();
-	// Initialize index for pagination
+
     c.currentPage = 0;
 
-    // Function to show the next set of records
+    
     c.showNext = function () {
-        var pageSize = 2;
+        var pageSize = 5;
         var totalRecords = c.data.bids.length;
 
         if (c.currentPage < Math.ceil(totalRecords / pageSize) - 1) {
@@ -18,7 +18,7 @@ api.controller = function ($scope, $http) {
         }
     };
 
-    // Function to show the previous set of records
+    
     c.showPrevious = function () {
         if (c.currentPage > 0) {
             c.currentPage--;
@@ -27,7 +27,7 @@ api.controller = function ($scope, $http) {
 
     // Function to get the starting index for the current page
     c.getStartIndex = function () {
-        var pageSize = 2;
+        var pageSize = 5;
         return c.currentPage * pageSize;
     };
 };
@@ -35,28 +35,29 @@ api.controller = function ($scope, $http) {
         <controller_as>c</controller_as>
         <css>/* CSS for Bid Cards */
 .container-fluid {
-  padding: 20px; /* Add padding for better spacing */
+  padding: 10px; /* Add padding for better spacing */
 }
 
 .bid-card {
   display: flex;
   align-items: center;
-  border: 2px solid #ddd; /* Add a subtle border */
-  border-radius: 10px; /* Add rounded corners */
-  margin-bottom: 15px; /* Add spacing between cards */
-  overflow: hidden; /* Hide overflow for rounded corners */
-  transition: transform 0.3s ease; /* Add a subtle transition effect */
+  border: 2px solid #ddd;
+  border-radius: 1px;
+  margin-bottom: 5px; /* Decrease spacing between cards */
+  overflow: hidden;
+  transition: transform 0.3s ease;
 }
 
-.bid-card:hover {
+/*.bid-card:hover {
   transform: scale(1.05); /* Enlarge the card on hover */
 }
 
+
 .bid-card img {
-  width: 100px; /* Adjust the image width as needed */
-  height: 100px; /* Adjust the image height as needed */
-  object-fit: cover; /* Maintain aspect ratio and cover the container */
-  border-radius: 10px 0 0 10px; /* Rounded corners on the left side */
+  width: 80px; /* Decrease image width */
+  height: 80px; /* Decrease image height */
+  object-fit: cover;
+  border-radius: 50%; /* Make images rounded */
 }
 
 .bid-card h2 {
@@ -71,19 +72,20 @@ api.controller = function ($scope, $http) {
 
 .team-info p {
   margin: 0;
-  font-size: 18px; /* Adjust the font size for current bid */
+  font-size: 16px; /* Adjust the font size for current bid */
   color: #00AF91; /* Set a color for emphasis */
 }
 
 
 .text-center {
-  margin-top: 15px; /* Adjust margin for spacing */
+  margin-top: 10px; /* Adjust margin for spacing */
 }
 
 button {
-  padding: 10px 15px; /* Add padding for better button appearance */
-  margin: 0 5px; /* Add margin between buttons */
-  font-size: 16px; /* Adjust font size */
+  padding: 8px 12px;
+  margin: 0 3px;
+  font-size: 14px;
+
   background-color: #007965; /* Button background color */
   color: #fff; /* Button text color */
   border: none; /* Remove button border */
@@ -119,6 +121,7 @@ button:hover {
 
 	var gr = new GlideRecord('x_540166_apl_apl_bidlog_table');
 	//gr.addQuery('sys_id', '33d5f475479042100e63e481e36d43cc');
+	gr.orderByDesc('number');
 	gr.query();
 
 
@@ -139,16 +142,16 @@ button:hover {
         <sys_created_by>maulik</sys_created_by>
         <sys_created_on>2024-02-12 07:19:50</sys_created_on>
         <sys_id>d1045935471442100e63e481e36d430b</sys_id>
-        <sys_mod_count>17</sys_mod_count>
+        <sys_mod_count>31</sys_mod_count>
         <sys_name>APL Bidlog List</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
         <sys_update_name>sp_widget_d1045935471442100e63e481e36d430b</sys_update_name>
         <sys_updated_by>maulik</sys_updated_by>
-        <sys_updated_on>2024-02-13 06:53:36</sys_updated_on>
+        <sys_updated_on>2024-02-13 11:13:23</sys_updated_on>
         <template><![CDATA[<div class="container-fluid">
-    <div class="row bid-card" ng-repeat="bid in c.data.bids | limitTo: 2 : c.getStartIndex()">
+    <div class="row bid-card" ng-repeat="bid in c.data.bids | limitTo: 5 : c.getStartIndex()">
         <div class="col-md-4">
             <img ng-src="{{::bid.playerImage + '.iix'}}" alt="Player Pic" class="img-fluid" style="max-height: 100px;">
         </div>
