@@ -2,25 +2,23 @@
     <sp_widget action="INSERT_OR_UPDATE">
         <category>custom</category>
         <client_script><![CDATA[api.controller=function($scope, spUtil) {
-	/* widget controller */
-	var c = this;
-	//c.server.update();
-	// recordWatch()
-	spUtil.recordWatch($scope, "x_540166_apl_apl_player_table", "numberISNOTEMPTY", function(name) {
-		console.log("updated");
-		window.location.reload();
-	});
-
+  /* widget controller */
+  var c = this;
+	////  new logic /////
+	localStorage.setItem("teams_list", JSON.stringify(c.data.teams_array));
+	var temp_array=JSON.parse(localStorage.getItem("teams_list"));
+	console.log(temp_array[0]);
+	debugger;
+	
+	/////////////////////////////
 	c.placeBid = function(player) {
 		var n = 500;
 		c.data.newValue = parseInt(c.data.list[0].value) + parseInt("500");
 		c.data.team_id = localStorage.getItem('user_id');
-		c.server.update();
-		//window.location.reload();
+		c.server.update(); 
+		window.location.reload();
 	}
-
-
-
+	
 };]]></client_script>
         <controller_as>c</controller_as>
         <css>/* Player Card Container */
@@ -158,10 +156,10 @@
         <docs/>
         <field_list/>
         <has_preview>true</has_preview>
-        <id>apl_player_card</id>
+        <id>h_apl_player_card</id>
         <internal>false</internal>
         <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
-        <name>apl_player_card</name>
+        <name>h_apl_player_card</name>
         <option_schema/>
         <public>false</public>
         <roles/>
@@ -169,6 +167,7 @@
 	/* populate the 'data' object */
 	/* e.g., data.table = $sp.getValue('table'); */
 
+	// same player on all users logic
 	var id;
 	var player_ids=[];
 	var myTable = new GlideRecord('x_540166_apl_apl_player_table');
@@ -179,7 +178,6 @@
 		player_ids.push(myTable.getValue('sys_id'));
 	}
 	id = player_ids[player_ids.length-1];
-	console.log(player_ids);
 
 	// fetch record for that player
 	var gr = new GlideRecord("x_540166_apl_apl_player_table");
@@ -239,22 +237,38 @@
 		bidlog.setValue('u_reference_1', input.team_id);
 		bidlog.setValue('u_current_bid', input.newValue);
 		bidlog.insert();
+	} 
+	
+	// bidding buttons logic
+	
+	data.teams_array=[];
+	var teamData = new GlideRecord("x_540166_apl_team_table");
+	teamData.orderBy('number');
+	teamData.query(); 
+	while(teamData.next())
+	{
+		data.teams_array.push(teamData.getValue('sys_id'));
 	}
-
+	
+	for(var i=0; i<data.teams_array.length; i++)
+		{
+			console.log(data.teams_array[i]);
+		}
+	
 })();]]></script>
         <servicenow>false</servicenow>
         <sys_class_name>sp_widget</sys_class_name>
-        <sys_created_by>dev</sys_created_by>
-        <sys_created_on>2024-02-07 10:38:46</sys_created_on>
-        <sys_id>e691dc9c471402100e63e481e36d43ae</sys_id>
-        <sys_mod_count>123</sys_mod_count>
-        <sys_name>apl_player_card</sys_name>
+        <sys_created_by>harshraj</sys_created_by>
+        <sys_created_on>2024-02-14 05:53:25</sys_created_on>
+        <sys_id>76635b5e471002100e63e481e36d430d</sys_id>
+        <sys_mod_count>25</sys_mod_count>
+        <sys_name>h_apl_player_card</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
-        <sys_update_name>sp_widget_e691dc9c471402100e63e481e36d43ae</sys_update_name>
-        <sys_updated_by>dev</sys_updated_by>
-        <sys_updated_on>2024-02-14 06:19:21</sys_updated_on>
+        <sys_update_name>sp_widget_76635b5e471002100e63e481e36d430d</sys_update_name>
+        <sys_updated_by>harshraj</sys_updated_by>
+        <sys_updated_on>2024-02-14 07:01:10</sys_updated_on>
         <template><![CDATA[<div ng-repeat="player in data.list">
   <div class="player-card">
     <div class="first-row">
