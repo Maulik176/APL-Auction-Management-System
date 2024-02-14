@@ -80,7 +80,11 @@ for (i = 0; i < acc.length; i++) {
 }
 ]]></client_script>
         <controller_as>c</controller_as>
-        <css>/* Style for the sidebar widget */
+        <css>
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+}
 .sidebar-widget {
   width: 100%;
   height:100vh;
@@ -91,14 +95,13 @@ for (i = 0; i < acc.length; i++) {
   padding: 10px;
 }
 
-/* Style for the auction image */
 #apl-image {
   max-width: 80%;
   height: auto;
-  border-radius: 5px; /* Optional: Add border-radius for rounded corners */
+  border-radius: 5px; 
 }
 
-/* Style for the title container */
+
 .title-container {
   text-align: center;
 }
@@ -107,33 +110,45 @@ for (i = 0; i < acc.length; i++) {
   font-size: 3em;
 }
 
-/* Style for the accordion container */
+
 .accordion {
   width: 100%;
   margin-top: 10px;
 }
 
-/* Style for each accordion item */
+
 .accordion div {
-  border: 1px solid #ccc;
+  width: 80%;
+  margin: 0 auto;
+  border: 1px solid #ddd;
   margin-bottom: 10px;
-  transition: background-color 0.3s, color 0.3s; /* Add smooth transition */
+  transition: background-color 0.3s, color 0.3s; 
+  
+  //maulik
+  position: relative;
+  z-index: 1;
+  background-color: #fff; /* White background */
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
+  
 }
 
-/* Style for the accordion header */
+
 .accordion div h4 {
-  padding: 10px;
+  padding: 15px;
   margin: 0;
   cursor: pointer;
   text-align:center;
+  
 }
 
-/* Style for the accordion content (initially hidden) */
+
 .accordion div ul {
   list-style-type: none;
   padding: 0;
   display: none;
   text-align: center;
+  
 }
 
 .accordion div:hover {
@@ -141,13 +156,15 @@ for (i = 0; i < acc.length; i++) {
   color: #fff;
 }
 
-/* Show content when accordion header is clicked */
+
 .accordion div.open ul {
   display: block;
+  
 }
 
 .accordion div.open {
   background-color: #007965;
+  //background-color: #00564d;
   color: #fff;
 }
 </css>
@@ -208,14 +225,14 @@ var gr1=new GlideRecord("x_540166_apl_apl_player_table");
         <sys_created_by>vandan</sys_created_by>
         <sys_created_on>2024-02-13 17:04:06</sys_created_on>
         <sys_id>ed53a01e475802100e63e481e36d43a2</sys_id>
-        <sys_mod_count>53</sys_mod_count>
+        <sys_mod_count>79</sys_mod_count>
         <sys_name>APL_accordion</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
         <sys_update_name>sp_widget_ed53a01e475802100e63e481e36d43a2</sys_update_name>
         <sys_updated_by>maulik</sys_updated_by>
-        <sys_updated_on>2024-02-14 06:51:48</sys_updated_on>
+        <sys_updated_on>2024-02-14 08:20:11</sys_updated_on>
         <template><![CDATA[
  <div class="sidebar-widget">
    <div id="apl-im">
