@@ -9,7 +9,6 @@
 	var give_up_array=JSON.parse(localStorage.getItem('give_up_list'));
 	var team_id=localStorage.getItem('user_id');
 	var it=localStorage.getItem('it');
-	var len = give_up_array.length;
 	
 	c.btn_show=false
 	if(give_up_array[it]==team_id) 
@@ -18,27 +17,22 @@
 	}
 	
 	
-	// recordWatch()
+	// recordWatch() for bid
 	spUtil.recordWatch($scope, "x_540166_apl_apl_player_table", "numberISNOTEMPTY", function(name) {
-		localStorage.setItem('it',(parseInt(it)+parseInt(1))%len);
+		localStorage.setItem('it',(it+1)%give_up_array.length);
 		window.location.reload();
 	});
 	
+	// recordWatch() for giveup
 	spUtil.recordWatch($scope, "x_540166_apl_team_table", "numberISNOTEMPTY", function(name) {
-		var newArray;
-		if (it == len-2) {
-			newArray = give_up_array.slice(0, it);
-			newArray.push(give_up_array[len - 1]);
-		}
-		else if (it == len-1) {
-			newArray = give_up_array.slice(0, parseInt(it));
-			//localStorage.setItem('it', 0);
-		}
-		else{
-			newArray = give_up_array.slice(0, it).concat(give_up_array.slice(parseInt(it)+parseInt(1)));
-		}
+		var newArray = give_up_array.slice(0, it).concat(give_up_array.slice(it + 1));
 		localStorage.setItem('give_up_list', JSON.stringify(newArray));
-		localStorage.setItem('it', (parseInt(it)%len));
+		
+		if(give_up_array.length == 1)
+		{
+			sold_func();
+		}
+		
 		window.location.reload();
 		
 	});
@@ -58,7 +52,10 @@
 		c.server.update();
 	}
 
-
+	function sold_func(){
+		c.data.action = "sold";
+		c.server.update();
+	}
 
 };]]></client_script>
         <controller_as>c</controller_as>
@@ -197,10 +194,10 @@
         <docs/>
         <field_list/>
         <has_preview>true</has_preview>
-        <id>apl_player_card</id>
+        <id>h_apl_player_card</id>
         <internal>false</internal>
         <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
-        <name>apl_player_card</name>
+        <name>h_apl_player_card</name>
         <option_schema/>
         <public>false</public>
         <roles/>
@@ -210,12 +207,12 @@
 
 	var id;
 	var player_ids=[];
-	var myTable = new GlideRecord('x_540166_apl_apl_player_table');
-	myTable.orderBy('number');
-	myTable.query();
+	var player_table = new GlideRecord('x_540166_apl_apl_player_table');
+	player_table.orderBy('number');
+	player_table.query();
 
-	while(myTable.next()) {
-		player_ids.push(myTable.getValue('sys_id'));
+	while(player_table.next()) {
+		player_ids.push(player_table.getValue('sys_id'));
 	}
 	id = player_ids[player_ids.length-1];
 	//console.log(player_ids);
@@ -265,9 +262,10 @@
 		if(input.action == "bid"){
 			var player = new GlideRecord('x_540166_apl_apl_player_table');
 			player.addQuery('sys_id', id);
-			//player.setLimit(1);
 			player.query();
-			var a = gr.getValue('u_name');
+			
+			// doubt ?????   var a = gr.getValue('u_name');
+			
 			if (player.next()) {
 				player.setValue('u_value', input.newValue);
 				player.update();
@@ -288,22 +286,48 @@
 				team.update();
 			}
 		}
+		else if(input.action=="sold")
+		{
+			//// opening tables
+			var open_team_data = new GlideRecord('x_540166_apl_team_table');
+			open_team_data.query();
+			var o1 = open_team_data.getValue('team_purse');
+			var o2 = open_team_data.getValue('team_players');
+			
+			var open_player_data = new GlideRecord('x_540166_apl_apl_player_table');
+			open_player_data.intialize();
+			
+			var open_bid_data = new GlideRecord('x_540166_apl_apl_bidlog_table');
+			open_bid_data.intialize();
+			
+			//// setting tables
+			var set_team_data = new GlideRecord('x_540166_apl_team_table');
+			set_team_data.intialize();
+			set_team_data.setValue('team_purse', );
+			set_team_data.setValue('team_players', (o2+1));
+			
+			var set_player_data = new GlideRecord('x_540166_apl_apl_player_table');
+			player_data.intialize();
+			
+			var set_bid_data = new GlideRecord('x_540166_apl_apl_bidlog_table');
+			team_data.intialize();
+		}
 	}
 
 })();]]></script>
         <servicenow>false</servicenow>
         <sys_class_name>sp_widget</sys_class_name>
-        <sys_created_by>dev</sys_created_by>
-        <sys_created_on>2024-02-07 10:38:46</sys_created_on>
-        <sys_id>e691dc9c471402100e63e481e36d43ae</sys_id>
-        <sys_mod_count>183</sys_mod_count>
-        <sys_name>apl_player_card</sys_name>
+        <sys_created_by>harshraj</sys_created_by>
+        <sys_created_on>2024-02-15 06:18:55</sys_created_on>
+        <sys_id>0ed228f6475002100e63e481e36d43bf</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>h_apl_player_card</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
-        <sys_update_name>sp_widget_e691dc9c471402100e63e481e36d43ae</sys_update_name>
-        <sys_updated_by>dev</sys_updated_by>
-        <sys_updated_on>2024-02-15 07:27:18</sys_updated_on>
+        <sys_update_name>sp_widget_0ed228f6475002100e63e481e36d43bf</sys_update_name>
+        <sys_updated_by>harshraj</sys_updated_by>
+        <sys_updated_on>2024-02-15 07:14:30</sys_updated_on>
         <template><![CDATA[<div ng-repeat="player in data.list">
   <div class="player-card">
     <div class="first-row">

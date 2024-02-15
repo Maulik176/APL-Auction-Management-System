@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function () {
+  /* widget controller */
+  var c = this;
+	
+	
+  var TIME_LIMIT = 20;
+
+	var FULL_DASH_ARRAY = 283;
+
+  var timePassed = 0;
+  var timeLeft = TIME_LIMIT;
+  var timerInterval = null;
+	
+	function onTimesUp() {
+    clearInterval(timerInterval);
+    
+  }
+	
+  function startTimer() {
+    timerInterval = setInterval(function () {
+      timePassed = timePassed + 1;
+      timeLeft = TIME_LIMIT - timePassed;
+      document.getElementById("base-timer-label").innerHTML = formatTime(timeLeft);
+      setCircleDasharray();
+      setRemainingPathColor(timeLeft);
+
+      if (timeLeft === 0) {
+        onTimesUp();
+      }
+    }, 1000);
+  }
+
+
+	
+	/*function formatTime(time) {
+  var minutes = Math.floor(time / 60);
+  var seconds = time % 60;
+
+  if (seconds < 10) {
+    seconds = "0" + seconds;
+  }
+
+  return minutes + ":" + seconds;
+}*/
+	
+	function formatTime(time) {
+  var minutes = Math.floor(time / 60);
+  var seconds = String(time % 60);
+  
+  if (seconds.length < 2) {
+    seconds = '0' + seconds;
+  }
+
+  return minutes + ':' + seconds;
+}
+
+
+  function setRemainingPathColor(timeLeft) {
+  var alertColor = "red";
+  var warningColor = "orange";
+  var infoColor = "green";
+
+  var pathRemaining = document.getElementById("base-timer-path-remaining");
+
+  if (timeLeft <= 5) {
+    pathRemaining.classList.remove(warningColor, infoColor);
+    pathRemaining.classList.add(alertColor);
+  } else if (timeLeft <= 10) {
+    pathRemaining.classList.remove(alertColor, infoColor);
+    pathRemaining.classList.add(warningColor);
+  } else {
+    pathRemaining.classList.remove(alertColor, warningColor);
+    pathRemaining.classList.add(infoColor);
+  }
+}
+
+
+  function calculateTimeFraction() {
+    var rawTimeFraction = timeLeft / TIME_LIMIT;
+    return rawTimeFraction - (1 / TIME_LIMIT) * (1 - rawTimeFraction);
+  }
+
+  function setCircleDasharray() {
+    var circleDasharray = calculateTimeFraction() * FULL_DASH_ARRAY + " 283";
+    document.getElementById("base-timer-path-remaining").setAttribute("stroke-dasharray", circleDasharray);
+  }
+	document.getElementById("base-timer-label").innerHTML = formatTime(TIME_LIMIT);
+
+  startTimer();
+};
+]]></client_script>
+        <controller_as>c</controller_as>
+        <css>body {
+  font-family: sans-serif;
+  display: grid;
+  height: 100vh;
+  width: 100%;
+  place-items: center;
+}
+
+.base-timer {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+
+.base-timer__svg {
+  transform: scaleX(-1);
+}
+
+.base-timer__circle {
+  fill: none;
+  stroke: none;
+}
+
+.base-timer__path-elapsed {
+  stroke-width: 7px;
+  stroke: grey;
+}
+
+.base-timer__path-remaining {
+  stroke-width: 7px;
+  stroke-linecap: round;
+  transform: rotate(90deg);
+  transform-origin: center;
+  transition: 1s linear all;
+  fill-rule: nonzero;
+  stroke: currentColor;
+}
+
+.base-timer__path-remaining.green {
+  //color: rgb(65, 184, 131);
+  color: green;
+}
+
+.base-timer__path-remaining.orange {
+  color: orange;
+}
+
+.base-timer__path-remaining.red {
+  color: red;
+}
+
+.base-timer__label {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+}
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>apl_countdown_timer</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>APL Countdown Timer</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {  /* populate the 'data' object */  /* e.g., data.table = $sp.getValue('table'); */})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>maulik</sys_created_by>
+        <sys_created_on>2024-02-15 04:54:34</sys_created_on>
+        <sys_id>e68f4cf2471002100e63e481e36d436b</sys_id>
+        <sys_mod_count>36</sys_mod_count>
+        <sys_name>APL Countdown Timer</sys_name>
+        <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+        <sys_update_name>sp_widget_e68f4cf2471002100e63e481e36d436b</sys_update_name>
+        <sys_updated_by>maulik</sys_updated_by>
+        <sys_updated_on>2024-02-15 05:56:43</sys_updated_on>
+        <template><![CDATA[<div class="base-timer">
+  <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <g class="base-timer__circle">
+      <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
+      <path
+        id="base-timer-path-remaining"
+        stroke-dasharray="283"
+        class="base-timer__path-remaining ${remainingPathColor}"
+        d="
+          M 50, 50
+          m -45, 0
+          a 45,45 0 1,0 90,0
+          a 45,45 0 1,0 -90,0
+        "
+      ></path>
+    </g>
+  </svg>
+  <span id="base-timer-label" class="base-timer__label">${formatTime(timeLeft)}</span>
+</div>
+]]></template>
+    </sp_widget>
+</record_update>

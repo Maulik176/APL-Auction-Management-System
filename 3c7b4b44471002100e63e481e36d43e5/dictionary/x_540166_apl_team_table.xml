@@ -2,6 +2,7 @@
     <element db_object_id="a4dc83c4471002100e63e481e36d4376" label="APL team table" max_length="40" name="x_540166_apl_team_table" type="collection">
         <element attributes="edge_encryption_enabled=true" label="Team Coach Name" mandatory="true" max_length="255" name="coach_name" type="string_full_utf8"/>
         <element attributes="pdf_cell_type=image" label="Image" max_length="40" name="image" type="user_image"/>
+        <element default="true" label="Interested" max_length="40" name="interested" type="boolean"/>
         <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Team ID" max_length="40" name="number" type="string"/>
         <element attributes="edge_encryption_enabled=true" label="Team Owner's Name" mandatory="true" max_length="255" name="owner_name" type="string_full_utf8"/>
         <element attributes="edge_encryption_enabled=true" label="Password" mandatory="true" max_length="255" name="password" type="string_full_utf8"/>
