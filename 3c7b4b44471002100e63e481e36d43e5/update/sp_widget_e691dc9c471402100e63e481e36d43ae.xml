@@ -6,6 +6,7 @@
 	var c = this;
 	  
 	////  new logic /////
+	var all_team_array=JSON.parse(localStorage.getItem('teams_list'));
 	var give_up_array=JSON.parse(localStorage.getItem('give_up_list'));
 	var team_id=localStorage.getItem('user_id');
 	var it=localStorage.getItem('it');
@@ -17,13 +18,20 @@
 		c.btn_show=true;
 	}
 	
+	// sold implementation 
+	if(give_up_array.length == 1)
+	{
+		sold_func();
+	}
 	
-	// recordWatch()
+	
+	// recordWatch() for bid
 	spUtil.recordWatch($scope, "x_540166_apl_apl_player_table", "numberISNOTEMPTY", function(name) {
 		localStorage.setItem('it',(parseInt(it)+parseInt(1))%len);
 		window.location.reload();
 	});
 	
+	// recordWatch() for giveup
 	spUtil.recordWatch($scope, "x_540166_apl_team_table", "numberISNOTEMPTY", function(name) {
 		var newArray;
 		if (it == len-2) {
@@ -58,6 +66,13 @@
 		c.server.update();
 	}
 
+	function sold_func(){
+		c.data.action = "sold";
+		c.won_team=give_up_array[0];
+		c.server.update();
+		localStorage.setItem("give_up_list", JSON.stringify(all_team_array));
+		window.location.reload();
+	}
 
 
 };]]></client_script>
@@ -292,6 +307,39 @@
 				team.update();
 			}
 		}
+		else if(input.action=="sold")
+		{
+			var team_purse, no_players, last_bid, team_name;
+			var open_bid_data = new GlideRecord('x_540166_apl_apl_bidlog_table');
+			open_bid_data.orderByDesc('number');
+			open_bid_data.query();
+			if(open_bid_data.next())
+			{
+				last_bid = open_bid_data.getValue('u_current_bid');
+				team_name = open_bid_data.getValue('u_reference_1');
+			}
+			
+			
+			var open_team_data = new GlideRecord('x_540166_apl_team_table');
+			open_team_data.addQuery('sys_id', input.won_team);
+			open_team_data.query();
+			if(open_team_data.next())
+			{
+				team_purse = open_team_data.getValue('team_purse');
+				no_players = open_team_data.getValue('team_players');
+				open_team_data.setValue('team_purse', (parseInt(team_purse)-parseInt(last_bid)));
+				open_team_data.setValue('team_players', (parseInt(no_players)+parseInt(1)));
+				open_team_data.update();
+			}
+			
+			var set_player_data = new GlideRecord('x_540166_apl_apl_player_table');
+			open_team_data.addQuery('sys_id', id);
+			open_team_data.query();
+			set_player_data.setValue('u_status', 'Sold');
+			set_player_data.setValue('u_team_name', team_name);
+			
+			player_ids.pop();
+		}
 	}
 
 })();]]></script>
@@ -300,14 +348,14 @@
         <sys_created_by>dev</sys_created_by>
         <sys_created_on>2024-02-07 10:38:46</sys_created_on>
         <sys_id>e691dc9c471402100e63e481e36d43ae</sys_id>
-        <sys_mod_count>195</sys_mod_count>
+        <sys_mod_count>197</sys_mod_count>
         <sys_name>apl_player_card</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
         <sys_update_name>sp_widget_e691dc9c471402100e63e481e36d43ae</sys_update_name>
-        <sys_updated_by>dev</sys_updated_by>
-        <sys_updated_on>2024-02-15 08:44:14</sys_updated_on>
+        <sys_updated_by>harshraj</sys_updated_by>
+        <sys_updated_on>2024-02-15 10:13:33</sys_updated_on>
         <template><![CDATA[<div ng-repeat="player in data.list">
   <div class="player-card">
     <div class="first-row">
