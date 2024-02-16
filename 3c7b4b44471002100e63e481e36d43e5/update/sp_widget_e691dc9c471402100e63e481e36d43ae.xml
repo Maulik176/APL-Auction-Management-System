@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
         <category>custom</category>
-        <client_script><![CDATA[api.controller=function($scope, spUtil) {
+        <client_script><![CDATA[api.controller=function($scope, spUtil, spModal) {
 	/* widget controller */
 	var c = this;
 	  
@@ -10,16 +10,34 @@
 	var give_up_array=JSON.parse(localStorage.getItem('give_up_list'));
 	var team_id=localStorage.getItem('user_id');
 	var it=localStorage.getItem('it');
-	var len = give_up_array.length;
 	
 	c.btn_show=false;
-	if(give_up_array[it]==team_id) 
+	c.more_bidders=true;
+	
+	if(give_up_array.length==1)
+	{
+		console.log("111");
+		if(c.data.bid_count==0 && give_up_array[it]==team_id) 
+		{
+			console.log("222");
+			c.btn_show=true;
+		}
+		else if(c.data.bid_count!=0 && give_up_array[it]==team_id)
+			{
+				c.btn_show=false;
+				c.more_bidders=false;
+				console.log("soldddd to last one");
+				sold_func();
+			}
+	}
+	else if(give_up_array[it]==team_id && c.more_bidders)
 	{
 		c.btn_show=true;
 	}
 	
+	
 	// sold implementation 
-	if(give_up_array.length == 1)
+	function sold_func()
 	{
 		c.data.action = "sold";
 		c.won_team=give_up_array[0];
@@ -36,13 +54,11 @@
 			localStorage.setItem("give_up_list", JSON.stringify(all_team_array));
 			console.log("give up array updated");
 		});
-		
-		//window.location.reload();
 	}
 	
 	// recordWatch() for bid
 	spUtil.recordWatch($scope, "x_540166_apl_apl_bidlog_table", "numberISNOTEMPTY", function(name) {
-		localStorage.setItem('it',(parseInt(it)+parseInt(1))%len);
+		localStorage.setItem('it',(parseInt(it)+parseInt(1))%give_up_array.length);
 		window.location.reload();
 	});
 	
@@ -63,7 +79,6 @@
 			localStorage.setItem('it', (parseInt(it)%give_up_array.length));
 		}
 		localStorage.setItem('give_up_list', JSON.stringify(newArray));
-		//localStorage.setItem('it', (parseInt(it)%give_up_array.length));
 		window.location.reload();
 	});
 
@@ -286,6 +301,12 @@
 		data.list.push(obj);
 	}
 
+	
+	var bid_table= new GlideRecord('x_540166_apl_apl_bidlog_table');
+	bid_table.query();
+	data.bid_count = bid_table.getRowCount();
+	
+	
 	if(input) {
 		if(input.action == "bid"){
 			var player = new GlideRecord('x_540166_apl_apl_player_table');
@@ -361,14 +382,14 @@
         <sys_created_by>dev</sys_created_by>
         <sys_created_on>2024-02-07 10:38:46</sys_created_on>
         <sys_id>e691dc9c471402100e63e481e36d43ae</sys_id>
-        <sys_mod_count>235</sys_mod_count>
+        <sys_mod_count>242</sys_mod_count>
         <sys_name>apl_player_card</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
         <sys_update_name>sp_widget_e691dc9c471402100e63e481e36d43ae</sys_update_name>
         <sys_updated_by>harshraj</sys_updated_by>
-        <sys_updated_on>2024-02-16 06:31:14</sys_updated_on>
+        <sys_updated_on>2024-02-16 07:22:25</sys_updated_on>
         <template><![CDATA[<div ng-repeat="player in data.list">
   <div class="player-card">
     <div class="first-row">
