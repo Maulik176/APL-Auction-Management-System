@@ -12,7 +12,7 @@
 	var it=localStorage.getItem('it');
 	var len = give_up_array.length;
 	
-	c.btn_show=false
+	c.btn_show=false;
 	if(give_up_array[it]==team_id) 
 	{
 		c.btn_show=true;
@@ -21,34 +21,50 @@
 	// sold implementation 
 	if(give_up_array.length == 1)
 	{
-		sold_func();
+		c.data.action = "sold";
+		c.won_team=give_up_array[0];
+		c.t_id=team_id;
+		c.data.sold_flag=false;
+		if(c.won_team == c.t_id)
+			{
+				c.data.sold_flag=true;
+				console.log("flag true");
+				
+			}
+		c.server.update().then(function(r){
+			console.log("give up array not updated");
+			localStorage.setItem("give_up_list", JSON.stringify(all_team_array));
+			console.log("give up array updated");
+		});
+		
+		//window.location.reload();
 	}
 	
-	
 	// recordWatch() for bid
-	spUtil.recordWatch($scope, "x_540166_apl_apl_player_table", "numberISNOTEMPTY", function(name) {
+	spUtil.recordWatch($scope, "x_540166_apl_apl_bidlog_table", "numberISNOTEMPTY", function(name) {
 		localStorage.setItem('it',(parseInt(it)+parseInt(1))%len);
 		window.location.reload();
 	});
 	
 	// recordWatch() for giveup
 	spUtil.recordWatch($scope, "x_540166_apl_team_table", "numberISNOTEMPTY", function(name) {
-		var newArray;
-		if (it == len-2) {
+		var newArray = [];
+		if (it == give_up_array.length-2) {
 			newArray = give_up_array.slice(0, it);
-			newArray.push(give_up_array[len - 1]);
+			newArray.push(give_up_array[give_up_array.length - 1]);
+			localStorage.setItem('it', (parseInt(it)%give_up_array.length));
 		}
-		else if (it == len-1) {
+		else if (it == give_up_array.length-1) {
 			newArray = give_up_array.slice(0, parseInt(it));
-			//localStorage.setItem('it', 0);
+			localStorage.setItem('it', parseInt("0"));
 		}
 		else{
 			newArray = give_up_array.slice(0, it).concat(give_up_array.slice(parseInt(it)+parseInt(1)));
+			localStorage.setItem('it', (parseInt(it)%give_up_array.length));
 		}
 		localStorage.setItem('give_up_list', JSON.stringify(newArray));
-		localStorage.setItem('it', (parseInt(it)%len));
+		//localStorage.setItem('it', (parseInt(it)%give_up_array.length));
 		window.location.reload();
-		
 	});
 
 	c.placeBid = function(player) {
@@ -65,16 +81,6 @@
 		c.data.action = "giveup";
 		c.server.update();
 	}
-
-	function sold_func(){
-		c.data.action = "sold";
-		c.won_team=give_up_array[0];
-		c.server.update();
-		localStorage.setItem("give_up_list", JSON.stringify(all_team_array));
-		window.location.reload();
-	}
-
-
 };]]></client_script>
         <controller_as>c</controller_as>
         <css>/* Player Card Container */
@@ -284,7 +290,6 @@
 		if(input.action == "bid"){
 			var player = new GlideRecord('x_540166_apl_apl_player_table');
 			player.addQuery('sys_id', id);
-			//player.setLimit(1);
 			player.query();
 			var a = gr.getValue('u_name');
 			if (player.next()) {
@@ -307,8 +312,9 @@
 				team.update();
 			}
 		}
-		else if(input.action=="sold")
+		else if(input.action=="sold" && input.sold_flag)
 		{
+			console.log("inside sold block");
 			var team_purse, no_players, last_bid, team_name;
 			var open_bid_data = new GlideRecord('x_540166_apl_apl_bidlog_table');
 			open_bid_data.orderByDesc('number');
@@ -319,7 +325,7 @@
 				team_name = open_bid_data.getValue('u_reference_1');
 			}
 			
-			
+			/*
 			var open_team_data = new GlideRecord('x_540166_apl_team_table');
 			open_team_data.addQuery('sys_id', input.won_team);
 			open_team_data.query();
@@ -331,15 +337,22 @@
 				open_team_data.setValue('team_players', (parseInt(no_players)+parseInt(1)));
 				open_team_data.update();
 			}
+			*/
 			
 			var set_player_data = new GlideRecord('x_540166_apl_apl_player_table');
-			open_team_data.addQuery('sys_id', id);
-			open_team_data.query();
-			set_player_data.setValue('u_status', 'Sold');
-			set_player_data.setValue('u_team_name', team_name);
-			
-			player_ids.pop();
+			set_player_data.addQuery('sys_id', id);
+			set_player_data.query();
+			if(set_player_data.next())
+			{
+				console.log("nationality yet to update");
+				set_player_data.setValue('u_status', 'sold');
+				console.log("nationality updated");
+				set_player_data.setValue('u_team_name', team_name);
+				set_player_data.update();
+			}
+			console.log("sold block finished");
 		}
+		player_ids.pop();
 	}
 
 })();]]></script>
@@ -348,14 +361,14 @@
         <sys_created_by>dev</sys_created_by>
         <sys_created_on>2024-02-07 10:38:46</sys_created_on>
         <sys_id>e691dc9c471402100e63e481e36d43ae</sys_id>
-        <sys_mod_count>197</sys_mod_count>
+        <sys_mod_count>235</sys_mod_count>
         <sys_name>apl_player_card</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
         <sys_update_name>sp_widget_e691dc9c471402100e63e481e36d43ae</sys_update_name>
         <sys_updated_by>harshraj</sys_updated_by>
-        <sys_updated_on>2024-02-15 10:13:33</sys_updated_on>
+        <sys_updated_on>2024-02-16 06:31:14</sys_updated_on>
         <template><![CDATA[<div ng-repeat="player in data.list">
   <div class="player-card">
     <div class="first-row">
@@ -386,7 +399,6 @@
           <button ng-click="c.placeBid(player)">
             Bid
           </button>
-          <!--<button ng-click="passOnBid(player)">Pass</button>-->
         </div>
         <button ng-click="c.giveup(player)">
           Give up
