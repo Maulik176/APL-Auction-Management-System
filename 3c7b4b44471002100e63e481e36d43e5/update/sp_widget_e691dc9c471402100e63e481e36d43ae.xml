@@ -4,16 +4,45 @@
         <client_script><![CDATA[api.controller=function($scope, spUtil, spModal) {
 	/* widget controller */
 	var c = this;
-
-	////  new logic /////
+	
 	var all_team_array=JSON.parse(localStorage.getItem('teams_list'));
 	var give_up_array=JSON.parse(localStorage.getItem('give_up_list'));
 	var team_id=localStorage.getItem('user_id');
 	var it=localStorage.getItem('it');
-
+	var player_id=c.data.list[0].sysid;
+	
 	c.btn_show=false;
 	c.more_bidders=true;
-
+	
+	/*
+	if (team_id == give_up_array[it]) {
+		var a = c.data.t_purse;
+		var b= parseInt(c.data.list[0].value) + parseInt("500");
+		console.log(a + " " + b);
+		if(a-b < 0) {
+			console.log("reached inside");
+			c.data.team_id = team_id;
+			c.data.action = "giveup";
+			c.server.update();
+			console.log("reached outside");
+			
+		}	
+	}
+	*/
+		 
+/*
+	// timeout logic 
+	if (give_up_array[it]==team_id) {
+		setTimeout(
+			function timeout_func(){
+			c.data.team_id = team_id;
+			c.data.action = "giveup";
+			c.server.update();
+			}, 
+			15000);
+	}
+*/
+	
 	if(give_up_array.length==1)
 	{
 		console.log("111");
@@ -21,6 +50,7 @@
 		{
 			console.log("222");
 			c.btn_show=true;
+			//setTimeout(timeout_func(), 15000);
 		}
 		else if(c.data.bid_count!=0 && give_up_array[it]==team_id)
 		{
@@ -37,6 +67,7 @@
 	else if(give_up_array[it]==team_id && c.more_bidders)
 	{
 		c.btn_show=true;
+		//setTimeout(timeout_func(), 15000);
 	}
 	else if(give_up_array.length==0){
 		unsold_func();
@@ -65,6 +96,7 @@
 	}
 	
 	function unsold_func(){
+		c.data.playerid=player_id;
 		c.data.action = "unsold";
 		c.server.update().then(function(r){
 			console.log("unsold give up array not updated");
@@ -100,17 +132,17 @@
 		window.location.reload();
 	});
 
-	c.placeBid = function(player) {
+	c.placeBid = function() {
 
-		var n = 500;
+		//var n = 500;
 		c.data.newValue = parseInt(c.data.list[0].value) + parseInt("500");
-		c.data.team_id = localStorage.getItem('user_id');
+		c.data.team_id = team_id;
 		c.data.action = "bid";
 		c.server.update();
 	}
-
-	c.giveup = function(player) {
-		c.data.team_id = localStorage.getItem('user_id');
+	
+	c.giveup = function() {
+		c.data.team_id = team_id;
 		c.data.action = "giveup";
 		c.server.update();
 	}
@@ -265,7 +297,16 @@
         <script><![CDATA[(function() {
 	/* populate the 'data' object */
 	/* e.g., data.table = $sp.getValue('table'); */
-
+	
+	var tid = $sp.getParameter('team_id');
+	var team_data = new GlideRecord('x_540166_apl_team_table');
+	team_data.addQuery('sys_id', tid);
+	team_data.query();
+	while(team_data.next())
+	{
+		data.t_purse = team_data.getValue('team_purse');	
+	}
+	
 	var id;
 	var player_ids=[];
 	var myTable = new GlideRecord('x_540166_apl_apl_player_table');
@@ -289,6 +330,7 @@
 
 	while(gr.next()) {
 		//data.obj = {};
+		obj.sysid = gr.getValue('sys_id');
 		obj.number = gr.getValue('number');
 		obj.name = gr.getValue('u_name');
 		obj.player_image = gr.getValue('player_image');
@@ -321,6 +363,7 @@
 
 
 	var bid_table= new GlideRecord('x_540166_apl_apl_bidlog_table');
+	bid_table.orderByDesc('number');
 	bid_table.query();
 	data.bid_count = bid_table.getRowCount();
 
@@ -407,7 +450,7 @@
 		else if(input.action=="unsold")
 		{
 			var unsold_player_data = new GlideRecord('x_540166_apl_apl_player_table');
-			unsold_player_data.addQuery('sys_id', id);
+			unsold_player_data.addQuery('sys_id', input.playerid);
 			unsold_player_data.query();
 			console.log("outside unsold");
 			if(unsold_player_data.next())
@@ -424,7 +467,6 @@
 				unsold_open_team_data.update();
 			}
 			console.log("reached hereeeeeeeee");
-			
 		}
 	}
 
@@ -434,14 +476,14 @@
         <sys_created_by>dev</sys_created_by>
         <sys_created_on>2024-02-07 10:38:46</sys_created_on>
         <sys_id>e691dc9c471402100e63e481e36d43ae</sys_id>
-        <sys_mod_count>279</sys_mod_count>
+        <sys_mod_count>326</sys_mod_count>
         <sys_name>apl_player_card</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
         <sys_update_name>sp_widget_e691dc9c471402100e63e481e36d43ae</sys_update_name>
         <sys_updated_by>harshraj</sys_updated_by>
-        <sys_updated_on>2024-02-16 13:09:56</sys_updated_on>
+        <sys_updated_on>2024-02-19 12:20:41</sys_updated_on>
         <template><![CDATA[<div ng-repeat="player in data.list">
   <div class="player-card">
     <div class="first-row">
@@ -454,9 +496,11 @@
       </div>
       <div class="container3">
         <p class="price">Current Price: {{ player.value }}</p>
-         <div class="container5" ng-show="c.btn_show">
+         <!--
+					<div class="container5" ng-show="c.btn_show">
            <widget class="countdown" id="apl_countdown_timer"></widget>
           </div>
+				 -->
       </div>
     </div>
     <div class="second-row">
@@ -469,11 +513,11 @@
       </div>
       <div class="container5" ng-show="c.btn_show">
         <div class="twobut">
-          <button ng-click="c.placeBid(player)">
+          <button ng-click="c.placeBid()">
             Bid
           </button>
         </div>
-        <button ng-click="c.giveup(player)">
+        <button ng-click="c.giveup()">
           Give up
         </button>
       </div>
