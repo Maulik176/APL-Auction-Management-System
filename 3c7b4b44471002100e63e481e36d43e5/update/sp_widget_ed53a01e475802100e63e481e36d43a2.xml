@@ -7,7 +7,7 @@
   c.togglePlayers1 = function(){
     var playerList = document.getElementById('playerList1');
     var playersBox = document.querySelector('.players-box');
-
+	
     // Toggle the 'open' class on the players-box
     if (playersBox.classList.contains('open')) {
       playersBox.classList.remove('open');
@@ -34,9 +34,9 @@
     } else {
       playersBox.classList.add('open');
       // Replace this with your actual player names
-      var dummyNames = ['Player 1', 'Player 2', 'Player 3', 'Player 4', 'Player 5','Player 6'];
+      //var dummyNames = ['Player 1', 'Player 2', 'Player 3', 'Player 4', 'Player 5','Player 6'];
       var team=c.data.myteam;
-			playerList.innerHTML = dummyNames.map(function (name) {
+			playerList.innerHTML = c.data.myteam.map(function (name) {
         return '<li>' + name + '</li>';
       }).join('');
     }
@@ -179,27 +179,36 @@
 	data.unsold=[]
 	
 	//var id=localStorage.getItem("user_id");
-	var gr = new GlideRecord("x_540166_apl_team_table");
-	gr.query();
-	while(gr.next()){
+var tid = $sp.getParameter('team_id');
+	var team_data = new GlideRecord('x_540166_apl_team_table');
+	team_data.addQuery('sys_id', tid);
+	team_data.query();
+	while(team_data.next()){
+	 data.teamname=team_data.getValue('team_name');
+	}
+	
+	/*while(gr.next()){
 		if(gr.getValue('team_name')=='None'){
 			data.image=gr.getValue('image');
-		}
+		}*/
 		/*else if(gr.getValue('sys_id')==id){
 			data.teamname=gr.getValue('team_name');
-		}*/
-	}
+		}}*/
+	
 var gr1=new GlideRecord("x_540166_apl_apl_player_table");
+	gr1.addQuery()
 	gr1.query();
 	
 	while(gr1.next()){
 		var x=gr1.getValue('u_status');
-		var y=gr1.getValue('u_team_name')
+		var y=gr1.getValue('u_team_name');
+		//console.log(tid==y);
 		var name = gr1.getValue('u_name')
 		
 		if(x=='sold'){
 			data.sold.push(name);
-			if(y==data.teamname){data.myteam.push(name);}
+			if(y==tid){data.myteam.push(name);}
+			
 		}
 		else{
 			data.unsold.push(name);
@@ -213,14 +222,14 @@ var gr1=new GlideRecord("x_540166_apl_apl_player_table");
         <sys_created_by>vandan</sys_created_by>
         <sys_created_on>2024-02-13 17:04:06</sys_created_on>
         <sys_id>ed53a01e475802100e63e481e36d43a2</sys_id>
-        <sys_mod_count>100</sys_mod_count>
+        <sys_mod_count>114</sys_mod_count>
         <sys_name>APL_accordion</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
         <sys_update_name>sp_widget_ed53a01e475802100e63e481e36d43a2</sys_update_name>
-        <sys_updated_by>maulik</sys_updated_by>
-        <sys_updated_on>2024-02-20 06:27:27</sys_updated_on>
+        <sys_updated_by>vandan</sys_updated_by>
+        <sys_updated_on>2024-02-20 07:30:30</sys_updated_on>
         <template><![CDATA[
  <div class="sidebar-widget">
    <div id="apl-im">
