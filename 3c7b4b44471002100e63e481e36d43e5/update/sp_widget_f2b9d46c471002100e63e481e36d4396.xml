@@ -7,18 +7,12 @@
 	c.submit=function(){
 		c.data.temp1=c.tname;
 		c.data.temp2=c.tpass;
-		c.data.temp3=c.oname;
-		c.data.temp4=c.cname;
-		c.data.temp5=10000;
-		c.data.temp6=0;
+		c.data.temp3=c.logo;
+		c.data.temp4=c.oname;
+		c.data.temp5=c.cname;
+		c.data.temp6=10000;
+		c.data.temp7=0;
 		c.server.update();
-		
-		/*c.server.update().then(function(){
-			spUtil.addInfoMessage("Registered successfully");
-			setTimeout(function() {
-        spModal.close();
-      }, 3000);
-		});*/
 	}
 };]]></client_script>
         <controller_as>c</controller_as>
@@ -68,6 +62,10 @@ input[type="number"] {
   box-sizing: border-box;
 }
 
+input[type='file']::file-selector-button {
+    color: #007965;
+  }
+
 button {
   width: 60%;
   margin: 0 auto; 
@@ -107,10 +105,11 @@ button:hover {
 	{
 		gr.setValue('team_name',input.temp1);
 		gr.setValue('password',input.temp2);
-		gr.setValue('owner_name',input.temp3);
-		gr.setValue('coach_name',input.temp4);
-		gr.setValue('team_purse',input.temp5);
-		gr.setValue('team_players',input.temp6);
+		gr.setValue('image',input.temp3);
+		gr.setValue('owner_name',input.temp4);
+		gr.setValue('coach_name',input.temp5);
+		gr.setValue('team_purse',input.temp6);
+		gr.setValue('team_players',input.temp7);
 		gr.insert();
 	}
 })();]]></script>
@@ -119,14 +118,14 @@ button:hover {
         <sys_created_by>harshraj</sys_created_by>
         <sys_created_on>2024-02-08 05:52:45</sys_created_on>
         <sys_id>f2b9d46c471002100e63e481e36d4396</sys_id>
-        <sys_mod_count>60</sys_mod_count>
+        <sys_mod_count>75</sys_mod_count>
         <sys_name>apl_reg_page</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
         <sys_update_name>sp_widget_f2b9d46c471002100e63e481e36d4396</sys_update_name>
-        <sys_updated_by>maulik</sys_updated_by>
-        <sys_updated_on>2024-02-20 10:10:24</sys_updated_on>
+        <sys_updated_by>harshraj</sys_updated_by>
+        <sys_updated_on>2024-02-21 06:25:03</sys_updated_on>
         <template><![CDATA[<div class="container">
   <h2>Team Registration Form</h2>
   <form action="#">
@@ -138,6 +137,10 @@ button:hover {
         <label for="password">Password</label>
         <input type="password" id="password" name="password" ng-model="c.tpass" required>
       </div>
+    <div class="form-group">
+      <label for="teamLogo">Team Logo:</label>
+      <input type="file" id="teamLogo" name="teamLogo" accept="image/*"  ng-src="c.tlogo" required>
+    </div>
     <div class="form-group">
       <label for="teamOwner">Team Owner's Name:</label>
       <input type="text" id="teamOwner" name="teamOwner" ng-model="c.oname" required>

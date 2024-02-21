@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element db_object_id="4c12dfc8471002100e63e481e36d4342" label="APL player table" max_length="40" name="x_540166_apl_apl_player_table" type="collection">
+        <element display="true" label="Category Image" max_length="40" name="category_image" type="user_image"/>
         <element default="0" label="Interested" max_length="40" name="interested" type="integer"/>
         <element label="Intrested" mandatory="true" max_length="40" name="intrested" type="integer"/>
         <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
