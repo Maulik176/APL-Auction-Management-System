@@ -8,7 +8,7 @@
         <element default="javascript:current.getTableName();" label="Class" max_length="80" name="sys_class_name" type="sys_class_name"/>
         <element default="true" label="Active" max_length="40" name="u_active" type="boolean"/>
         <element label="Age" mandatory="true" max_length="40" name="u_age" type="integer"/>
-        <element label="Base Price" max_length="40" name="u_base_price" type="integer"/>
+        <element default="5000" label="Base Price" max_length="40" name="u_base_price" read_only="true" type="integer"/>
         <element attributes="edge_encryption_enabled=true" choice="3" default="batsman" label="Category" mandatory="true" max_length="40" name="u_category" type="string">
             <choice>
                 <element inactive_on_update="false" label="Batsman" sequence="0" value="batsman"/>
