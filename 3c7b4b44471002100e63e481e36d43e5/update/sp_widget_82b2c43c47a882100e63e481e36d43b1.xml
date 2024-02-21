@@ -9,9 +9,11 @@
 		c.data.temp2=c.pcategory;
 		c.data.temp3=c.pnationality;
 		c.data.temp4=c.active;
-		c.data.temp5=c.status;
-		c.data.temp6=c.basevalue;
-		c.server.update();
+		c.data.temp5="unsold";
+		c.data.temp6=5000;
+		c.server.update().then(function(){
+			window.location.reload();
+		});
 	}
 };]]></client_script>
         <controller_as>c</controller_as>
@@ -117,14 +119,14 @@ button:hover {
         <sys_created_by>harshraj</sys_created_by>
         <sys_created_on>2024-02-21 09:06:24</sys_created_on>
         <sys_id>82b2c43c47a882100e63e481e36d43b1</sys_id>
-        <sys_mod_count>23</sys_mod_count>
+        <sys_mod_count>29</sys_mod_count>
         <sys_name>apl_add_player</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
         <sys_update_name>sp_widget_82b2c43c47a882100e63e481e36d43b1</sys_update_name>
         <sys_updated_by>harshraj</sys_updated_by>
-        <sys_updated_on>2024-02-21 09:36:21</sys_updated_on>
+        <sys_updated_on>2024-02-21 10:23:41</sys_updated_on>
         <template><![CDATA[<div class="container">
  <h2>Add New Player</h2>
   <form action="add_player.php" method="POST">
@@ -144,9 +146,9 @@ button:hover {
     <input type="text" id="status" name="status" placeholder="Unsold" value="Unsold" ng-model="c.status" required readonly><br><br>
 
     <label for="base_value">Base Value:</label>
-    <input type="number" id="base_value" name="base_value" value="5000" ng-model="c.basevalue" required><br><br>
+    <input type="number" id="base_value" name="base_value" placeholder="5000" value="5000" ng-model="c.basevalue" required readonly><br><br>
 
-    <button type="submit">Submit</button>
+    <button type="submit" ng-click="c.submit()">Submit</button>
   </form>
 </div>]]></template>
     </sp_widget>
