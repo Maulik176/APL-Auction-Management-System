@@ -3,140 +3,154 @@
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>number</element>
             <position>0</position>
-            <sys_created_by>harshraj</sys_created_by>
-            <sys_created_on>2024-02-16 08:30:52</sys_created_on>
-            <sys_id>64aac24b47d442100e63e481e36d430d</sys_id>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-20 10:52:03</sys_created_on>
+            <sys_id>8c511710476842100e63e481e36d4386</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_540166_apl_apl_player_table" sys_domain="global" view="Default view">21165b00475002100e63e481e36d4357</sys_ui_section>
-            <sys_updated_by>harshraj</sys_updated_by>
-            <sys_updated_on>2024-02-16 08:30:52</sys_updated_on>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-20 10:52:03</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>u_name</element>
             <position>1</position>
-            <sys_created_by>harshraj</sys_created_by>
-            <sys_created_on>2024-02-16 08:30:52</sys_created_on>
-            <sys_id>68aac24b47d442100e63e481e36d430d</sys_id>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-20 10:52:03</sys_created_on>
+            <sys_id>c4511710476842100e63e481e36d4387</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_540166_apl_apl_player_table" sys_domain="global" view="Default view">21165b00475002100e63e481e36d4357</sys_ui_section>
-            <sys_updated_by>harshraj</sys_updated_by>
-            <sys_updated_on>2024-02-16 08:30:52</sys_updated_on>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-20 10:52:03</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>player_image</element>
             <position>2</position>
-            <sys_created_by>harshraj</sys_created_by>
-            <sys_created_on>2024-02-16 08:30:52</sys_created_on>
-            <sys_id>24aac24b47d442100e63e481e36d431a</sys_id>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-20 10:52:03</sys_created_on>
+            <sys_id>c8511710476842100e63e481e36d4387</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_540166_apl_apl_player_table" sys_domain="global" view="Default view">21165b00475002100e63e481e36d4357</sys_ui_section>
-            <sys_updated_by>harshraj</sys_updated_by>
-            <sys_updated_on>2024-02-16 08:30:52</sys_updated_on>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-20 10:52:03</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>u_age</element>
             <position>3</position>
-            <sys_created_by>harshraj</sys_created_by>
-            <sys_created_on>2024-02-16 08:30:52</sys_created_on>
-            <sys_id>28aac24b47d442100e63e481e36d431a</sys_id>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-20 10:52:03</sys_created_on>
+            <sys_id>cc511710476842100e63e481e36d4387</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_540166_apl_apl_player_table" sys_domain="global" view="Default view">21165b00475002100e63e481e36d4357</sys_ui_section>
-            <sys_updated_by>harshraj</sys_updated_by>
-            <sys_updated_on>2024-02-16 08:30:52</sys_updated_on>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-20 10:52:03</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>u_nationality</element>
             <position>4</position>
-            <sys_created_by>harshraj</sys_created_by>
-            <sys_created_on>2024-02-16 08:30:52</sys_created_on>
-            <sys_id>2caac24b47d442100e63e481e36d431a</sys_id>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-20 10:52:03</sys_created_on>
+            <sys_id>c0511710476842100e63e481e36d4388</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_540166_apl_apl_player_table" sys_domain="global" view="Default view">21165b00475002100e63e481e36d4357</sys_ui_section>
-            <sys_updated_by>harshraj</sys_updated_by>
-            <sys_updated_on>2024-02-16 08:30:52</sys_updated_on>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-20 10:52:03</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>u_category</element>
             <position>5</position>
-            <sys_created_by>harshraj</sys_created_by>
-            <sys_created_on>2024-02-16 08:30:52</sys_created_on>
-            <sys_id>20aac24b47d442100e63e481e36d431b</sys_id>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-20 10:52:03</sys_created_on>
+            <sys_id>c4511710476842100e63e481e36d4388</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_540166_apl_apl_player_table" sys_domain="global" view="Default view">21165b00475002100e63e481e36d4357</sys_ui_section>
-            <sys_updated_by>harshraj</sys_updated_by>
-            <sys_updated_on>2024-02-16 08:30:52</sys_updated_on>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-20 10:52:03</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_base_price</element>
+            <position>6</position>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-20 10:52:03</sys_created_on>
+            <sys_id>c8511710476842100e63e481e36d4388</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_540166_apl_apl_player_table" sys_domain="global" view="Default view">21165b00475002100e63e481e36d4357</sys_ui_section>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-20 10:52:03</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>u_value</element>
-            <position>6</position>
-            <sys_created_by>harshraj</sys_created_by>
-            <sys_created_on>2024-02-16 08:30:52</sys_created_on>
-            <sys_id>24aac24b47d442100e63e481e36d431b</sys_id>
+            <position>7</position>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-20 10:52:03</sys_created_on>
+            <sys_id>cc511710476842100e63e481e36d4388</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_540166_apl_apl_player_table" sys_domain="global" view="Default view">21165b00475002100e63e481e36d4357</sys_ui_section>
-            <sys_updated_by>harshraj</sys_updated_by>
-            <sys_updated_on>2024-02-16 08:30:52</sys_updated_on>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-20 10:52:03</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>u_status</element>
-            <position>7</position>
-            <sys_created_by>harshraj</sys_created_by>
-            <sys_created_on>2024-02-16 08:30:52</sys_created_on>
-            <sys_id>28aac24b47d442100e63e481e36d431b</sys_id>
+            <position>8</position>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-20 10:52:03</sys_created_on>
+            <sys_id>c0511710476842100e63e481e36d4389</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_540166_apl_apl_player_table" sys_domain="global" view="Default view">21165b00475002100e63e481e36d4357</sys_ui_section>
-            <sys_updated_by>harshraj</sys_updated_by>
-            <sys_updated_on>2024-02-16 08:30:52</sys_updated_on>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-20 10:52:03</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>u_team_name</element>
-            <position>8</position>
-            <sys_created_by>harshraj</sys_created_by>
-            <sys_created_on>2024-02-16 08:30:52</sys_created_on>
-            <sys_id>2caac24b47d442100e63e481e36d431b</sys_id>
+            <position>9</position>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-20 10:52:03</sys_created_on>
+            <sys_id>c4511710476842100e63e481e36d4389</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_540166_apl_apl_player_table" sys_domain="global" view="Default view">21165b00475002100e63e481e36d4357</sys_ui_section>
-            <sys_updated_by>harshraj</sys_updated_by>
-            <sys_updated_on>2024-02-16 08:30:52</sys_updated_on>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-20 10:52:03</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>u_active</element>
-            <position>9</position>
-            <sys_created_by>harshraj</sys_created_by>
-            <sys_created_on>2024-02-16 08:30:52</sys_created_on>
-            <sys_id>20aac24b47d442100e63e481e36d431c</sys_id>
+            <position>10</position>
+            <sys_created_by>dev</sys_created_by>
+            <sys_created_on>2024-02-20 10:52:03</sys_created_on>
+            <sys_id>c8511710476842100e63e481e36d4389</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_540166_apl_apl_player_table" sys_domain="global" view="Default view">21165b00475002100e63e481e36d4357</sys_ui_section>
-            <sys_updated_by>harshraj</sys_updated_by>
-            <sys_updated_on>2024-02-16 08:30:52</sys_updated_on>
+            <sys_updated_by>dev</sys_updated_by>
+            <sys_updated_on>2024-02-20 10:52:03</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>

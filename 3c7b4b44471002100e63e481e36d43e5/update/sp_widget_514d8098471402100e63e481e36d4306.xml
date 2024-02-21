@@ -4,7 +4,7 @@
         <client_script><![CDATA[api.controller=function($scope, spModal, spUtil) {
   /* widget controller */
   var c = this;
-	c.login=function(){
+	/*c.login=function(){
 		//debugger;
 		c.data.x=c.ltname;
 		c.data.y=c.ltpass;
@@ -19,7 +19,31 @@
 				}
 		});
 
-	}
+	}*/
+	
+	c.login = function() {
+    c.data.x = c.ltname;
+    c.data.y = c.ltpass;
+    c.server.update().then(function(r) {
+      localStorage.setItem('user_id', r.user_id);
+
+      if (r.loginstatus == true) {
+        localStorage.setItem("it", 0);
+        localStorage.setItem("teams_list", JSON.stringify(c.data.teams_array));
+        localStorage.setItem("give_up_list", JSON.stringify(c.data.give_up));
+
+        // Display success message 
+        spUtil.addInfoMessage("Login successful");
+				
+				setTimeout(function(){
+					window.location.href = 'https://dev192681.service-now.com/apl?id=apl_landing_page&team_id=' + r.user_id;
+				},1000)
+
+        // Redirect to the landing page
+        //window.location.href = 'https://dev192681.service-now.com/apl?id=apl_landing_page&team_id=' + r.user_id;
+      }
+    });
+  }
 	
 	
 	c.signup=function(){
@@ -33,7 +57,11 @@
 
 };]]></client_script>
         <controller_as>c</controller_as>
-        <css>body {
+        <css>*{
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
       font-family: 'Poppins', sans-serif;
       background-color: #f2f2f2;
       margin: 0;
@@ -152,14 +180,14 @@
         <sys_created_by>harshraj</sys_created_by>
         <sys_created_on>2024-02-07 10:19:50</sys_created_on>
         <sys_id>514d8098471402100e63e481e36d4306</sys_id>
-        <sys_mod_count>167</sys_mod_count>
+        <sys_mod_count>174</sys_mod_count>
         <sys_name>apl_login</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
         <sys_update_name>sp_widget_514d8098471402100e63e481e36d4306</sys_update_name>
-        <sys_updated_by>harshraj</sys_updated_by>
-        <sys_updated_on>2024-02-14 10:06:52</sys_updated_on>
+        <sys_updated_by>maulik</sys_updated_by>
+        <sys_updated_on>2024-02-20 10:10:44</sys_updated_on>
         <template><![CDATA[<div class="login-container">
     <h2>Login</h2>
     <form id="login-form">
