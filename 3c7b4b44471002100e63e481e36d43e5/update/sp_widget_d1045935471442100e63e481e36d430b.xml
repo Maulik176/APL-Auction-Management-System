@@ -174,14 +174,14 @@ button:hover {
         <sys_created_by>maulik</sys_created_by>
         <sys_created_on>2024-02-12 07:19:50</sys_created_on>
         <sys_id>d1045935471442100e63e481e36d430b</sys_id>
-        <sys_mod_count>118</sys_mod_count>
+        <sys_mod_count>119</sys_mod_count>
         <sys_name>APL Bidlog List</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
         <sys_update_name>sp_widget_d1045935471442100e63e481e36d430b</sys_update_name>
         <sys_updated_by>maulik</sys_updated_by>
-        <sys_updated_on>2024-02-20 11:01:19</sys_updated_on>
+        <sys_updated_on>2024-02-22 06:06:55</sys_updated_on>
         <template><![CDATA[<html>
   <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -201,7 +201,7 @@ button:hover {
             <h2 class="team-name">{{bid.teamName}}</h2>
         </div>
         <div class="col-md-4 team-info">
-            <p>Current Bid: {{bid.teamBid}}$</p>
+            <p>Current Bid: ₹{{bid.teamBid}}</p>
         </div>
     </div>
 </div>

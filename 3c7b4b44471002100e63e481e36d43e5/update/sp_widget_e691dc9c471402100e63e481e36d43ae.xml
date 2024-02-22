@@ -176,6 +176,7 @@
   border-radius: 10px; /* Add rounded corners */
   background-color: #fff;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  
 }
  
 /* Fixed size for images based on container1 size */
@@ -512,14 +513,14 @@ h3{
         <sys_created_by>dev</sys_created_by>
         <sys_created_on>2024-02-07 10:38:46</sys_created_on>
         <sys_id>e691dc9c471402100e63e481e36d43ae</sys_id>
-        <sys_mod_count>520</sys_mod_count>
+        <sys_mod_count>527</sys_mod_count>
         <sys_name>apl_player_card</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
         <sys_update_name>sp_widget_e691dc9c471402100e63e481e36d43ae</sys_update_name>
-        <sys_updated_by>harshraj</sys_updated_by>
-        <sys_updated_on>2024-02-22 03:15:26</sys_updated_on>
+        <sys_updated_by>dev</sys_updated_by>
+        <sys_updated_on>2024-02-22 04:59:45</sys_updated_on>
         <template><![CDATA[<div ng-repeat="player in data.list">
   <div class="player-card">
     <div class="first-row">
@@ -541,7 +542,7 @@ h3{
           <h3>
             <i class="fa-solid fa-circle-info" style="color: #004f41;"></i>Info
           </h3>
-           <p>Category: {{ player.category }}</p>
+           <p>Category:{{ player.category }}</p>
            <p>Matches: {{ player.matches }}</p>
           <p>Innings: {{ player.innings }}</p>
           
