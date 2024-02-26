@@ -1,0 +1,643 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="DELETE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller=function($scope, spUtil) {
+  /* widget controller */
+  var c = this;
+	c.btn_show=true;
+	////  new logic /////
+	localStorage.setItem("teams_list", JSON.stringify(c.data.teams_array));
+	var temp_array=JSON.parse(localStorage.getItem("teams_list"));
+	//console.log(temp_array[0]);
+	var team_len=temp_array.length;
+	var it=0;
+	it=setTimeout(increment, it*3000);
+	function increment(){
+		it=(it+1)%team_len;
+	}
+	
+	
+	/////////////////////////////
+	c.placeBid = function(player) {
+		var n = 500;
+		c.data.newValue = parseInt(c.data.list[0].value) + parseInt("500");
+		c.data.team_id = localStorage.getItem('user_id');
+		c.server.update(); 
+		window.location.reload();
+	}
+	
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/* Player Card Container */
+.player-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Increased vertical spacing between containers */
+  padding: 15px; /* Increased padding for the card */
+  border: 2px solid #ddd; /* Add a subtle border */
+  border-radius: 10px; /* Add rounded corners */
+  
+}
+
+/* First Row (30%) */
+.player-card .first-row {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 30%;
+  gap: 15px; /* Increased spacing between containers in the first row */
+}
+
+/* Container 1 - Player Profile Pic */
+.first-row .container1 {
+  flex: 30%;
+  position: relative; /* Added position relative for positioning the overlay text */
+  overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+}
+
+/* Fixed size for images based on container1 size */
+.container1 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Adjust the object-fit property as needed */
+  border-radius: 10px; /* Add rounded corners to the image */
+  
+}
+
+/* Overlay text for image */
+.container1 .overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 16px; /* Adjust the font size of the overlay text */
+}
+
+/* Container 2 - Player Name and Age */
+.first-row .container2 {
+  flex: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px; /* Adjust the font size for player name and age */
+   overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+}
+
+/* Container 3 - Base Price */
+.first-row .container3 {
+  flex: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px; /* Adjust the font size for base price */
+   overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+  color: #007965;
+}
+
+/* Second Row (70%) */
+.player-card .second-row {
+  display: flex;
+  height: 70%;
+  gap: 15px; /* Increased spacing between containers in the second row */
+}
+
+/* Container 4 - Other Statistics */
+.second-row .container4 {
+  flex: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px; /* Adjust the font size for statistics */
+   overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+}
+
+/* Container 5 - Buttons (Bid, Pass, Give Up) */
+.second-row .container5 {
+  flex: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+   overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+  align-items: center;
+  
+}
+
+/* Styling for Buttons */
+.container5 button {
+  margin: 9px; /* Increased margin for buttons */
+  padding: 15px; /* Increased padding for buttons */
+  font-size: 16px; /* Adjust the font size for buttons */
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px; /* Add rounded corners to buttons */
+  background-color: #00AF91;
+}
+
+
+
+.container5 button:hover {
+  background-color: #2980b9;
+  
+}
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>h_apl_player_card</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>h_apl_player_card</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	/* populate the 'data' object */
+	/* e.g., data.table = $sp.getValue('table'); */
+
+	// same player on all users logic
+	var id;
+	var player_ids=[];
+	var myTable = new GlideRecord('x_540166_apl_apl_player_table');
+	myTable.orderBy('number');
+	myTable.query();
+
+	while(myTable.next()) {
+		player_ids.push(myTable.getValue('sys_id'));
+	}
+	id = player_ids[player_ids.length-1];
+
+	// fetch record for that player
+	var gr = new GlideRecord("x_540166_apl_apl_player_table");
+	gr.addQuery('sys_id', id);
+	gr.orderBy('number');
+	gr.query(); 
+
+	data.list = [];
+	var obj = {};
+
+	while(gr.next()) {
+		//data.obj = {};
+		obj.number = gr.getValue('number');
+		obj.name = gr.getValue('u_name');
+		obj.player_image = gr.getValue('player_image');
+		obj.age = gr.getValue('u_age');
+		obj.category = gr.getValue('u_category');
+		obj.value = gr.getValue('u_value');
+	} 
+
+
+	// fetch stats for that player
+	var stat = new GlideRecord("x_540166_apl_player_stats");
+	stat.addQuery('u_reference_15', id);
+	stat.query();
+	while(stat.next()) {
+		obj.matches = stat.getValue('u_matches_1');
+		obj.innings = stat.getValue('u_innings_3');
+		obj.runs = stat.getValue('u_runs_2');
+		obj.strike_rate = stat.getValue('u_sr_7');
+		obj.fifties = stat.getValue('u_fifties_10');
+		obj.centuries = stat.getValue('u_centuries_9');
+		obj.wickets = stat.getValue('u_wickets_4');
+		obj.three_wicket = stat.getValue('u_3wh_15');
+		obj.five_wicket = stat.getValue('u_integer_11');
+		obj.average = stat.getValue('u_avg_5');
+		obj.highest_score = stat.getValue('u_high_14');
+		obj.bowling_best_fig = stat.getValue('u_bestbowl_12');
+		data.list.push(obj);
+	}
+
+	if(input) {
+		var player = new GlideRecord('x_540166_apl_apl_player_table');
+		player.addQuery('sys_id', id);
+		//player.setLimit(1);
+		player.query();
+		var a = gr.getValue('u_name');
+		if (player.next()) {
+			player.setValue('u_value', input.newValue);
+			player.update();
+		}
+		
+		
+		var bidlog = new GlideRecord('x_540166_apl_apl_bidlog_table');
+		bidlog.initialize();
+		bidlog.setValue('current_profile_pic', obj.player_image);
+		bidlog.setValue('u_reference_1', input.team_id);
+		bidlog.setValue('u_current_bid', input.newValue);
+		bidlog.insert();
+	} 
+	
+	// bidding buttons logic
+	
+	data.teams_array=[];
+	var teamData = new GlideRecord("x_540166_apl_team_table");
+	teamData.orderBy('number');
+	teamData.query(); 
+	while(teamData.next())
+	{
+		data.teams_array.push(teamData.getValue('sys_id'));
+	}
+	
+	for(var i=0; i<data.teams_array.length; i++)
+		{
+			console.log(data.teams_array[i]);
+		}
+	
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>harshraj</sys_created_by>
+        <sys_created_on>2024-02-14 05:53:25</sys_created_on>
+        <sys_id>76635b5e471002100e63e481e36d430d</sys_id>
+        <sys_mod_count>31</sys_mod_count>
+        <sys_name>h_apl_player_card</sys_name>
+        <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+        <sys_update_name>sp_widget_76635b5e471002100e63e481e36d430d</sys_update_name>
+        <sys_updated_by>harshraj</sys_updated_by>
+        <sys_updated_on>2024-02-14 08:10:34</sys_updated_on>
+        <template><![CDATA[<div ng-repeat="player in data.list">
+  <div class="player-card">
+    <div class="first-row">
+      <div class="container1">
+        <img ng-src="{{ ::player.player_image + '.iix' }}" alt="Player Image" class="img-fluid">
+      </div>
+      <div class="container2">
+        <h2>{{ player.name }}</h2>
+        <p>Age: {{ player.age }}</p>
+      </div>
+      <div class="container3">
+        <p>Price: {{ player.value }}</p>
+      </div>
+    </div>
+    <div class="second-row">
+      <div class="container4">
+        <p>Matches: {{ player.matches }}</p>
+        <p>Runs: {{ player.runs }}</p>
+        <p>Wickets: {{ player.wickets }}</p>
+        <p>Average: {{ player.average }}</p>
+        <p>Category: {{ player.category }}</p>
+      </div>
+      <div class="container5" ng-show="c.btn_show">
+        <div class="twobut">
+          <button ng-click="c.placeBid(player)">
+            Bid
+          </button>
+          <!--<button ng-click="passOnBid(player)">Pass</button>-->
+        </div>
+        <button ng-click="giveup(player)">
+          Give up
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+]]></template>
+    </sp_widget>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="APL ">3c7b4b44471002100e63e481e36d43e5</application>
+        <file_path/>
+        <instance_id>757a8d15db46b998199b1729139619ab</instance_id>
+        <instance_name>dev192681</instance_name>
+        <name>sp_widget_76635b5e471002100e63e481e36d430d</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_widget"&gt;&lt;sp_widget action="INSERT_OR_UPDATE"&gt;&lt;category&gt;custom&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[api.controller=function($scope, spUtil) {
+  /* widget controller */
+  var c = this;
+	c.btn_show=true;
+	////  new logic /////
+	localStorage.setItem("teams_list", JSON.stringify(c.data.teams_array));
+	var temp_array=JSON.parse(localStorage.getItem("teams_list"));
+	//console.log(temp_array[0]);
+	var team_len=temp_array.length;
+	var it=0;
+	it=setTimeout(increment, it*3000);
+	function increment(){
+		it=(it+1)%team_len;
+	}
+	
+	
+	/////////////////////////////
+	c.placeBid = function(player) {
+		var n = 500;
+		c.data.newValue = parseInt(c.data.list[0].value) + parseInt("500");
+		c.data.team_id = localStorage.getItem('user_id');
+		c.server.update(); 
+		window.location.reload();
+	}
+	
+};]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css&gt;/* Player Card Container */
+.player-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Increased vertical spacing between containers */
+  padding: 15px; /* Increased padding for the card */
+  border: 2px solid #ddd; /* Add a subtle border */
+  border-radius: 10px; /* Add rounded corners */
+  
+}
+
+/* First Row (30%) */
+.player-card .first-row {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 30%;
+  gap: 15px; /* Increased spacing between containers in the first row */
+}
+
+/* Container 1 - Player Profile Pic */
+.first-row .container1 {
+  flex: 30%;
+  position: relative; /* Added position relative for positioning the overlay text */
+  overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+}
+
+/* Fixed size for images based on container1 size */
+.container1 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Adjust the object-fit property as needed */
+  border-radius: 10px; /* Add rounded corners to the image */
+  
+}
+
+/* Overlay text for image */
+.container1 .overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 16px; /* Adjust the font size of the overlay text */
+}
+
+/* Container 2 - Player Name and Age */
+.first-row .container2 {
+  flex: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px; /* Adjust the font size for player name and age */
+   overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+}
+
+/* Container 3 - Base Price */
+.first-row .container3 {
+  flex: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px; /* Adjust the font size for base price */
+   overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+  color: #007965;
+}
+
+/* Second Row (70%) */
+.player-card .second-row {
+  display: flex;
+  height: 70%;
+  gap: 15px; /* Increased spacing between containers in the second row */
+}
+
+/* Container 4 - Other Statistics */
+.second-row .container4 {
+  flex: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px; /* Adjust the font size for statistics */
+   overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+}
+
+/* Container 5 - Buttons (Bid, Pass, Give Up) */
+.second-row .container5 {
+  flex: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+   overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+  align-items: center;
+  
+}
+
+/* Styling for Buttons */
+.container5 button {
+  margin: 9px; /* Increased margin for buttons */
+  padding: 15px; /* Increased padding for buttons */
+  font-size: 16px; /* Adjust the font size for buttons */
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px; /* Add rounded corners to buttons */
+  background-color: #00AF91;
+}
+
+
+
+.container5 button:hover {
+  background-color: #2980b9;
+  
+}
+&lt;/css&gt;&lt;data_table&gt;sp_instance&lt;/data_table&gt;&lt;demo_data/&gt;&lt;description/&gt;&lt;docs/&gt;&lt;field_list/&gt;&lt;has_preview&gt;true&lt;/has_preview&gt;&lt;id&gt;h_apl_player_card&lt;/id&gt;&lt;internal&gt;false&lt;/internal&gt;&lt;link&gt;&lt;![CDATA[function link(scope, element, attrs, controller) {  }]]&gt;&lt;/link&gt;&lt;name&gt;h_apl_player_card&lt;/name&gt;&lt;option_schema/&gt;&lt;public&gt;false&lt;/public&gt;&lt;roles/&gt;&lt;script&gt;&lt;![CDATA[(function() {
+	/* populate the 'data' object */
+	/* e.g., data.table = $sp.getValue('table'); */
+
+	// same player on all users logic
+	var id;
+	var player_ids=[];
+	var myTable = new GlideRecord('x_540166_apl_apl_player_table');
+	myTable.orderBy('number');
+	myTable.query();
+
+	while(myTable.next()) {
+		player_ids.push(myTable.getValue('sys_id'));
+	}
+	id = player_ids[player_ids.length-1];
+
+	// fetch record for that player
+	var gr = new GlideRecord("x_540166_apl_apl_player_table");
+	gr.addQuery('sys_id', id);
+	gr.orderBy('number');
+	gr.query(); 
+
+	data.list = [];
+	var obj = {};
+
+	while(gr.next()) {
+		//data.obj = {};
+		obj.number = gr.getValue('number');
+		obj.name = gr.getValue('u_name');
+		obj.player_image = gr.getValue('player_image');
+		obj.age = gr.getValue('u_age');
+		obj.category = gr.getValue('u_category');
+		obj.value = gr.getValue('u_value');
+	} 
+
+
+	// fetch stats for that player
+	var stat = new GlideRecord("x_540166_apl_player_stats");
+	stat.addQuery('u_reference_15', id);
+	stat.query();
+	while(stat.next()) {
+		obj.matches = stat.getValue('u_matches_1');
+		obj.innings = stat.getValue('u_innings_3');
+		obj.runs = stat.getValue('u_runs_2');
+		obj.strike_rate = stat.getValue('u_sr_7');
+		obj.fifties = stat.getValue('u_fifties_10');
+		obj.centuries = stat.getValue('u_centuries_9');
+		obj.wickets = stat.getValue('u_wickets_4');
+		obj.three_wicket = stat.getValue('u_3wh_15');
+		obj.five_wicket = stat.getValue('u_integer_11');
+		obj.average = stat.getValue('u_avg_5');
+		obj.highest_score = stat.getValue('u_high_14');
+		obj.bowling_best_fig = stat.getValue('u_bestbowl_12');
+		data.list.push(obj);
+	}
+
+	if(input) {
+		var player = new GlideRecord('x_540166_apl_apl_player_table');
+		player.addQuery('sys_id', id);
+		//player.setLimit(1);
+		player.query();
+		var a = gr.getValue('u_name');
+		if (player.next()) {
+			player.setValue('u_value', input.newValue);
+			player.update();
+		}
+		
+		
+		var bidlog = new GlideRecord('x_540166_apl_apl_bidlog_table');
+		bidlog.initialize();
+		bidlog.setValue('current_profile_pic', obj.player_image);
+		bidlog.setValue('u_reference_1', input.team_id);
+		bidlog.setValue('u_current_bid', input.newValue);
+		bidlog.insert();
+	} 
+	
+	// bidding buttons logic
+	
+	data.teams_array=[];
+	var teamData = new GlideRecord("x_540166_apl_team_table");
+	teamData.orderBy('number');
+	teamData.query(); 
+	while(teamData.next())
+	{
+		data.teams_array.push(teamData.getValue('sys_id'));
+	}
+	
+	for(var i=0; i&lt;data.teams_array.length; i++)
+		{
+			console.log(data.teams_array[i]);
+		}
+	
+})();]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;harshraj&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2024-02-14 05:53:25&lt;/sys_created_on&gt;&lt;sys_id&gt;76635b5e471002100e63e481e36d430d&lt;/sys_id&gt;&lt;sys_mod_count&gt;31&lt;/sys_mod_count&gt;&lt;sys_name&gt;h_apl_player_card&lt;/sys_name&gt;&lt;sys_package display_value="APL " source="x_540166_apl"&gt;3c7b4b44471002100e63e481e36d43e5&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="APL "&gt;3c7b4b44471002100e63e481e36d43e5&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_76635b5e471002100e63e481e36d430d&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;harshraj&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2024-02-14 08:10:34&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;div ng-repeat="player in data.list"&gt;
+  &lt;div class="player-card"&gt;
+    &lt;div class="first-row"&gt;
+      &lt;div class="container1"&gt;
+        &lt;img ng-src="{{ ::player.player_image + '.iix' }}" alt="Player Image" class="img-fluid"&gt;
+      &lt;/div&gt;
+      &lt;div class="container2"&gt;
+        &lt;h2&gt;{{ player.name }}&lt;/h2&gt;
+        &lt;p&gt;Age: {{ player.age }}&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="container3"&gt;
+        &lt;p&gt;Price: {{ player.value }}&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="second-row"&gt;
+      &lt;div class="container4"&gt;
+        &lt;p&gt;Matches: {{ player.matches }}&lt;/p&gt;
+        &lt;p&gt;Runs: {{ player.runs }}&lt;/p&gt;
+        &lt;p&gt;Wickets: {{ player.wickets }}&lt;/p&gt;
+        &lt;p&gt;Average: {{ player.average }}&lt;/p&gt;
+        &lt;p&gt;Category: {{ player.category }}&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="container5" ng-show="c.btn_show"&gt;
+        &lt;div class="twobut"&gt;
+          &lt;button ng-click="c.placeBid(player)"&gt;
+            Bid
+          &lt;/button&gt;
+          &lt;!--&lt;button ng-click="passOnBid(player)"&gt;Pass&lt;/button&gt;--&gt;
+        &lt;/div&gt;
+        &lt;button ng-click="giveup(player)"&gt;
+          Give up
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+]]&gt;&lt;/template&gt;&lt;/sp_widget&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>1278629052</payload_hash>
+        <record_name>h_apl_player_card</record_name>
+        <reverted_from/>
+        <source>ef7a2b16479002100e63e481e36d43de</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>harshraj</sys_created_by>
+        <sys_created_on>2024-02-14 08:10:34</sys_created_on>
+        <sys_id>84d27b1e479002100e63e481e36d43ec</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18da6aae7c40000001</sys_recorded_at>
+        <sys_updated_by>harshraj</sys_updated_by>
+        <sys_updated_on>2024-02-14 08:10:34</sys_updated_on>
+        <type>Widget</type>
+        <update_guid>4cd27b1ede900210002482503d7c28eb</update_guid>
+        <update_guid_history>4cd27b1ede900210002482503d7c28eb:1278629052,5812b31ebd900210f083115265a57d6d:-1661623186,1981bfda0b900210c9e580715f01fd66:1704356304,2671ffda3390021059e0ae685fc2cc69:-927330053,b661bb9abc900210c8cb1eb7d0eb96ed:936959233,5a5177dad8900210f9eefaf65c027b6e:2073083596,2be2671e40500210ddbc89bb5c707e83:769836699,0b52a35e80500210caebe06b9bc66de7:904200179,c6026f1e425002108b3598fef75f1ee6:-866303701,6ef1a71efc5002105a4bd943461eaced:1428923909,44e1eb1e2c500210ac0026bcc553fe8e:-26220309,6dc1abda2f500210c1085cc510febc7a:-1927122081,a0b12b1e055002106eeffdb8a9646682:-1116239309,98f0a3da2d5002100e38691a2b86a917:397374006,58e0a3da0050021096e8336866ed9511:494391904,a4706f9a29500210ccc902b55bf28239:-844200104,83306796a75002101e5415b4344c64c0:-1407245484,06006f9a1e50021038ff5536b5ac412b:1235627682,44ff5f9a7a500210e97202a13683b425:300866612,d1ef9796305002103f871e84cd2d742f:-2014569311,0b2a1356ac500210e3e48cbf5eafaada:-1881171398,abf91f16405002107935946ba8080cde:-683357799,8cf91b16e150021039a5608d097e73b4:329199940,41d9db166c5002103a665d1b8aa9774e:-1880777628,d9995716ea5002103d263be759513b53:1563320676,3b395fd2385002105f315e88137468af:-322336775,95869b12a1500210da50341bb5a22385:-896129821,4d76df126a5002106ec6397a8e72c23e:1964616969,bed5171286500210785eb510f4c92b53:601335350,bca5dfde33100210805f41083130fe35:1393235980,c5655bde44100210ba2913e90a37f791:-1847853033,b2635b5ee5100210aea310109a2d0210:-603721140</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="h_apl_player_card">a351486e47d002100e63e481e36d436f</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>harshraj</sys_created_by>
+        <sys_created_on>2024-02-14 09:14:10</sys_created_on>
+        <sys_db_object display_value="" name="sp_widget">sp_widget</sys_db_object>
+        <sys_id>535c397da9d8403ca0ab55165bf5fc21</sys_id>
+        <sys_metadata>76635b5e471002100e63e481e36d430d</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>h_apl_player_card</sys_name>
+        <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+        <sys_scope_delete display_value="">34d45e9f175a49329ec1bf71207ab644</sys_scope_delete>
+        <sys_update_name>sp_widget_76635b5e471002100e63e481e36d430d</sys_update_name>
+        <sys_update_version display_value="sp_widget_76635b5e471002100e63e481e36d430d">84d27b1e479002100e63e481e36d43ec</sys_update_version>
+        <sys_updated_by>harshraj</sys_updated_by>
+        <sys_updated_on>2024-02-14 09:14:10</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

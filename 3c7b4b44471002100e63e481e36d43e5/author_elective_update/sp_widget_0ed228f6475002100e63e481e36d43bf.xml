@@ -1,0 +1,1107 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="DELETE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller=function($scope, spUtil, spModal) {
+	/* widget controller */
+	var c = this;
+	
+	var all_team_array=JSON.parse(localStorage.getItem('teams_list'));
+	var give_up_array=JSON.parse(localStorage.getItem('give_up_list'));
+	var team_id=localStorage.getItem('user_id');
+	var it=localStorage.getItem('it');
+	var player_id=c.data.list[0].sysid;
+	
+	if(all_team_array[(it+parseInt(1))%parseInt(all_team_array.length)] == give_up_array[it]){
+		spUtil.addTrivialMessage("Previous team has given up for this player");	
+	}
+	
+	c.btn_show=false;
+	c.more_bidders=true;
+	
+	c.last_giveup=false;
+	
+	/*
+	if (team_id == give_up_array[it]) {
+		var a = c.data.t_purse;
+		var b= parseInt(c.data.list[0].value) + parseInt("500");
+		console.log(a + " " + b);
+		if(a-b < 0) {
+			console.log("reached inside");
+			c.data.team_id = team_id;
+			c.data.action = "giveup";
+			c.server.update();
+			console.log("reached outside");
+			
+		}	
+	}
+	*/
+		 
+/*
+	// timeout logic 
+	if (give_up_array[it]==team_id) {
+		setTimeout(
+			function timeout_func(){
+			c.data.team_id = team_id;
+			c.data.action = "giveup";
+			c.server.update();
+			}, 
+			15000);
+	}
+*/
+	
+	if(give_up_array.length==1)
+	{
+		console.log("111");
+		if(c.data.bid_count==0 && give_up_array[it]==team_id) 
+		{
+			console.log("222");
+			c.last_giveup=true;
+			c.btn_show=true;
+			
+			//setTimeout(timeout_func(), 15000);
+		}
+		else if(c.data.bid_count!=0 && give_up_array[it]==team_id)
+		{
+			c.btn_show=false;
+			c.more_bidders=false;
+			console.log("soldddd to last one");
+			sold_func();
+		}
+		else if(c.data.bid_count==1 & give_up_array.length==1)
+		{
+			sold_func();
+		}
+	}
+	else if(give_up_array[it]==team_id && c.more_bidders)
+	{
+		c.btn_show=true;
+		//setTimeout(timeout_func(), 15000);
+	}
+	/*else if(give_up_array.length==0){
+		unsold_func();
+	}*/
+
+
+	// sold implementation 
+	function sold_func()
+	{
+		c.data.action = "sold";
+		c.data.won_team=give_up_array[0];
+		c.data.t_id=team_id;
+		c.data.sold_flag=false;
+		if(c.data.won_team == c.data.t_id)
+		{
+			c.data.sold_flag=true;
+			console.log("flag true");
+
+		}
+		c.server.update().then(function(r){
+			console.log("give up array not updated");
+			localStorage.setItem("give_up_list", JSON.stringify(all_team_array));
+			console.log("give up array updated");
+			window.location.reload();
+		});
+	}
+	
+	function unsold_func(){
+		c.data.playerid=player_id;
+		c.data.action = "unsold";
+		c.server.update().then(function(r){
+			console.log("unsold give up array not updated");
+			localStorage.setItem("give_up_list", JSON.stringify(all_team_array));
+			console.log("unsold give up array updated");
+		});
+	}
+
+	// recordWatch() for bid
+	spUtil.recordWatch($scope, "x_540166_apl_apl_bidlog_table", "numberISNOTEMPTY", function(name) {
+		localStorage.setItem('it',(parseInt(it)+parseInt(1))%give_up_array.length);
+		window.location.reload();
+	});
+
+	// recordWatch() for giveup
+	spUtil.recordWatch($scope, "x_540166_apl_team_table", "", function(name) { //numberISNOTEMPTY
+		var newArray = [];
+		// new addition
+		if (give_up_array.length == 0) {
+			localStorage.setItem("give_up_list", JSON.stringify(all_team_array));
+		}
+		
+		if (it == give_up_array.length-2) {
+			newArray = give_up_array.slice(0, it);
+			newArray.push(give_up_array[give_up_array.length - 1]);
+			localStorage.setItem('it', (parseInt(it)%give_up_array.length));
+
+		}
+		else if (it == give_up_array.length-1) {
+			newArray = give_up_array.slice(0, parseInt(it));
+			localStorage.setItem('it', parseInt("0"))
+		}
+		else{
+			newArray = give_up_array.slice(0, it).concat(give_up_array.slice(parseInt(it)+parseInt(1)));
+			localStorage.setItem('it', (parseInt(it)%give_up_array.length));
+		}
+		localStorage.setItem('give_up_list', JSON.stringify(newArray));
+		
+		if(give_up_list.length == 0){
+			unsold_func();
+		}
+		window.location.reload();
+	});
+
+	c.placeBid = function() {
+		c.data.newValue = parseInt(c.data.list[0].value) + parseInt("500");
+		c.data.team_id = team_id;
+		c.data.action = "bid";
+		c.server.update();
+	}
+	
+	c.giveup = function() {
+		/*
+		if(c.last_giveup){
+			unsold_func();
+		}
+		
+		else{}
+		*/
+			c.data.team_id = team_id;
+			c.data.action = "giveup";
+			c.server.update();
+	}
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/* Player Card Container */
+.player-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Increased vertical spacing between containers */
+  padding: 15px; /* Increased padding for the card */
+  border: 2px solid #ddd; /* Add a subtle border */
+  border-radius: 10px; /* Add rounded corners */
+  
+}
+
+/* First Row (30%) */
+.player-card .first-row {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 30%;
+  gap: 15px; /* Increased spacing between containers in the first row */
+}
+
+/* Container 1 - Player Profile Pic */
+.first-row .container1 {
+  flex: 30%;
+  position: relative; /* Added position relative for positioning the overlay text */
+  overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+}
+
+/* Fixed size for images based on container1 size */
+.container1 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Adjust the object-fit property as needed */
+  border-radius: 10px; /* Add rounded corners to the image */
+  
+}
+
+/* Overlay text for image */
+.container1 .overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 16px; /* Adjust the font size of the overlay text */
+}
+
+/* Container 2 - Player Name and Age */
+.first-row .container2 {
+  flex: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px; /* Adjust the font size for player name and age */
+   overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+}
+
+/* Container 3 - Base Price */
+.first-row .container3 {
+  flex: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px; /* Adjust the font size for base price */
+   overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+  color: #007965;
+}
+
+/* Second Row (70%) */
+.player-card .second-row {
+  display: flex;
+  height: 70%;
+  gap: 15px; /* Increased spacing between containers in the second row */
+}
+
+/* Container 4 - Other Statistics */
+.second-row .container4 {
+  flex: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px; /* Adjust the font size for statistics */
+   overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+}
+
+/* Container 5 - Buttons (Bid, Pass, Give Up) */
+.second-row .container5 {
+  flex: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+   overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+  align-items: center;
+  
+}
+
+/* Styling for Buttons */
+.container5 button {
+  margin: 9px; /* Increased margin for buttons */
+  padding: 15px; /* Increased padding for buttons */
+  font-size: 16px; /* Adjust the font size for buttons */
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px; /* Add rounded corners to buttons */
+  background-color: #00AF91;
+}
+
+
+
+.container5 button:hover {
+  background-color: #2980b9;
+  
+}
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>h_apl_player_card</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>h_apl_player_card</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	/* populate the 'data' object */
+	/* e.g., data.table = $sp.getValue('table'); */
+	
+	var tid = $sp.getParameter('team_id');
+	var team_data = new GlideRecord('x_540166_apl_team_table');
+	team_data.addQuery('sys_id', tid);
+	team_data.query();
+	while(team_data.next())
+	{
+		data.t_purse = team_data.getValue('team_purse');	
+	}
+
+////////////////////////////////////////////////////////////////////
+	
+	var id;
+	var player_ids=[];
+	var myTable = new GlideRecord('x_540166_apl_apl_player_table');
+	myTable.addQuery('u_active', true);
+	myTable.orderBy('number');
+	myTable.query();
+
+	while(myTable.next()) {
+		player_ids.push(myTable.getValue('sys_id'));
+	}
+	id = player_ids[player_ids.length-1];
+	
+/////////////////////////////////////////////////////////////////////
+	
+	// fetch record for that player
+	var gr = new GlideRecord("x_540166_apl_apl_player_table");
+	gr.addQuery('sys_id', id);
+	gr.orderBy('number');
+	gr.query(); 
+
+	data.list = [];
+	var obj = {};
+
+	while(gr.next()) {
+		//data.obj = {};
+		obj.sysid = gr.getValue('sys_id');
+		obj.number = gr.getValue('number');
+		obj.name = gr.getValue('u_name');
+		obj.player_image = gr.getValue('player_image');
+		obj.age = gr.getValue('u_age');
+		obj.category = gr.getValue('u_category');
+		obj.value = gr.getValue('u_value');
+		obj.interested = gr.getValue('interested');
+	} 
+
+///////////////////////////////////////////////////////////////////////
+	
+	// fetch stats for that player
+	var stat = new GlideRecord("x_540166_apl_player_stats");
+	stat.addQuery('u_reference_15', id);
+	stat.query();
+	while(stat.next()) {
+		obj.matches = stat.getValue('u_matches_1');
+		obj.innings = stat.getValue('u_innings_3');
+		obj.runs = stat.getValue('u_runs_2');
+		obj.strike_rate = stat.getValue('u_sr_7');
+		obj.fifties = stat.getValue('u_fifties_10');
+		obj.centuries = stat.getValue('u_centuries_9');
+		obj.wickets = stat.getValue('u_wickets_4');
+		obj.three_wicket = stat.getValue('u_3wh_15');
+		obj.five_wicket = stat.getValue('u_integer_11');
+		obj.average = stat.getValue('u_avg_5');
+		obj.highest_score = stat.getValue('u_high_14');
+		obj.bowling_best_fig = stat.getValue('u_bestbowl_12');
+		data.list.push(obj);
+	}
+
+///////////////////////////////////////////////////////////////////////
+
+	var bid_table= new GlideRecord('x_540166_apl_apl_bidlog_table');
+	bid_table.orderByDesc('number');
+	bid_table.query();
+	data.bid_count = bid_table.getRowCount();
+
+///////////////////////////////////////////////////////////////////////	
+
+	if(input) {
+		if(input.action == "bid"){
+			var player = new GlideRecord('x_540166_apl_apl_player_table');
+			player.addQuery('sys_id', id);
+			player.query();
+			var a = gr.getValue('u_name');
+			if (player.next()) {
+				player.setValue('u_value', input.newValue);
+				player.update();
+			}
+			var bidlog = new GlideRecord('x_540166_apl_apl_bidlog_table');
+			bidlog.initialize();
+			bidlog.setValue('current_profile_pic', obj.player_image);
+			bidlog.setValue('u_reference_1', input.team_id);
+			bidlog.setValue('u_current_bid', input.newValue);
+			bidlog.insert();
+		}
+		else if (input.action=="giveup"){
+			var team = new GlideRecord('x_540166_apl_team_table');
+			team.addQuery('sys_id', input.team_id);
+			team.query();
+			if (team.next()) {
+				team.setValue('interested', false);
+				team.update();
+			}
+		}
+		else if(input.action=="sold" && input.sold_flag)
+		{
+			console.log("inside sold block");
+			var team_purse, no_players, last_bid, team_name;
+			var open_bid_data = new GlideRecord('x_540166_apl_apl_bidlog_table');
+			open_bid_data.orderByDesc('number');
+			open_bid_data.query();
+			if(open_bid_data.next())
+			{
+				last_bid = open_bid_data.getValue('u_current_bid');
+				team_name = open_bid_data.getValue('u_reference_1');
+				open_bid_data.deleteRecord();
+			}
+			while(open_bid_data.next())
+			{
+				console.log("entered in deleting");
+				open_bid_data.deleteRecord();
+			}
+			
+			
+			var open_team_data = new GlideRecord('x_540166_apl_team_table');
+			open_team_data.query();
+			while(open_team_data.next())
+			{
+				open_team_data.setValue('interested', true);
+				console.log("reached in setting team table");
+				var test_id = open_team_data.getValue('sys_id');
+				if(test_id == input.won_team)
+				{
+					console.log("reached with equal sys id")
+					team_purse = open_team_data.getValue('team_purse');
+					no_players = open_team_data.getValue('team_players');
+					open_team_data.setValue('team_purse', (parseInt(team_purse)-parseInt(last_bid)));
+					open_team_data.setValue('team_players', (parseInt(no_players)+parseInt(1)));
+				}
+				open_team_data.update();
+			}
+
+
+			var set_player_data = new GlideRecord('x_540166_apl_apl_player_table');
+			set_player_data.addQuery('sys_id', id);
+			set_player_data.query();
+			if(set_player_data.next())
+			{
+				console.log("nationality yet to update");
+				set_player_data.setValue('u_status', 'sold');
+				console.log("nationality updated");
+				set_player_data.setValue('u_team_name', team_name);
+				set_player_data.setValue('u_active', false);
+				set_player_data.update();
+			}
+			console.log("sold block finished");
+		}
+		else if(input.action=="unsold")
+		{
+			var unsold_player_data = new GlideRecord('x_540166_apl_apl_player_table');
+			unsold_player_data.addQuery('sys_id', input.playerid);
+			unsold_player_data.query();
+			console.log("outside unsold");
+			if(unsold_player_data.next())
+			{
+				console.log("inside unsold");
+				unsold_player_data.setValue('u_active', false);
+				unsold_player_data.update();
+			}
+			var unsold_open_team_data = new GlideRecord('x_540166_apl_team_table');
+			unsold_open_team_data.query();
+			while(unsold_open_team_data.next())
+			{
+				unsold_open_team_data.setValue('interested', true);
+				unsold_open_team_data.update();
+			}
+			console.log("reached hereeeeeeeee");
+		}
+	}
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>harshraj</sys_created_by>
+        <sys_created_on>2024-02-15 06:18:55</sys_created_on>
+        <sys_id>0ed228f6475002100e63e481e36d43bf</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>h_apl_player_card</sys_name>
+        <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+        <sys_update_name>sp_widget_0ed228f6475002100e63e481e36d43bf</sys_update_name>
+        <sys_updated_by>harshraj</sys_updated_by>
+        <sys_updated_on>2024-02-20 03:39:42</sys_updated_on>
+        <template><![CDATA[<div ng-repeat="player in data.list">
+  <div class="player-card">
+    <div class="first-row">
+      <div class="container1">
+        <img ng-src="{{ ::player.player_image + '.iix' }}" alt="Player Image" class="img-fluid">
+      </div>
+      <div class="container2">
+        <h2>{{ player.name }}</h2>
+        <p>Age: {{ player.age }}</p>
+      </div>
+      <div class="container3">
+        <p>Price: {{ player.value }}</p>
+      </div>
+    </div>
+    <div class="second-row">
+      <div class="container4">
+        <p>Matches: {{ player.matches }}</p>
+        <p>Runs: {{ player.runs }}</p>
+        <p>Wickets: {{ player.wickets }}</p>
+        <p>Average: {{ player.average }}</p>
+        <p>Category: {{ player.category }}</p>
+      </div>
+      <div class="container5" ng-show="c.btn_show">
+        <div class="twobut">
+          <button ng-click="c.placeBid(player)">
+            Bid
+          </button>
+          <!--<button ng-click="passOnBid(player)">Pass</button>-->
+        </div>
+        <button ng-click="c.giveup(player)">
+          Give up
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+]]></template>
+    </sp_widget>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="APL ">3c7b4b44471002100e63e481e36d43e5</application>
+        <file_path/>
+        <instance_id>757a8d15db46b998199b1729139619ab</instance_id>
+        <instance_name>dev192681</instance_name>
+        <name>sp_widget_0ed228f6475002100e63e481e36d43bf</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_widget"&gt;&lt;sp_widget action="INSERT_OR_UPDATE"&gt;&lt;category&gt;custom&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[api.controller=function($scope, spUtil, spModal) {
+	/* widget controller */
+	var c = this;
+	
+	var all_team_array=JSON.parse(localStorage.getItem('teams_list'));
+	var give_up_array=JSON.parse(localStorage.getItem('give_up_list'));
+	var team_id=localStorage.getItem('user_id');
+	var it=localStorage.getItem('it');
+	var player_id=c.data.list[0].sysid;
+	
+	if(all_team_array[(it+parseInt(1))%parseInt(all_team_array.length)] == give_up_array[it]){
+		spUtil.addTrivialMessage("Previous team has given up for this player");	
+	}
+	
+	c.btn_show=false;
+	c.more_bidders=true;
+	
+	c.last_giveup=false;
+	
+	/*
+	if (team_id == give_up_array[it]) {
+		var a = c.data.t_purse;
+		var b= parseInt(c.data.list[0].value) + parseInt("500");
+		console.log(a + " " + b);
+		if(a-b &lt; 0) {
+			console.log("reached inside");
+			c.data.team_id = team_id;
+			c.data.action = "giveup";
+			c.server.update();
+			console.log("reached outside");
+			
+		}	
+	}
+	*/
+		 
+/*
+	// timeout logic 
+	if (give_up_array[it]==team_id) {
+		setTimeout(
+			function timeout_func(){
+			c.data.team_id = team_id;
+			c.data.action = "giveup";
+			c.server.update();
+			}, 
+			15000);
+	}
+*/
+	
+	if(give_up_array.length==1)
+	{
+		console.log("111");
+		if(c.data.bid_count==0 &amp;&amp; give_up_array[it]==team_id) 
+		{
+			console.log("222");
+			c.last_giveup=true;
+			c.btn_show=true;
+			
+			//setTimeout(timeout_func(), 15000);
+		}
+		else if(c.data.bid_count!=0 &amp;&amp; give_up_array[it]==team_id)
+		{
+			c.btn_show=false;
+			c.more_bidders=false;
+			console.log("soldddd to last one");
+			sold_func();
+		}
+		else if(c.data.bid_count==1 &amp; give_up_array.length==1)
+		{
+			sold_func();
+		}
+	}
+	else if(give_up_array[it]==team_id &amp;&amp; c.more_bidders)
+	{
+		c.btn_show=true;
+		//setTimeout(timeout_func(), 15000);
+	}
+	/*else if(give_up_array.length==0){
+		unsold_func();
+	}*/
+
+
+	// sold implementation 
+	function sold_func()
+	{
+		c.data.action = "sold";
+		c.data.won_team=give_up_array[0];
+		c.data.t_id=team_id;
+		c.data.sold_flag=false;
+		if(c.data.won_team == c.data.t_id)
+		{
+			c.data.sold_flag=true;
+			console.log("flag true");
+
+		}
+		c.server.update().then(function(r){
+			console.log("give up array not updated");
+			localStorage.setItem("give_up_list", JSON.stringify(all_team_array));
+			console.log("give up array updated");
+			window.location.reload();
+		});
+	}
+	
+	function unsold_func(){
+		c.data.playerid=player_id;
+		c.data.action = "unsold";
+		c.server.update().then(function(r){
+			console.log("unsold give up array not updated");
+			localStorage.setItem("give_up_list", JSON.stringify(all_team_array));
+			console.log("unsold give up array updated");
+		});
+	}
+
+	// recordWatch() for bid
+	spUtil.recordWatch($scope, "x_540166_apl_apl_bidlog_table", "numberISNOTEMPTY", function(name) {
+		localStorage.setItem('it',(parseInt(it)+parseInt(1))%give_up_array.length);
+		window.location.reload();
+	});
+
+	// recordWatch() for giveup
+	spUtil.recordWatch($scope, "x_540166_apl_team_table", "", function(name) { //numberISNOTEMPTY
+		var newArray = [];
+		// new addition
+		if (give_up_array.length == 0) {
+			localStorage.setItem("give_up_list", JSON.stringify(all_team_array));
+		}
+		
+		if (it == give_up_array.length-2) {
+			newArray = give_up_array.slice(0, it);
+			newArray.push(give_up_array[give_up_array.length - 1]);
+			localStorage.setItem('it', (parseInt(it)%give_up_array.length));
+
+		}
+		else if (it == give_up_array.length-1) {
+			newArray = give_up_array.slice(0, parseInt(it));
+			localStorage.setItem('it', parseInt("0"))
+		}
+		else{
+			newArray = give_up_array.slice(0, it).concat(give_up_array.slice(parseInt(it)+parseInt(1)));
+			localStorage.setItem('it', (parseInt(it)%give_up_array.length));
+		}
+		localStorage.setItem('give_up_list', JSON.stringify(newArray));
+		
+		if(give_up_list.length == 0){
+			unsold_func();
+		}
+		window.location.reload();
+	});
+
+	c.placeBid = function() {
+		c.data.newValue = parseInt(c.data.list[0].value) + parseInt("500");
+		c.data.team_id = team_id;
+		c.data.action = "bid";
+		c.server.update();
+	}
+	
+	c.giveup = function() {
+		/*
+		if(c.last_giveup){
+			unsold_func();
+		}
+		
+		else{}
+		*/
+			c.data.team_id = team_id;
+			c.data.action = "giveup";
+			c.server.update();
+	}
+};]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css&gt;/* Player Card Container */
+.player-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Increased vertical spacing between containers */
+  padding: 15px; /* Increased padding for the card */
+  border: 2px solid #ddd; /* Add a subtle border */
+  border-radius: 10px; /* Add rounded corners */
+  
+}
+
+/* First Row (30%) */
+.player-card .first-row {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 30%;
+  gap: 15px; /* Increased spacing between containers in the first row */
+}
+
+/* Container 1 - Player Profile Pic */
+.first-row .container1 {
+  flex: 30%;
+  position: relative; /* Added position relative for positioning the overlay text */
+  overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+}
+
+/* Fixed size for images based on container1 size */
+.container1 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Adjust the object-fit property as needed */
+  border-radius: 10px; /* Add rounded corners to the image */
+  
+}
+
+/* Overlay text for image */
+.container1 .overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 16px; /* Adjust the font size of the overlay text */
+}
+
+/* Container 2 - Player Name and Age */
+.first-row .container2 {
+  flex: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px; /* Adjust the font size for player name and age */
+   overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+}
+
+/* Container 3 - Base Price */
+.first-row .container3 {
+  flex: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px; /* Adjust the font size for base price */
+   overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+  color: #007965;
+}
+
+/* Second Row (70%) */
+.player-card .second-row {
+  display: flex;
+  height: 70%;
+  gap: 15px; /* Increased spacing between containers in the second row */
+}
+
+/* Container 4 - Other Statistics */
+.second-row .container4 {
+  flex: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px; /* Adjust the font size for statistics */
+   overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+}
+
+/* Container 5 - Buttons (Bid, Pass, Give Up) */
+.second-row .container5 {
+  flex: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+   overflow: hidden; /* Hide overflow for rounded corners */
+  border: 2px solid #ddd; /* Add a border to container1 */
+  border-radius: 10px; /* Add rounded corners */
+  align-items: center;
+  
+}
+
+/* Styling for Buttons */
+.container5 button {
+  margin: 9px; /* Increased margin for buttons */
+  padding: 15px; /* Increased padding for buttons */
+  font-size: 16px; /* Adjust the font size for buttons */
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px; /* Add rounded corners to buttons */
+  background-color: #00AF91;
+}
+
+
+
+.container5 button:hover {
+  background-color: #2980b9;
+  
+}
+&lt;/css&gt;&lt;data_table&gt;sp_instance&lt;/data_table&gt;&lt;demo_data/&gt;&lt;description/&gt;&lt;docs/&gt;&lt;field_list/&gt;&lt;has_preview&gt;true&lt;/has_preview&gt;&lt;id&gt;h_apl_player_card&lt;/id&gt;&lt;internal&gt;false&lt;/internal&gt;&lt;link&gt;&lt;![CDATA[function link(scope, element, attrs, controller) {  }]]&gt;&lt;/link&gt;&lt;name&gt;h_apl_player_card&lt;/name&gt;&lt;option_schema/&gt;&lt;public&gt;false&lt;/public&gt;&lt;roles/&gt;&lt;script&gt;&lt;![CDATA[(function() {
+	/* populate the 'data' object */
+	/* e.g., data.table = $sp.getValue('table'); */
+	
+	var tid = $sp.getParameter('team_id');
+	var team_data = new GlideRecord('x_540166_apl_team_table');
+	team_data.addQuery('sys_id', tid);
+	team_data.query();
+	while(team_data.next())
+	{
+		data.t_purse = team_data.getValue('team_purse');	
+	}
+
+////////////////////////////////////////////////////////////////////
+	
+	var id;
+	var player_ids=[];
+	var myTable = new GlideRecord('x_540166_apl_apl_player_table');
+	myTable.addQuery('u_active', true);
+	myTable.orderBy('number');
+	myTable.query();
+
+	while(myTable.next()) {
+		player_ids.push(myTable.getValue('sys_id'));
+	}
+	id = player_ids[player_ids.length-1];
+	
+/////////////////////////////////////////////////////////////////////
+	
+	// fetch record for that player
+	var gr = new GlideRecord("x_540166_apl_apl_player_table");
+	gr.addQuery('sys_id', id);
+	gr.orderBy('number');
+	gr.query(); 
+
+	data.list = [];
+	var obj = {};
+
+	while(gr.next()) {
+		//data.obj = {};
+		obj.sysid = gr.getValue('sys_id');
+		obj.number = gr.getValue('number');
+		obj.name = gr.getValue('u_name');
+		obj.player_image = gr.getValue('player_image');
+		obj.age = gr.getValue('u_age');
+		obj.category = gr.getValue('u_category');
+		obj.value = gr.getValue('u_value');
+		obj.interested = gr.getValue('interested');
+	} 
+
+///////////////////////////////////////////////////////////////////////
+	
+	// fetch stats for that player
+	var stat = new GlideRecord("x_540166_apl_player_stats");
+	stat.addQuery('u_reference_15', id);
+	stat.query();
+	while(stat.next()) {
+		obj.matches = stat.getValue('u_matches_1');
+		obj.innings = stat.getValue('u_innings_3');
+		obj.runs = stat.getValue('u_runs_2');
+		obj.strike_rate = stat.getValue('u_sr_7');
+		obj.fifties = stat.getValue('u_fifties_10');
+		obj.centuries = stat.getValue('u_centuries_9');
+		obj.wickets = stat.getValue('u_wickets_4');
+		obj.three_wicket = stat.getValue('u_3wh_15');
+		obj.five_wicket = stat.getValue('u_integer_11');
+		obj.average = stat.getValue('u_avg_5');
+		obj.highest_score = stat.getValue('u_high_14');
+		obj.bowling_best_fig = stat.getValue('u_bestbowl_12');
+		data.list.push(obj);
+	}
+
+///////////////////////////////////////////////////////////////////////
+
+	var bid_table= new GlideRecord('x_540166_apl_apl_bidlog_table');
+	bid_table.orderByDesc('number');
+	bid_table.query();
+	data.bid_count = bid_table.getRowCount();
+
+///////////////////////////////////////////////////////////////////////	
+
+	if(input) {
+		if(input.action == "bid"){
+			var player = new GlideRecord('x_540166_apl_apl_player_table');
+			player.addQuery('sys_id', id);
+			player.query();
+			var a = gr.getValue('u_name');
+			if (player.next()) {
+				player.setValue('u_value', input.newValue);
+				player.update();
+			}
+			var bidlog = new GlideRecord('x_540166_apl_apl_bidlog_table');
+			bidlog.initialize();
+			bidlog.setValue('current_profile_pic', obj.player_image);
+			bidlog.setValue('u_reference_1', input.team_id);
+			bidlog.setValue('u_current_bid', input.newValue);
+			bidlog.insert();
+		}
+		else if (input.action=="giveup"){
+			var team = new GlideRecord('x_540166_apl_team_table');
+			team.addQuery('sys_id', input.team_id);
+			team.query();
+			if (team.next()) {
+				team.setValue('interested', false);
+				team.update();
+			}
+		}
+		else if(input.action=="sold" &amp;&amp; input.sold_flag)
+		{
+			console.log("inside sold block");
+			var team_purse, no_players, last_bid, team_name;
+			var open_bid_data = new GlideRecord('x_540166_apl_apl_bidlog_table');
+			open_bid_data.orderByDesc('number');
+			open_bid_data.query();
+			if(open_bid_data.next())
+			{
+				last_bid = open_bid_data.getValue('u_current_bid');
+				team_name = open_bid_data.getValue('u_reference_1');
+				open_bid_data.deleteRecord();
+			}
+			while(open_bid_data.next())
+			{
+				console.log("entered in deleting");
+				open_bid_data.deleteRecord();
+			}
+			
+			
+			var open_team_data = new GlideRecord('x_540166_apl_team_table');
+			open_team_data.query();
+			while(open_team_data.next())
+			{
+				open_team_data.setValue('interested', true);
+				console.log("reached in setting team table");
+				var test_id = open_team_data.getValue('sys_id');
+				if(test_id == input.won_team)
+				{
+					console.log("reached with equal sys id")
+					team_purse = open_team_data.getValue('team_purse');
+					no_players = open_team_data.getValue('team_players');
+					open_team_data.setValue('team_purse', (parseInt(team_purse)-parseInt(last_bid)));
+					open_team_data.setValue('team_players', (parseInt(no_players)+parseInt(1)));
+				}
+				open_team_data.update();
+			}
+
+
+			var set_player_data = new GlideRecord('x_540166_apl_apl_player_table');
+			set_player_data.addQuery('sys_id', id);
+			set_player_data.query();
+			if(set_player_data.next())
+			{
+				console.log("nationality yet to update");
+				set_player_data.setValue('u_status', 'sold');
+				console.log("nationality updated");
+				set_player_data.setValue('u_team_name', team_name);
+				set_player_data.setValue('u_active', false);
+				set_player_data.update();
+			}
+			console.log("sold block finished");
+		}
+		else if(input.action=="unsold")
+		{
+			var unsold_player_data = new GlideRecord('x_540166_apl_apl_player_table');
+			unsold_player_data.addQuery('sys_id', input.playerid);
+			unsold_player_data.query();
+			console.log("outside unsold");
+			if(unsold_player_data.next())
+			{
+				console.log("inside unsold");
+				unsold_player_data.setValue('u_active', false);
+				unsold_player_data.update();
+			}
+			var unsold_open_team_data = new GlideRecord('x_540166_apl_team_table');
+			unsold_open_team_data.query();
+			while(unsold_open_team_data.next())
+			{
+				unsold_open_team_data.setValue('interested', true);
+				unsold_open_team_data.update();
+			}
+			console.log("reached hereeeeeeeee");
+		}
+	}
+})();]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;harshraj&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2024-02-15 06:18:55&lt;/sys_created_on&gt;&lt;sys_id&gt;0ed228f6475002100e63e481e36d43bf&lt;/sys_id&gt;&lt;sys_mod_count&gt;6&lt;/sys_mod_count&gt;&lt;sys_name&gt;h_apl_player_card&lt;/sys_name&gt;&lt;sys_package display_value="APL " source="x_540166_apl"&gt;3c7b4b44471002100e63e481e36d43e5&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="APL "&gt;3c7b4b44471002100e63e481e36d43e5&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_0ed228f6475002100e63e481e36d43bf&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;harshraj&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2024-02-20 03:39:42&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;div ng-repeat="player in data.list"&gt;
+  &lt;div class="player-card"&gt;
+    &lt;div class="first-row"&gt;
+      &lt;div class="container1"&gt;
+        &lt;img ng-src="{{ ::player.player_image + '.iix' }}" alt="Player Image" class="img-fluid"&gt;
+      &lt;/div&gt;
+      &lt;div class="container2"&gt;
+        &lt;h2&gt;{{ player.name }}&lt;/h2&gt;
+        &lt;p&gt;Age: {{ player.age }}&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="container3"&gt;
+        &lt;p&gt;Price: {{ player.value }}&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="second-row"&gt;
+      &lt;div class="container4"&gt;
+        &lt;p&gt;Matches: {{ player.matches }}&lt;/p&gt;
+        &lt;p&gt;Runs: {{ player.runs }}&lt;/p&gt;
+        &lt;p&gt;Wickets: {{ player.wickets }}&lt;/p&gt;
+        &lt;p&gt;Average: {{ player.average }}&lt;/p&gt;
+        &lt;p&gt;Category: {{ player.category }}&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="container5" ng-show="c.btn_show"&gt;
+        &lt;div class="twobut"&gt;
+          &lt;button ng-click="c.placeBid(player)"&gt;
+            Bid
+          &lt;/button&gt;
+          &lt;!--&lt;button ng-click="passOnBid(player)"&gt;Pass&lt;/button&gt;--&gt;
+        &lt;/div&gt;
+        &lt;button ng-click="c.giveup(player)"&gt;
+          Give up
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+]]&gt;&lt;/template&gt;&lt;/sp_widget&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-1406462049</payload_hash>
+        <record_name>h_apl_player_card</record_name>
+        <reverted_from/>
+        <source>daa581fa47d002100e63e481e36d43fe</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>harshraj</sys_created_by>
+        <sys_created_on>2024-02-20 03:39:42</sys_created_on>
+        <sys_id>725ea11847a042100e63e481e36d43e6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18dc49912020000001</sys_recorded_at>
+        <sys_updated_by>harshraj</sys_updated_by>
+        <sys_updated_on>2024-02-20 03:39:42</sys_updated_on>
+        <type>Widget</type>
+        <update_guid>3a5ea1182ca04210dd587f37e24844e5</update_guid>
+        <update_guid_history>3a5ea1182ca04210dd587f37e24844e5:-1406462049,8dbde5d8d7a04210f4c525feddb17b99:1412379664,d669ad14eba04210f8137d584e6a3ac7:-369172834,189fe0762e90021062de663f99483fd3:812060051,83da2032869002106298563c3389c187:-2029016828,f36a68fe4c500210672a500e313f0ec4:33643337,02d228f60c500210bf48928f3f95a0c1:-2139023614</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="h_apl_player_card">84390a54472442100e63e481e36d43b0</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>harshraj</sys_created_by>
+        <sys_created_on>2024-02-20 05:36:56</sys_created_on>
+        <sys_db_object display_value="" name="sp_widget">sp_widget</sys_db_object>
+        <sys_id>0a34b0c1f85b43518549025cc8466d41</sys_id>
+        <sys_metadata>0ed228f6475002100e63e481e36d43bf</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>h_apl_player_card</sys_name>
+        <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+        <sys_scope_delete display_value="">34d45e9f175a49329ec1bf71207ab644</sys_scope_delete>
+        <sys_update_name>sp_widget_0ed228f6475002100e63e481e36d43bf</sys_update_name>
+        <sys_update_version display_value="sp_widget_0ed228f6475002100e63e481e36d43bf">725ea11847a042100e63e481e36d43e6</sys_update_version>
+        <sys_updated_by>harshraj</sys_updated_by>
+        <sys_updated_on>2024-02-20 05:36:56</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

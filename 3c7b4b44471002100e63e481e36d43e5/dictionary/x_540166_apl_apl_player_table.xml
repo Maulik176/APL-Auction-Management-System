@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element db_object_id="4c12dfc8471002100e63e481e36d4342" label="APL player table" max_length="40" name="x_540166_apl_apl_player_table" type="collection">
+        <element display="true" label="Category Image" max_length="40" name="category_image" type="user_image"/>
+        <element default="0" label="Interested" max_length="40" name="interested" type="integer"/>
+        <element label="Intrested" mandatory="true" max_length="40" name="intrested" type="integer"/>
         <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
         <element attributes="pdf_cell_type=image" label="Player Image" max_length="40" name="player_image" type="user_image"/>
         <element default="javascript:current.getTableName();" label="Class" max_length="80" name="sys_class_name" type="sys_class_name"/>
+        <element default="true" label="Active" max_length="40" name="u_active" type="boolean"/>
         <element label="Age" mandatory="true" max_length="40" name="u_age" type="integer"/>
+        <element default="5000" label="Base Price" max_length="40" name="u_base_price" read_only="true" type="integer"/>
         <element attributes="edge_encryption_enabled=true" choice="3" default="batsman" label="Category" mandatory="true" max_length="40" name="u_category" type="string">
             <choice>
                 <element inactive_on_update="false" label="Batsman" sequence="0" value="batsman"/>
@@ -24,7 +29,7 @@
                 <element inactive_on_update="false" label="Unsold" sequence="1" value="unsold"/>
             </choice>
         </element>
-        <element attributes="encode_utf8=false" default="a75cd708475002100e63e481e36d435d" label="Team Name" mandatory="true" max_length="32" name="u_team_name" reference="x_540166_apl_team_table" type="reference"/>
+        <element attributes="encode_utf8=false" label="Team Name" max_length="32" name="u_team_name" reference="x_540166_apl_team_table" type="reference"/>
         <element label="Value" max_length="40" name="u_value" type="integer"/>
         <index name="index">
             <element name="sys_class_name"/>

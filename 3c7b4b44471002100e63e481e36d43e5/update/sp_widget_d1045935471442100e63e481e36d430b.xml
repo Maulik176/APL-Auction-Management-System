@@ -5,6 +5,7 @@
 api.controller = function ($scope, $http) {
   var c = this;
 	c.server.update();
+/*
 
     c.currentPage = 0;
 
@@ -30,12 +31,41 @@ api.controller = function ($scope, $http) {
         var pageSize = 5;
         return c.currentPage * pageSize;
     };
+		
+*/
 };
 ]]></client_script>
         <controller_as>c</controller_as>
         <css>/* CSS for Bid Cards */
+*{
+  font-family: 'Poppins', sans-serif;
+}
+.scrollable-container {
+  width: 100%;
+  height: 790px; /* Set your desired height */
+  overflow: auto; 
+  border: 5px solid #007965;
+   background-color: #ecf0f1;
+  border-radius: 10px;
+}
+
 .container-fluid {
-  padding: 10px; /* Add padding for better spacing */
+  /*padding: 10px;  Add padding for better spacing */
+}
+
+
+.scrollable-container .header-container {
+  width: 100%;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.header-container{
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  background-color: #007965;
+  color: #fff;
 }
 
 .bid-card {
@@ -44,20 +74,23 @@ api.controller = function ($scope, $http) {
   border: 2px solid #ddd;
   border-radius: 1px;
   margin-bottom: 5px; /* Decrease spacing between cards */
-  overflow: hidden;
+  overflow: visible;
   transition: transform 0.3s ease;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  
 }
 
 /*.bid-card:hover {
-  transform: scale(1.05); /* Enlarge the card on hover */
-}
+  transform: scale(1.05); /* Enlarge the card on hover 
+}*/
 
 
 .bid-card img {
-  width: 80px; /* Decrease image width */
-  height: 80px; /* Decrease image height */
+  width: 80px; 
+  height: 80px; 
   object-fit: cover;
-  border-radius: 50%; /* Make images rounded */
+  border-radius: 50%; 
 }
 
 .bid-card h2 {
@@ -98,7 +131,6 @@ button:hover {
   background-color: #005c4f; /* Darken the background on hover */
 }
 
-/* Optional: Add more styles as needed for a polished look */
 </css>
         <data_table>sp_instance</data_table>
         <demo_data/>
@@ -142,16 +174,26 @@ button:hover {
         <sys_created_by>maulik</sys_created_by>
         <sys_created_on>2024-02-12 07:19:50</sys_created_on>
         <sys_id>d1045935471442100e63e481e36d430b</sys_id>
-        <sys_mod_count>31</sys_mod_count>
+        <sys_mod_count>121</sys_mod_count>
         <sys_name>APL Bidlog List</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
         <sys_update_name>sp_widget_d1045935471442100e63e481e36d430b</sys_update_name>
         <sys_updated_by>maulik</sys_updated_by>
-        <sys_updated_on>2024-02-13 11:13:23</sys_updated_on>
-        <template><![CDATA[<div class="container-fluid">
-    <div class="row bid-card" ng-repeat="bid in c.data.bids | limitTo: 5 : c.getStartIndex()">
+        <sys_updated_on>2024-02-22 08:55:03</sys_updated_on>
+        <template><![CDATA[<html>
+  <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+<div class="scrollable-container">
+  <div class="header-container">
+    <i class="fa fa-id-card-o" style="margin-top: 10px; font-size:30px"></i>
+    <p style="margin-top: 3px; font-size:30px">Bid Tracker</p>
+      </div>
+  <div class="container-fluid">
+   
+    <div class="row bid-card" ng-repeat="bid in c.data.bids ">
         <div class="col-md-4">
             <img ng-src="{{::bid.playerImage + '.iix'}}" alt="Player Pic" class="img-fluid" style="max-height: 100px;">
         </div>
@@ -159,14 +201,11 @@ button:hover {
             <h2 class="team-name">{{bid.teamName}}</h2>
         </div>
         <div class="col-md-4 team-info">
-            <p>Current Bid: {{bid.teamBid}}$</p>
+            <p>Current Bid: ₹{{bid.teamBid}}</p>
         </div>
     </div>
-  <div class="text-center">
-        <button ng-click="c.showPrevious()">Previous</button>
-        <button ng-click="c.showNext()">Next</button>
-    </div>
 </div>
-]]></template>
+  </div>
+</html>]]></template>
     </sp_widget>
 </record_update>

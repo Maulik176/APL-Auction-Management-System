@@ -5,13 +5,15 @@
   /* widget controller */
   var c = this;
 	c.submit=function(){
-		c.data.temp1=c.tname;
-		c.data.temp2=c.tpass;
-		c.data.temp3=c.oname;
-		c.data.temp4=c.cname;
-		c.data.temp5=10000;
-		c.data.temp6=0;
-		c.server.update();
+		c.data.temp1=c.pname;
+		c.data.temp2=c.pcategory;
+		c.data.temp3=c.pnationality;
+		c.data.temp4=c.active;
+		c.data.temp5="unsold";
+		c.data.temp6=5000;
+		c.server.update().then(function(){
+			window.location.reload();
+		});
 	}
 };]]></client_script>
         <controller_as>c</controller_as>
@@ -45,17 +47,22 @@ h2 {
 
 label {
   display: block;
-  margin-bottom: 5px;
   font-weight:bold;
   color: #fff;
 }
 
 input[type="text"],
-input[type="password"],
 input[type="number"] {
   width: 100%;
   padding: 10px;
-  margin-top: 5px; 
+  border-radius: 5px;
+  border: 1px solid #ccc; 
+  box-sizing: border-box;
+}
+
+#status{
+	width: 100%;
+  padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc; 
   box-sizing: border-box;
@@ -83,10 +90,10 @@ button:hover {
         <docs/>
         <field_list/>
         <has_preview>true</has_preview>
-        <id>apl_reg_page</id>
+        <id>apl_add_player</id>
         <internal>false</internal>
         <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
-        <name>apl_reg_page</name>
+        <name>apl_add_player</name>
         <option_schema/>
         <public>false</public>
         <roles/>
@@ -94,59 +101,53 @@ button:hover {
   /* populate the 'data' object */
   /* e.g., data.table = $sp.getValue('table'); */
 	
-	var gr= new GlideRecord('x_540166_apl_team_table');
+	var gr= new GlideRecord('x_540166_apl_apl_player_table');
 	gr.initialize();
 	if(input)
 	{
-		gr.setValue('team_name',input.temp1);
-		gr.setValue('password',input.temp2);
-		gr.setValue('owner_name',input.temp3);
-		gr.setValue('coach_name',input.temp4);
-		gr.setValue('team_purse',input.temp5);
-		gr.setValue('team_players',input.temp6);
+		gr.setValue('u_name',input.temp1);
+		gr.setValue('u_category',input.temp2);
+		gr.setValue('u_nationality',input.temp3);
+		gr.setValue('u_active',input.temp4);
+		gr.setValue('u_status',input.temp5);
+		gr.setValue('u_value',input.temp6);
 		gr.insert();
 	}
 })();]]></script>
         <servicenow>false</servicenow>
         <sys_class_name>sp_widget</sys_class_name>
         <sys_created_by>harshraj</sys_created_by>
-        <sys_created_on>2024-02-08 05:52:45</sys_created_on>
-        <sys_id>f2b9d46c471002100e63e481e36d4396</sys_id>
-        <sys_mod_count>80</sys_mod_count>
-        <sys_name>apl_reg_page</sys_name>
+        <sys_created_on>2024-02-21 09:06:24</sys_created_on>
+        <sys_id>82b2c43c47a882100e63e481e36d43b1</sys_id>
+        <sys_mod_count>29</sys_mod_count>
+        <sys_name>apl_add_player</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
-        <sys_update_name>sp_widget_f2b9d46c471002100e63e481e36d4396</sys_update_name>
-        <sys_updated_by>maulik</sys_updated_by>
-        <sys_updated_on>2024-02-22 06:02:22</sys_updated_on>
+        <sys_update_name>sp_widget_82b2c43c47a882100e63e481e36d43b1</sys_update_name>
+        <sys_updated_by>harshraj</sys_updated_by>
+        <sys_updated_on>2024-02-21 10:23:41</sys_updated_on>
         <template><![CDATA[<div class="container">
-  <h2>Team Registration Form</h2>
-  <form action="#">
-    <div class="form-group">
-      <label for="teamName">Team Name:</label>
-      <input type="text" id="teamName" name="teamName" ng-model="c.tname" required>
-    </div>
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" ng-model="c.tpass" required>
-      </div>
-    <div class="form-group">
-      <label for="teamOwner">Team Owner's Name:</label>
-      <input type="text" id="teamOwner" name="teamOwner" ng-model="c.oname" required>
-    </div>
-    <div class="form-group">
-      <label for="teamCoach">Team Coach Name:</label>
-      <input type="text" id="teamCoach" name="teamCoach" ng-model="c.cname" required>
-    </div>
-    <div class="form-group">
-      <label for="teamPurse">Team Purse ₹(default):</label>
-      <input type="text" id="teamPurse" name="teamPurse" value=10,000 readonly>
-    </div>
-    <div class="form-group">
-      <label for="numPlayers">No. Of Players (default):</label>
-      <input type="number" id="numPlayers" name="numPlayers" value="0" readonly>
-    </div>
+ <h2>Add New Player</h2>
+  <form action="add_player.php" method="POST">
+    <label for="player_name">Player Name:</label>
+    <input type="text" id="player_name" name="player_name" ng-model="c.pname" required><br><br>
+
+    <label for="category">Category:</label>
+    <input type="text" id="category" name="category" ng-model="c.pcategory" required><br><br>
+
+    <label for="nationality">Nationality:</label>
+    <input type="text" id="nationality" name="nationality" ng-model="c.pnationality" required><br><br>
+
+    <label for="active">Active:</label>
+    <input type="checkbox" id="active" name="active" value="1" ng-model="c.active"><br><br>
+
+    <label for="status">Status:</label>
+    <input type="text" id="status" name="status" placeholder="Unsold" value="Unsold" ng-model="c.status" required readonly><br><br>
+
+    <label for="base_value">Base Value:</label>
+    <input type="number" id="base_value" name="base_value" placeholder="5000" value="5000" ng-model="c.basevalue" required readonly><br><br>
+
     <button type="submit" ng-click="c.submit()">Submit</button>
   </form>
 </div>]]></template>

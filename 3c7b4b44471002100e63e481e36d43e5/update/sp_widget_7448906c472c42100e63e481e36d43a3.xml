@@ -3,20 +3,9 @@
         <category>custom</category>
         <client_script><![CDATA[api.controller=function($scope, spUtil, spModal) {
 	/* widget controller */
-	var c = this;
-	
-	if(c.data.endFlag){
-		spModal.confirm("Auction is finished. Please click OK").then(function(confirmed) {
-            c.confirmed = confirmed;
-						if(c.confirmed){
-							window.location.href = 'https://dev192681.service-now.com/apl';
-						}
-        })
-	}
-	
-	
 	
 	// declaring varibles
+	var c = this;
 	var all_team_array=JSON.parse(localStorage.getItem('teams_list'));
 	var give_up_array=JSON.parse(localStorage.getItem('give_up_list'));
 	var team_id=localStorage.getItem('user_id');
@@ -28,6 +17,39 @@
 	c.more_bidders=true;
 	c.last_giveup=false;
 	c.valid_flag=true;
+	
+	
+	//maulik
+	
+	 var autoGiveUpTimeout;
+
+  // Function to initiate auto-give up timer
+  function startAutoGiveUpTimer() {
+    // Set a timeout for auto-give up after a certain duration (e.g., 15 seconds)
+    autoGiveUpTimeout = $timeout(function () {
+      c.data.action = "giveup";
+			//c.giveup();  // Call the giveup function when the timer expires
+    }, 15000); // Adjust the duration as needed (in milliseconds)
+  }
+
+  // Function to cancel the auto-give up timer
+  function cancelAutoGiveUpTimer() {
+    if (autoGiveUpTimeout) {
+      $timeout.cancel(autoGiveUpTimeout);
+      autoGiveUpTimeout = null;
+    }
+  }
+	
+	
+	// Watch for changes in the bid or give up actions
+  $scope.$watchGroup(['c.data.bid_count', 'c.data.action'], function (newValues, oldValues) {
+    // Check if the action is bid and cancel the auto-give up timer
+    if (newValues[1] === 'bid') {
+      cancelAutoGiveUpTimer();
+    }
+  });
+	
+	
 	
 	if (parseInt(c.data.t_purse) - (parseInt(c.data.list[0].value) + parseInt("500")) < 0) {
 		spUtil.addErrorMessage("You don't have enough money to bid. Please Give up!");
@@ -87,12 +109,14 @@
 
 	// recordWatcher() for bid
 	spUtil.recordWatch($scope, "x_540166_apl_apl_bidlog_table", "numberISNOTEMPTY", function(name) {
+		cancelAutoGiveUpTimer();
 		localStorage.setItem('it',(parseInt(it)+parseInt(1))%give_up_array.length);
 		window.location.reload();
 	});
 
 	// recordWatcher() for giveup
 	spUtil.recordWatch($scope, "x_540166_apl_team_table", "numberISNOTEMPTY", function(name) {
+
 		var newArray = [];
 		if (it == give_up_array.length-2) {
 			newArray = give_up_array.slice(0, it);
@@ -138,7 +162,25 @@
 			c.data.action = "giveup";
 			c.server.update();
 		}
+		// Set a flag in local storage to indicate that the player has been given up
+    localStorage.setItem('player_given_up', 'true');
 	}
+	
+	
+	// Watch for changes in the local storage flag for player_given_up
+  $scope.$watch(function () {
+    return localStorage.getItem('player_given_up');
+  }, function (newValue) {
+    if (newValue === 'true') {
+      // ... perform additional logic if needed ...
+
+      // Clear the player_given_up flag
+      localStorage.removeItem('player_given_up');
+    }
+  });
+	
+	
+	startAutoGiveUpTimer();
 };]]></client_script>
         <controller_as>c</controller_as>
         <css>*{
@@ -176,7 +218,6 @@
   border-radius: 10px; /* Add rounded corners */
   background-color: #fff;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  
 }
  
 /* Fixed size for images based on container1 size */
@@ -208,7 +249,7 @@
    overflow: hidden; /* Hide overflow for rounded corners */
   border: 4px solid #ddd; /* Add a border to container1 */
   border-radius: 10px; /* Add rounded corners */
-  gap: 5px;
+  gap: 20px;
   background-color: white;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
@@ -254,19 +295,14 @@ flex-direction: row;
  
 .column {
   flex: 1;
-  padding: 9px;
+  padding: 10px;
   background-color: #fff;
   border: 4px solid #ddd;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  margin: 0 5px;
+  margin: 0 10px;
   color: black;
   font-weight: 200;
-  gap: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
  
 /* Container 5 - Buttons (Bid, Pass, Give Up) */
@@ -303,25 +339,12 @@ flex-direction: row;
  
  
 .container5 button:hover {
-  transition: background-color 0.3s;
-  background-color: #007965;
+  background-color: #2980b9;
 }
  
 .price, .base{
   font-size: 24px;
 }
-
-.container2 img{
-  width: 200px;
-  height: 200px;
-}
-
-h3{
-  display: flex;
-  gap: 5px;
-  justify-content: center;
-}
-
  </css>
         <data_table>sp_instance</data_table>
         <demo_data/>
@@ -329,16 +352,18 @@ h3{
         <docs/>
         <field_list/>
         <has_preview>true</has_preview>
-        <id>apl_player_card</id>
+        <id>maulik_player_card</id>
         <internal>false</internal>
         <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
-        <name>apl_player_card</name>
+        <name>maulik_player_card</name>
         <option_schema/>
         <public>false</public>
         <roles/>
         <script><![CDATA[(function() {
 	/* populate the 'data' object */
 	/* e.g., data.table = $sp.getValue('table'); */
+	
+	
 	
 	var tid = $sp.getParameter('team_id');
 	var team_data = new GlideRecord('x_540166_apl_team_table');
@@ -353,7 +378,7 @@ h3{
 	var player_ids=[];
 	var myTable = new GlideRecord('x_540166_apl_apl_player_table');
 	myTable.addQuery('u_active', true);
-	myTable.orderByDesc('number');
+	myTable.orderBy('number');
 	myTable.query();
 
 	while(myTable.next()) {
@@ -361,11 +386,6 @@ h3{
 	}
 	id = player_ids[player_ids.length-1];
 
-	data.endFlag=false;
-	if(player_ids.length == 0){
-		console.log("inside the end");
-		data.endFlag=true;
-	}
 	// fetch record for that player
 	var gr = new GlideRecord("x_540166_apl_apl_player_table");
 	gr.addQuery('sys_id', id);
@@ -381,8 +401,7 @@ h3{
 		obj.name = gr.getValue('u_name');
 		obj.player_image = gr.getValue('player_image');
 		obj.age = gr.getValue('u_age');
-		obj.category = gr.getDisplayValue('u_category');
-		obj.categoryImage = gr.getValue('category_image');
+		obj.category = gr.getValue('u_category');
 		obj.value = gr.getValue('u_value');
 		obj.interested = gr.getValue('interested');
 	} 
@@ -510,17 +529,17 @@ h3{
 })();]]></script>
         <servicenow>false</servicenow>
         <sys_class_name>sp_widget</sys_class_name>
-        <sys_created_by>dev</sys_created_by>
-        <sys_created_on>2024-02-07 10:38:46</sys_created_on>
-        <sys_id>e691dc9c471402100e63e481e36d43ae</sys_id>
-        <sys_mod_count>528</sys_mod_count>
-        <sys_name>apl_player_card</sys_name>
+        <sys_created_by>maulik</sys_created_by>
+        <sys_created_on>2024-02-20 16:02:02</sys_created_on>
+        <sys_id>7448906c472c42100e63e481e36d43a3</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>maulik_player_card</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
-        <sys_update_name>sp_widget_e691dc9c471402100e63e481e36d43ae</sys_update_name>
+        <sys_update_name>sp_widget_7448906c472c42100e63e481e36d43a3</sys_update_name>
         <sys_updated_by>maulik</sys_updated_by>
-        <sys_updated_on>2024-02-22 08:55:50</sys_updated_on>
+        <sys_updated_on>2024-02-20 16:25:04</sys_updated_on>
         <template><![CDATA[<div ng-repeat="player in data.list">
   <div class="player-card">
     <div class="first-row">
@@ -528,52 +547,47 @@ h3{
         <img ng-src="{{ ::player.player_image + '.iix' }}" alt="Player Image" class="img-fluid">
       </div>
       <div class="container2">
-        <img ng-src="{{ ::player.categoryImage + '.iix'}}" alt="Category Image" class="img-cat">
         <h2>{{ player.name }}</h2>
+        <p class="base">Age: {{ player.age }}</p>
       </div>
       <div class="container3">
-        <p class="base">Base Value: ₹5000</p>
-        <p class="price">Current Bid: ₹{{ player.value }}</p>
+        <p class="base">Base Value: {{ player.value }}</p>
+        <p class="price">Current Bid: {{ player.value }}</p>
+         
+					<!--<div class="container5" ng-show="c.btn_show">
+           <widget class="countdown" id="apl_countdown_timer"></widget>
+          </div>-->
+				 
       </div>
     </div>
     <div class="second-row">
       <div class="container4">
         <div class="column">
-          <h3>
-            <i class="fa-solid fa-circle-info" style="color: #004f41;"></i>Info
-          </h3>
-           <p>Category:{{ player.category }}</p>
-           <p>Matches: {{ player.matches }}</p>
-          <p>Innings: {{ player.innings }}</p>
-          
-        </div>
-        <div class="column">
-          <h3>
-            <i class="fa-solid fa-baseball-bat-ball" style="color: #004f41;"></i> Stats
-          </h3>
+          <p>Matches: {{ player.matches }}</p>
           <p>Runs: {{ player.runs }}</p>
-           <p>Best Score: {{ player.highest_score }}</p>
-           <p>Fifties: {{ player.fifties }}</p>
-       
+          <p>Wickets: {{ player.wickets }}</p>
         </div>
         <div class="column">
-          <h3>
-            <i class="fa-solid fa-baseball" style="color: #004f41;"></i> Stats
-          </h3>
-          <p>Wickets: {{ player.wickets }}</p>
+          <p>Average: {{ player.average }}</p>
+          <p>Category: {{ player.category }}</p>
+          <p>Innings: {{ player.innings }}</p>
+        </div>
+        <div class="column">
+          <p>Strike Rate: {{ player.strike_rate }}</p>
+          <p>Fifties: {{ player.fifties }}</p>
           <p>3 Wickets: {{ player.three_wicket }}</p>
-           <p>Best Haul: {{ player.bowling_best_fig }}</p>
         </div>
 </div>
       
       
       <div class="container5" ng-show="c.btn_show">
+        <widget class="countdown" id="apl_countdown_timer" ng-show="c.timerVisible"></widget>
         <div class="twobut" ng-show="c.valid_flag">
           <button ng-click="c.placeBid()">
             <i class="fa-solid fa-gavel" style="font-size:24px"></i>Bid
           </button>
         </div>
-        <button style="background-color: #E07A57; transition: background-color 0.3s" ng-click="c.giveup()" onmouseover="this.style.backgroundColor='#FF0000';" onmouseout="this.style.backgroundColor='#E07A57';">
+        <button style="background-color: #E07A57" ng-click="c.giveup()">
           <i class="fa-solid fa-thumbs-down" style="font-size:24px"></i>Give up
         </button>
       </div>
