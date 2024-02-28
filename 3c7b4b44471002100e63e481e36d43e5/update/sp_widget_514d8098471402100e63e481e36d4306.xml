@@ -1,61 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
         <category>custom</category>
-        <client_script><![CDATA[api.controller=function($scope, spModal, spUtil) {
-  /* widget controller */
+        <client_script><![CDATA[api.controller = function ($scope, spModal, spUtil, $location,$timeout) {
   var c = this;
-	/*c.login=function(){
-		//debugger;
-		c.data.x=c.ltname;
-		c.data.y=c.ltpass;
-		c.server.update().then(function(r){
-			localStorage.setItem('user_id', r.user_id);
-			if(r.loginstatus == true)
-				{
-					localStorage.setItem("it", 0);
-					localStorage.setItem("teams_list", JSON.stringify(c.data.teams_array));
-					localStorage.setItem("give_up_list", JSON.stringify(c.data.give_up));
-					window.location.href = 'https://dev192681.service-now.com/apl?id=apl_landing_page&team_id='+r.user_id;
-				}
-		});
-
-	}*/
 	
-	c.login = function() {
+
+	//login flag logic
+  function updateLoggedInUsers(userId) {   
+    var loggedInUsers = JSON.parse(localStorage.getItem("logged_in_users")) || [];
+    loggedInUsers.push(userId);
+    localStorage.setItem("logged_in_users", JSON.stringify(loggedInUsers));
+  }
+	
+	function checkAllTeamsLoggedIn() {
+    var teamsList = JSON.parse(localStorage.getItem("teams_list")) || [];
+    var loggedInUsers = JSON.parse(localStorage.getItem("logged_in_users")) || [];
+
+    // Check if all teams are logged in
+    var allTeamsLoggedIn = teamsList.every(function (team) {
+      return loggedInUsers.includes(team);
+    });
+
+    return allTeamsLoggedIn;
+  }
+	
+	//login flag logic
+
+  c.login = function () {
     c.data.x = c.ltname;
     c.data.y = c.ltpass;
-    c.server.update().then(function(r) {
+
+    c.server.update().then(function (r) {
       localStorage.setItem('user_id', r.user_id);
 
-      if (r.loginstatus == true) {
+      if (r.loginstatus) {
         localStorage.setItem("it", 0);
         localStorage.setItem("teams_list", JSON.stringify(c.data.teams_array));
         localStorage.setItem("give_up_list", JSON.stringify(c.data.give_up));
 
-        // Display success message 
-        spUtil.addInfoMessage("Login successful");
+				updateLoggedInUsers(r.user_id);
 				
-				setTimeout(function(){
-					window.location.href = 'https://dev192681.service-now.com/apl?id=apl_landing_page&team_id=' + r.user_id;
-				},1000)
+        //spUtil.addInfoMessage("Login successful");
 
-        // Redirect to the landing page
-        //window.location.href = 'https://dev192681.service-now.com/apl?id=apl_landing_page&team_id=' + r.user_id;
+				/*
+        setTimeout(function () {
+          window.location.href = 'https://dev192681.service-now.com/apl?id=apl_landing_page&team_id=' + r.user_id;
+        }, 1000);
+				
+				
+				$timeout(function () {
+          $location.path('/apl').search('id', 'apl_landing_page').search('team_id', r.user_id);
+        }, 1000);
+				*/
+				
+				
+				if (checkAllTeamsLoggedIn()) {
+          $timeout(function () {
+						spUtil.addInfoMessage("Login successful");
+            $location.path('/apl').search('id', 'apl_landing_page').search('team_id', r.user_id);
+          }, 1000);
+        } else {
+          spUtil.addErrorMessage("Auction will start when everyone is logged in");
+        }
+				
+				
       }
     });
   }
-	
-	
-	c.signup=function(){
-		spModal.open({
-			title: 'New Registration',
-      widget: "apl_reg_page",
-        }).then(function() {
-            window.location.reload();
-        })
-	}
 
-};]]></client_script>
+  c.signup = function () {
+    spModal.open({
+      title: 'New Registration',
+      widget: "apl_reg_page",
+    }).then(function (registrationResponse) {
+			var userId = registrationResponse.user_id;
+			updateLoggedInUsers(userId);
+      //window.location.reload();
+			
+			//signup redirect logic
+			/*$timeout(function () {
+        $location.path('/apl').search('id', 'apl_landing_page').search('team_id', userId);
+      }, 1000); // Adjust the delay as needed */
+			
+			if (checkAllTeamsLoggedIn()) {
+        $timeout(function () {
+          $location.path('/apl').search('id', 'apl_landing_page').search('team_id', userId);
+        }, 1000);
+      } else {
+        spUtil.addErrorMessage("Auction will start when everyone is logged in");
+      }
+    });
+		
+  }
+};
+]]></client_script>
         <controller_as>c</controller_as>
         <css>*{
   font-family: 'Poppins', sans-serif;
@@ -180,14 +218,14 @@ body {
         <sys_created_by>harshraj</sys_created_by>
         <sys_created_on>2024-02-07 10:19:50</sys_created_on>
         <sys_id>514d8098471402100e63e481e36d4306</sys_id>
-        <sys_mod_count>174</sys_mod_count>
+        <sys_mod_count>180</sys_mod_count>
         <sys_name>apl_login</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
         <sys_update_name>sp_widget_514d8098471402100e63e481e36d4306</sys_update_name>
         <sys_updated_by>maulik</sys_updated_by>
-        <sys_updated_on>2024-02-20 10:10:44</sys_updated_on>
+        <sys_updated_on>2024-02-27 06:37:31</sys_updated_on>
         <template><![CDATA[<div class="login-container">
     <h2>Login</h2>
     <form id="login-form">
