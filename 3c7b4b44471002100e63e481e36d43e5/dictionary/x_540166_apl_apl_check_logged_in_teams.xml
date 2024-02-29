@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="1be6000f472002100e63e481e36d4323" label="APL Check Logged In Teams" max_length="40" name="x_540166_apl_apl_check_logged_in_teams" type="collection">
+        <element default="False" label="Logged_in" max_length="40" name="logged_in" type="boolean"/>
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
+        <element label="Team_id" max_length="32" name="team_id" type="string"/>
+    </element>
+</database>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_scope_privilege">
+    <sys_scope_privilege action="INSERT_OR_UPDATE">
+        <operation>execute</operation>
+        <source_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</source_scope>
+        <status>allowed</status>
+        <sys_class_name>sys_scope_privilege</sys_class_name>
+        <sys_created_by>maulik</sys_created_by>
+        <sys_created_on>2024-02-28 15:32:36</sys_created_on>
+        <sys_id>e73e918f476402100e63e481e36d430b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>SysUserList</sys_name>
+        <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+        <sys_update_name>sys_scope_privilege_e73e918f476402100e63e481e36d430b</sys_update_name>
+        <sys_updated_by>maulik</sys_updated_by>
+        <sys_updated_on>2024-02-28 15:32:36</sys_updated_on>
+        <target_name>SysUserList</target_name>
+        <target_scope display_value="Global">global</target_scope>
+        <target_type>sys_script_include</target_type>
+    </sys_scope_privilege>
+</record_update>

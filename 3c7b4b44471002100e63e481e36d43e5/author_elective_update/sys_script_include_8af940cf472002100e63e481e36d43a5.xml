@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="DELETE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_540166_apl.CheckLoggedInTeams</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description/>
+        <name>CheckLoggedInTeams</name>
+        <script><![CDATA[var CheckLoggedInTeams = Class.create();
+CheckLoggedInTeams.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+	
+	checkTeamLogin: function(teamId) {
+    var logInTeam = new GlideRecord('x_check_logged_in_teams');
+    logInTeam.addQuery('team_id', teamId);
+    logInTeam.query();
+    return logInTeam.next();
+    },
+
+    logInTeam: function(teamId) {
+    var logInTeam = new GlideRecord('x_check_logged_in_teams');
+    logInTeam.initialize();
+    logInTeam.team_id = teamId;
+    logInTeam.logged_in = true;
+    logInTeam.insert();
+    },
+
+    type: 'CheckLoggedInTeams'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>maulik</sys_created_by>
+        <sys_created_on>2024-02-28 09:34:49</sys_created_on>
+        <sys_id>8af940cf472002100e63e481e36d43a5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>CheckLoggedInTeams</sys_name>
+        <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+        <sys_update_name>sys_script_include_8af940cf472002100e63e481e36d43a5</sys_update_name>
+        <sys_updated_by>maulik</sys_updated_by>
+        <sys_updated_on>2024-02-28 09:34:49</sys_updated_on>
+    </sys_script_include>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="APL ">3c7b4b44471002100e63e481e36d43e5</application>
+        <file_path/>
+        <instance_id>757a8d15db46b998199b1729139619ab</instance_id>
+        <instance_name>dev192681</instance_name>
+        <name>sys_script_include_8af940cf472002100e63e481e36d43a5</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_include"&gt;&lt;sys_script_include action="INSERT_OR_UPDATE"&gt;&lt;access&gt;package_private&lt;/access&gt;&lt;active&gt;true&lt;/active&gt;&lt;api_name&gt;x_540166_apl.CheckLoggedInTeams&lt;/api_name&gt;&lt;caller_access/&gt;&lt;client_callable&gt;true&lt;/client_callable&gt;&lt;description/&gt;&lt;name&gt;CheckLoggedInTeams&lt;/name&gt;&lt;script&gt;&lt;![CDATA[var CheckLoggedInTeams = Class.create();
+CheckLoggedInTeams.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+	
+	checkTeamLogin: function(teamId) {
+    var logInTeam = new GlideRecord('x_check_logged_in_teams');
+    logInTeam.addQuery('team_id', teamId);
+    logInTeam.query();
+    return logInTeam.next();
+    },
+
+    logInTeam: function(teamId) {
+    var logInTeam = new GlideRecord('x_check_logged_in_teams');
+    logInTeam.initialize();
+    logInTeam.team_id = teamId;
+    logInTeam.logged_in = true;
+    logInTeam.insert();
+    },
+
+    type: 'CheckLoggedInTeams'
+});]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_include&lt;/sys_class_name&gt;&lt;sys_created_by&gt;maulik&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2024-02-28 09:34:49&lt;/sys_created_on&gt;&lt;sys_id&gt;8af940cf472002100e63e481e36d43a5&lt;/sys_id&gt;&lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;&lt;sys_name&gt;CheckLoggedInTeams&lt;/sys_name&gt;&lt;sys_package display_value="APL " source="x_540166_apl"&gt;3c7b4b44471002100e63e481e36d43e5&lt;/sys_package&gt;&lt;sys_policy&gt;read&lt;/sys_policy&gt;&lt;sys_scope display_value="APL "&gt;3c7b4b44471002100e63e481e36d43e5&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_include_8af940cf472002100e63e481e36d43a5&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;maulik&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2024-02-28 09:34:49&lt;/sys_updated_on&gt;&lt;/sys_script_include&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>2139588734</payload_hash>
+        <record_name>CheckLoggedInTeams</record_name>
+        <reverted_from/>
+        <source>5a27d690476442100e63e481e36d43e2</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>maulik</sys_created_by>
+        <sys_created_on>2024-02-28 09:34:50</sys_created_on>
+        <sys_id>3a5c0443476002100e63e481e36d4356</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18def11152e0000001</sys_recorded_at>
+        <sys_updated_by>maulik</sys_updated_by>
+        <sys_updated_on>2024-02-28 09:34:50</sys_updated_on>
+        <type>Script Include</type>
+        <update_guid>7e5c04432d60021017b79ec89f988255</update_guid>
+        <update_guid_history>7e5c04432d60021017b79ec89f988255:2139588734</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>maulik</sys_created_by>
+        <sys_created_on>2024-02-28 09:47:38</sys_created_on>
+        <sys_db_object display_value="" name="sys_script_include">sys_script_include</sys_db_object>
+        <sys_id>0e7f5e52cd574900819041bbb31d6400</sys_id>
+        <sys_metadata>8af940cf472002100e63e481e36d43a5</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>CheckLoggedInTeams</sys_name>
+        <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+        <sys_parent/>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+        <sys_scope_delete display_value="">34d45e9f175a49329ec1bf71207ab644</sys_scope_delete>
+        <sys_update_name>sys_script_include_8af940cf472002100e63e481e36d43a5</sys_update_name>
+        <sys_update_version display_value="sys_script_include_8af940cf472002100e63e481e36d43a5">3a5c0443476002100e63e481e36d4356</sys_update_version>
+        <sys_updated_by>maulik</sys_updated_by>
+        <sys_updated_on>2024-02-28 09:47:38</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

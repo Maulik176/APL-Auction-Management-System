@@ -4,66 +4,21 @@
         <client_script><![CDATA[api.controller = function ($scope, spModal, spUtil, $location,$timeout) {
   var c = this;
 	
-
-	//login flag logic
-  function updateLoggedInUsers(userId) {   
-    var loggedInUsers = JSON.parse(localStorage.getItem("logged_in_users")) || [];
-    loggedInUsers.push(userId);
-    localStorage.setItem("logged_in_users", JSON.stringify(loggedInUsers));
-  }
-	
-	function checkAllTeamsLoggedIn() {
-    var teamsList = JSON.parse(localStorage.getItem("teams_list")) || [];
-    var loggedInUsers = JSON.parse(localStorage.getItem("logged_in_users")) || [];
-
-    // Check if all teams are logged in
-    var allTeamsLoggedIn = teamsList.every(function (team) {
-      return loggedInUsers.includes(team);
-    });
-
-    return allTeamsLoggedIn;
-  }
-	
-	//login flag logic
-
   c.login = function () {
     c.data.x = c.ltname;
     c.data.y = c.ltpass;
 
     c.server.update().then(function (r) {
       localStorage.setItem('user_id', r.user_id);
-
       if (r.loginstatus) {
         localStorage.setItem("it", 0);
         localStorage.setItem("teams_list", JSON.stringify(c.data.teams_array));
         localStorage.setItem("give_up_list", JSON.stringify(c.data.give_up));
-
-				updateLoggedInUsers(r.user_id);
 				
-        //spUtil.addInfoMessage("Login successful");
-
-				/*
+				spUtil.addInfoMessage("Login successful");
         setTimeout(function () {
           window.location.href = 'https://dev192681.service-now.com/apl?id=apl_landing_page&team_id=' + r.user_id;
         }, 1000);
-				
-				
-				$timeout(function () {
-          $location.path('/apl').search('id', 'apl_landing_page').search('team_id', r.user_id);
-        }, 1000);
-				*/
-				
-				
-				if (checkAllTeamsLoggedIn()) {
-          $timeout(function () {
-						spUtil.addInfoMessage("Login successful");
-            $location.path('/apl').search('id', 'apl_landing_page').search('team_id', r.user_id);
-          }, 1000);
-        } else {
-          spUtil.addErrorMessage("Auction will start when everyone is logged in");
-        }
-				
-				
       }
     });
   }
@@ -73,27 +28,18 @@
       title: 'New Registration',
       widget: "apl_reg_page",
     }).then(function (registrationResponse) {
-			var userId = registrationResponse.user_id;
-			updateLoggedInUsers(userId);
-      //window.location.reload();
+			window.location.reload();
 			
 			//signup redirect logic
 			/*$timeout(function () {
         $location.path('/apl').search('id', 'apl_landing_page').search('team_id', userId);
       }, 1000); // Adjust the delay as needed */
 			
-			if (checkAllTeamsLoggedIn()) {
-        $timeout(function () {
-          $location.path('/apl').search('id', 'apl_landing_page').search('team_id', userId);
-        }, 1000);
-      } else {
-        spUtil.addErrorMessage("Auction will start when everyone is logged in");
-      }
     });
 		
   }
-};
-]]></client_script>
+
+};]]></client_script>
         <controller_as>c</controller_as>
         <css>*{
   font-family: 'Poppins', sans-serif;
@@ -173,7 +119,6 @@ body {
         <script><![CDATA[(function() {
   /* populate the 'data' object */
   /* e.g., data.table = $sp.getValue('table'); */
-	data.temp=[];
 	data.loginstatus = false;
 	data.user_id = '-1';
 	if(input)
@@ -212,20 +157,45 @@ body {
 		data.teams_array.push(teamData.getValue('sys_id'));
 		data.give_up.push(teamData.getValue('sys_id'));
 	}
-})();]]></script>
+	
+	if (data.loginstatus) {
+		logInTeam(data.user_id);
+	}
+	
+})();
+
+function logInTeam(user_id) {
+  // Log in the team in the 'x_540166_apl_apl_check_logged_in_teams' table
+  var logInTeams = new GlideRecord('x_540166_apl_apl_check_logged_in_teams');
+  logInTeams.addQuery('team_id', user_id);
+  logInTeams.query();
+
+  if (!logInTeams.next()) {
+    // If the record doesn't exist, insert it
+    var newLogInTeam = new GlideRecord('x_540166_apl_apl_check_logged_in_teams');
+    newLogInTeam.team_id = user_id;
+    newLogInTeam.logged_in = true;
+    newLogInTeam.insert();
+  }
+	else{
+		gs.info('Team with sys_id ' + user_id + ' is already logged in.');
+	}
+}
+
+]]></script>
         <servicenow>false</servicenow>
         <sys_class_name>sp_widget</sys_class_name>
         <sys_created_by>harshraj</sys_created_by>
         <sys_created_on>2024-02-07 10:19:50</sys_created_on>
         <sys_id>514d8098471402100e63e481e36d4306</sys_id>
-        <sys_mod_count>180</sys_mod_count>
+        <sys_mod_count>208</sys_mod_count>
         <sys_name>apl_login</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
         <sys_update_name>sp_widget_514d8098471402100e63e481e36d4306</sys_update_name>
         <sys_updated_by>maulik</sys_updated_by>
-        <sys_updated_on>2024-02-27 06:37:31</sys_updated_on>
+        <sys_updated_on>2024-02-29 05:12:21</sys_updated_on>
         <template><![CDATA[<div class="login-container">
     <h2>Login</h2>
     <form id="login-form">
