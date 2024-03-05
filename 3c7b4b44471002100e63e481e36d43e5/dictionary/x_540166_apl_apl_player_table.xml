@@ -23,6 +23,7 @@
         <element label="Image" max_length="40" name="u_image" type="file_attachment"/>
         <element attributes="edge_encryption_enabled=true" label="Name" mandatory="true" max_length="100" name="u_name" type="string"/>
         <element attributes="edge_encryption_enabled=true" label="Nationality" mandatory="true" max_length="100" name="u_nationality" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Player Email" mandatory="true" max_length="255" name="u_player_email" type="string_full_utf8"/>
         <element attributes="edge_encryption_enabled=true" choice="3" default="unsold" label="Status" mandatory="true" max_length="40" name="u_status" type="string">
             <choice>
                 <element inactive_on_update="false" label="Sold" sequence="0" value="sold"/>

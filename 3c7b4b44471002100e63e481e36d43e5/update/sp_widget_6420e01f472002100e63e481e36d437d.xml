@@ -1,29 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
         <category>custom</category>
-        <client_script><![CDATA[api.controller = function ($scope, spModal, spUtil, $location,$timeout) {
+        <client_script><![CDATA[api.controller = function ($scope, spModal, spUtil, $location, $timeout) {
   var c = this;
-	
+
   c.login = function () {
     c.data.x = c.ltname;
     c.data.y = c.ltpass;
 
     c.server.update().then(function (r) {
-      localStorage.setItem('user_id', r.user_id);
+			 localStorage.setItem('user_id', r.user_id);
       if (r.loginstatus) {
-        localStorage.setItem("it", 0);
+				localStorage.setItem("it", 0);
         localStorage.setItem("teams_list", JSON.stringify(c.data.teams_array));
         localStorage.setItem("give_up_list", JSON.stringify(c.data.give_up));
 				
-				spUtil.addInfoMessage("Login successful");
-        setTimeout(function () {
-          window.location.href = 'https://dev192681.service-now.com/apl?id=apl_landing_page&team_id=' + r.user_id;
-        }, 1000);
+
+				// Client Script
+				c.server.get({
+					action: 'checkAllTeamsLoggedIn'
+				}).then(function (result) {
+					console.log("Raw result:", result);
+					console.log("Type of result:", typeof result);
+
+					// Ensure you are logging the correct information
+					console.log("Boolean result:", result === true);
+
+					if (result === true) {
+						console.log("result is true");
+						$timeout(function () {
+							spUtil.addInfoMessage("Login successful");
+							$location.path('/apl').search('id', 'apl_landing_page').search('team_id', r.user_id);
+						}, 1000);
+					} else {
+						spUtil.addInfoMessage("Waiting for others to join.");
+					}
+				});
+
+				
       }
     });
   }
 
-  c.signup = function () {
+	// ... (rest of the code)
+	c.signup = function () {
     spModal.open({
       title: 'New Registration',
       widget: "apl_reg_page",
@@ -40,8 +60,8 @@
     });
 		
   }
-
-};]]></client_script>
+};
+]]></client_script>
         <controller_as>c</controller_as>
         <css>*{
   font-family: 'Poppins', sans-serif;
@@ -111,10 +131,10 @@ body {
         <docs/>
         <field_list/>
         <has_preview>true</has_preview>
-        <id>apl_login</id>
+        <id>m_apl_login</id>
         <internal>false</internal>
         <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
-        <name>apl_login</name>
+        <name>m_apl_login</name>
         <option_schema/>
         <public>false</public>
         <roles/>
@@ -161,9 +181,33 @@ body {
 	}
 	
 	if (data.loginstatus) {
-		logInTeam(data.user_id);
+		var checkLoggedInTeams = new CheckLoggedInTeams();
+
+		// Check if the team is already logged in
+		checkLoggedInTeams.checkIfTeamLoggedIn(data.user_id, function(isTeamLoggedIn) {
+			gs.info('Maulik check if the team is logged in? ' + isTeamLoggedIn);
+
+			if (!isTeamLoggedIn) {
+				// Team is not logged in, so log them in
+				logInTeam(data.user_id);
+				gs.info('Team with sys_id ' + data.user_id + ' is now logged in.');
+			} 
+			// Team is already logged in, check if all other teams have logged in
+			checkLoggedInTeams.checkAllTeamsLoggedIn(function(allTeamsLoggedIn) {
+				gs.info('Maulik check if all teams are logged in? ' + allTeamsLoggedIn);
+
+				if (allTeamsLoggedIn) {
+					// All teams have logged in, proceed with further actions
+					gs.info('All teams have logged in. Proceeding with further actions...');
+				} else {
+					// Not all teams have logged in, wait for others
+					gs.info('Waiting for other teams to join.');
+				}
+			});
+
+		});
 	}
-	
+
 })();
 
 function logInTeam(user_id) {
@@ -172,32 +216,31 @@ function logInTeam(user_id) {
   logInTeams.addQuery('team_id', user_id);
   logInTeams.query();
 
-  if (!logInTeams.next()) {
-    // If the record doesn't exist, insert it
-    var newLogInTeam = new GlideRecord('x_540166_apl_apl_check_logged_in_teams');
-    newLogInTeam.team_id = user_id;
-    newLogInTeam.logged_in = true;
-    newLogInTeam.insert();
+	if (!logInTeams.next()) {
+		// If the record doesn't exist, insert it
+		var newLogInTeam = new GlideRecord('x_540166_apl_apl_check_logged_in_teams');
+		newLogInTeam.initialize();
+		newLogInTeam.team_id = user_id;
+		newLogInTeam.logged_in = true;
+		newLogInTeam.insert();
+  } else {
+    gs.info('Team with sys_id ' + user_id + ' is already logged in.');
   }
-	else{
-		gs.info('Team with sys_id ' + user_id + ' is already logged in.');
-	}
 }
-
 ]]></script>
         <servicenow>false</servicenow>
         <sys_class_name>sp_widget</sys_class_name>
-        <sys_created_by>harshraj</sys_created_by>
-        <sys_created_on>2024-02-07 10:19:50</sys_created_on>
-        <sys_id>514d8098471402100e63e481e36d4306</sys_id>
-        <sys_mod_count>214</sys_mod_count>
-        <sys_name>apl_login</sys_name>
+        <sys_created_by>maulik</sys_created_by>
+        <sys_created_on>2024-02-29 05:39:43</sys_created_on>
+        <sys_id>6420e01f472002100e63e481e36d437d</sys_id>
+        <sys_mod_count>27</sys_mod_count>
+        <sys_name>m_apl_login</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
-        <sys_update_name>sp_widget_514d8098471402100e63e481e36d4306</sys_update_name>
-        <sys_updated_by>dev</sys_updated_by>
-        <sys_updated_on>2024-02-29 05:24:26</sys_updated_on>
+        <sys_update_name>sp_widget_6420e01f472002100e63e481e36d437d</sys_update_name>
+        <sys_updated_by>maulik</sys_updated_by>
+        <sys_updated_on>2024-03-01 06:10:44</sys_updated_on>
         <template><![CDATA[<div class="login-container">
     <h2>Login</h2>
     <form id="login-form">
@@ -211,6 +254,7 @@ function logInTeam(user_id) {
       </div>
       <div class="btn-container">
         <button type="submit" ng-click="c.login()">Login</button>
+         <!--<button type="button" ng-click="c.login()">Login</button>-->
         <button type="button" ng-click="c.signup()">Sign Up</button>
       </div>
     </form>

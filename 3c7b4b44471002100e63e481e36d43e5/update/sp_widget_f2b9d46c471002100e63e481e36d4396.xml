@@ -13,6 +13,7 @@
 		c.data.temp6=0;
 		c.server.update().then(function(r) {
 			if (r.data.team_exists) {
+				concole.log("In reg widget "+r.data.message);
 				spUtil.addErrorMessage(r.data.message);
 			}
 			else{
@@ -135,14 +136,14 @@ button:hover {
         <sys_created_by>harshraj</sys_created_by>
         <sys_created_on>2024-02-08 05:52:45</sys_created_on>
         <sys_id>f2b9d46c471002100e63e481e36d4396</sys_id>
-        <sys_mod_count>81</sys_mod_count>
+        <sys_mod_count>82</sys_mod_count>
         <sys_name>apl_reg_page</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
         <sys_update_name>sp_widget_f2b9d46c471002100e63e481e36d4396</sys_update_name>
         <sys_updated_by>dev</sys_updated_by>
-        <sys_updated_on>2024-02-29 05:09:27</sys_updated_on>
+        <sys_updated_on>2024-02-29 05:18:05</sys_updated_on>
         <template><![CDATA[<div class="container">
   <h2>Team Registration Form</h2>
   <form action="#">
