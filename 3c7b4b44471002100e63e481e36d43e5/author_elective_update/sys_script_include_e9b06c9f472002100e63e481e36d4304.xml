@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="DELETE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_540166_apl.CheckLoggedInTeams </api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description/>
+        <name>CheckLoggedInTeams </name>
+        <script><![CDATA[var CheckLoggedInTeams = Class.create();
+CheckLoggedInTeams.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+  
+  // Function to check if the specific team is logged in
+  checkIfTeamLoggedIn: function(teamId) {
+    var teamTable = new GlideRecord('x_540166_apl_apl_check_logged_in_teams');
+    teamTable.addQuery('team_id', teamId);
+    teamTable.query();
+
+    var isTeamLoggedIn = teamTable.hasNext();
+
+	gs.info("MR script include info - Team logged in: " + isTeamLoggedIn);
+
+    return isTeamLoggedIn;
+  },
+
+  // Function to check if all teams have logged in
+  checkAllTeamsLoggedIn: function() {
+    var teamTable = new GlideRecord('x_540166_apl_apl_check_logged_in_teams');
+    teamTable.query();
+
+    var teamsTotal = new GlideRecord('x_540166_apl_team_table');
+    teamsTotal.query();
+
+    var allTeamsLoggedIn = (teamTable.getRowCount() == teamsTotal.getRowCount()) ;
+
+    gs.info("MR script include info - All teams logged in???: " + allTeamsLoggedIn);
+    // Return a boolean value directly
+    return allTeamsLoggedIn;
+  },
+
+  type: 'CheckLoggedInTeams'
+});
+]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>maulik</sys_created_by>
+        <sys_created_on>2024-02-29 05:47:01</sys_created_on>
+        <sys_id>e9b06c9f472002100e63e481e36d4304</sys_id>
+        <sys_mod_count>18</sys_mod_count>
+        <sys_name>CheckLoggedInTeams </sys_name>
+        <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+        <sys_update_name>sys_script_include_e9b06c9f472002100e63e481e36d4304</sys_update_name>
+        <sys_updated_by>maulik</sys_updated_by>
+        <sys_updated_on>2024-03-05 08:52:18</sys_updated_on>
+    </sys_script_include>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="APL ">3c7b4b44471002100e63e481e36d43e5</application>
+        <file_path/>
+        <instance_id>757a8d15db46b998199b1729139619ab</instance_id>
+        <instance_name>dev192681</instance_name>
+        <name>sys_script_include_e9b06c9f472002100e63e481e36d4304</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_include"&gt;&lt;sys_script_include action="INSERT_OR_UPDATE"&gt;&lt;access&gt;package_private&lt;/access&gt;&lt;active&gt;true&lt;/active&gt;&lt;api_name&gt;x_540166_apl.CheckLoggedInTeams &lt;/api_name&gt;&lt;caller_access/&gt;&lt;client_callable&gt;true&lt;/client_callable&gt;&lt;description/&gt;&lt;name&gt;CheckLoggedInTeams &lt;/name&gt;&lt;script&gt;&lt;![CDATA[var CheckLoggedInTeams = Class.create();
+CheckLoggedInTeams.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+  
+  // Function to check if the specific team is logged in
+  checkIfTeamLoggedIn: function(teamId) {
+    var teamTable = new GlideRecord('x_540166_apl_apl_check_logged_in_teams');
+    teamTable.addQuery('team_id', teamId);
+    teamTable.query();
+
+    var isTeamLoggedIn = teamTable.hasNext();
+
+	gs.info("MR script include info - Team logged in: " + isTeamLoggedIn);
+
+    return isTeamLoggedIn;
+  },
+
+  // Function to check if all teams have logged in
+  checkAllTeamsLoggedIn: function() {
+    var teamTable = new GlideRecord('x_540166_apl_apl_check_logged_in_teams');
+    teamTable.query();
+
+    var teamsTotal = new GlideRecord('x_540166_apl_team_table');
+    teamsTotal.query();
+
+    var allTeamsLoggedIn = (teamTable.getRowCount() == teamsTotal.getRowCount()) ;
+
+    gs.info("MR script include info - All teams logged in???: " + allTeamsLoggedIn);
+    // Return a boolean value directly
+    return allTeamsLoggedIn;
+  },
+
+  type: 'CheckLoggedInTeams'
+});
+]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_include&lt;/sys_class_name&gt;&lt;sys_created_by&gt;maulik&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2024-02-29 05:47:01&lt;/sys_created_on&gt;&lt;sys_id&gt;e9b06c9f472002100e63e481e36d4304&lt;/sys_id&gt;&lt;sys_mod_count&gt;18&lt;/sys_mod_count&gt;&lt;sys_name&gt;CheckLoggedInTeams &lt;/sys_name&gt;&lt;sys_package display_value="APL " source="x_540166_apl"&gt;3c7b4b44471002100e63e481e36d43e5&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="APL "&gt;3c7b4b44471002100e63e481e36d43e5&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_include_e9b06c9f472002100e63e481e36d4304&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;maulik&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2024-03-05 08:52:18&lt;/sys_updated_on&gt;&lt;/sys_script_include&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-1131837413</payload_hash>
+        <record_name>CheckLoggedInTeams </record_name>
+        <reverted_from/>
+        <source>5a27d690476442100e63e481e36d43e2</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>maulik</sys_created_by>
+        <sys_created_on>2024-03-05 08:52:19</sys_created_on>
+        <sys_id>222cb6f8477002100e63e481e36d434e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18e0dd04ea10000001</sys_recorded_at>
+        <sys_updated_by>maulik</sys_updated_by>
+        <sys_updated_on>2024-03-05 08:52:19</sys_updated_on>
+        <type>Script Include</type>
+        <update_guid>a62cb6f858700210883ce7364bac004d</update_guid>
+        <update_guid_history>a62cb6f858700210883ce7364bac004d:-1131837413,b344796fbe2002100f71e7db2b9a8d4a:1568893145,5144796fec20021082562383459fa91b:1926952025,020371eb8620021016979b99f2531f47:-1001629544,d4b2b5ebdf200210297c601b3bffc6f5:2016068382,3eefe56b17200210904c21bad9e76552:1901920442,b11d2da76f20021017f2d7afa5834cf8:-920021059,4e2c2567142002107014e236f9935620:1719648146,76596da39220021027d807e5b8640d44:1749427351,190961e3752002104e0e9e6144ba3353:1797451368,511c595b19240210516b47f12f1d95c9:615185854,788ffc1fa3a002107b3e86401ef9c7bc:697303213,cf86781748a002108190d1fe9fd61e7c:-338365994,0766f4175ca002105b0fa2a290410648:1685591570,fb567417c3a00210642f3635f4e02c90:-248325623,952de49bf56002101e0e61e92f53ffc7:1685591570,54cae8d73660021080196c0974196f3a:-1070700209,215828978b600210f4d325792cc9c0cd:-764235782,73c16cdfda20021015ae5fbfbdefea7c:-1432074050</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>maulik</sys_created_by>
+        <sys_created_on>2024-03-05 10:36:14</sys_created_on>
+        <sys_db_object display_value="" name="sys_script_include">sys_script_include</sys_db_object>
+        <sys_id>6a711a4fe36e47d39f1ea162e83874e9</sys_id>
+        <sys_metadata>e9b06c9f472002100e63e481e36d4304</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>CheckLoggedInTeams </sys_name>
+        <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
+        <sys_scope_delete display_value="">34d45e9f175a49329ec1bf71207ab644</sys_scope_delete>
+        <sys_update_name>sys_script_include_e9b06c9f472002100e63e481e36d4304</sys_update_name>
+        <sys_update_version display_value="sys_script_include_e9b06c9f472002100e63e481e36d4304">222cb6f8477002100e63e481e36d434e</sys_update_version>
+        <sys_updated_by>maulik</sys_updated_by>
+        <sys_updated_on>2024-03-05 10:36:14</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

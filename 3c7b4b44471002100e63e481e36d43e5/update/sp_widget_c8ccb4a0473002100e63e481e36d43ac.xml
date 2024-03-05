@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
         <category>custom</category>
-        <client_script><![CDATA[api.controller=function() {  /* widget controller */  var c = this;};]]></client_script>
+        <client_script><![CDATA[api.controller=function($scope, spUtil) {
+	/* widget controller */
+	var c = this;
+	var team_id = localStorage.getItem('user_id');
+	c.server.update();
+	spUtil.recordWatch($scope, "x_540166_apl_apl_check_logged_in_teams", "numberISNOTEMPTY", function(name) {
+		if (c.data.allTeamsLoggedIn) {
+			console.log("Do redirect");
+			window.location.href = 'https://dev192681.service-now.com/apl?id=apl_landing_page&team_id='+ team_id;
+		}
+		else{
+			//window.location.reload();
+			console.log("Reached here");
+		}
+	});
+};]]></client_script>
         <controller_as>c</controller_as>
         <css>h1{
   text-align: center
@@ -19,20 +34,35 @@
         <option_schema/>
         <public>false</public>
         <roles/>
-        <script><![CDATA[(function() {  /* populate the 'data' object */  /* e.g., data.table = $sp.getValue('table'); */})();]]></script>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+	
+	data.allTeamsLoggedIn = false;
+	var loggedInTable = new GlideRecord('x_540166_apl_apl_check_logged_in_teams');
+	loggedInTable.query();
+
+	var teamTable = new GlideRecord('x_540166_apl_team_table');
+	teamTable.query();
+
+	data.allTeamsLoggedIn = (teamTable.getRowCount() == loggedInTable.getRowCount()) ;
+	gs.info("dev team "+teamTable.getRowCount());
+	gs.info("dev logged in "+loggedInTable.getRowCount());
+	gs.info("dev status "+data.allTeamsLoggedIn);
+})();]]></script>
         <servicenow>false</servicenow>
         <sys_class_name>sp_widget</sys_class_name>
         <sys_created_by>dev</sys_created_by>
         <sys_created_on>2024-03-04 04:57:09</sys_created_on>
         <sys_id>c8ccb4a0473002100e63e481e36d43ac</sys_id>
-        <sys_mod_count>6</sys_mod_count>
+        <sys_mod_count>19</sys_mod_count>
         <sys_name>APL waiting widget</sys_name>
         <sys_package display_value="APL " source="x_540166_apl">3c7b4b44471002100e63e481e36d43e5</sys_package>
         <sys_policy/>
         <sys_scope display_value="APL ">3c7b4b44471002100e63e481e36d43e5</sys_scope>
         <sys_update_name>sp_widget_c8ccb4a0473002100e63e481e36d43ac</sys_update_name>
         <sys_updated_by>dev</sys_updated_by>
-        <sys_updated_on>2024-03-04 05:11:13</sys_updated_on>
+        <sys_updated_on>2024-03-05 10:21:00</sys_updated_on>
         <template><![CDATA[<div>
 <!-- your widget template -->
   <h1>
